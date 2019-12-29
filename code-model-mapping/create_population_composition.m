@@ -10,11 +10,11 @@ function F = create_population_composition(H)
 % Output: a 1x2 vector [F_a,F_c] for the fraction of adults and children 
 % in the population.
 % 
-% Reference: F_a and F_c in Supplementary Methods, Section 1.5 of
+% Reference: F_a and F_c in Supplementary Methods, Section 1.6.1 of
 % Pellis, L. et al (2019), Nature Communications
 % 
 % Author: Lorenzo Pellis
-% Last update: 11/05/2019 
+% Last update: 29-12-2019 
 
 [ max_inA,max_inC ] = size(H);
 F = [0,0]; % composition of the population (in fractions of total population)

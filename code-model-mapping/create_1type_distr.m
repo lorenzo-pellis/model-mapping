@@ -14,7 +14,7 @@ function H_single = create_1type_distr(H)
 % Pellis, L. et al (2019), Nature Communications
 % 
 % Author: Lorenzo Pellis
-% Last update: 11/05/2019 
+% Last update: 29-12-2019 
 
 [ max_inA,max_inC ] = size(H);
 if max_inA == max_inC
