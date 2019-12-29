@@ -10,7 +10,7 @@ function H_single = create_1type_distr(H)
 % Output: a 1xn vector, with i-th element giving the probability that 
 % a randomly selected household has size i.
 % 
-% Reference: h_n in Tables S2, S5 and S7 of 
+% Reference: h_n in Supplementary Tables 2, 5 and 7 of 
 % Pellis, L. et al (2019), Nature Communications
 % 
 % Author: Lorenzo Pellis
