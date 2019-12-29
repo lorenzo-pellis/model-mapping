@@ -16,10 +16,11 @@ function afs_each_type = afs_multitype_NGM(h,NGM)
 % ultimately infected.  Note that they are not fractions of the full 
 % population, but of each group, i.e. 0 <= z_i <= 1
 % 
-% Reference: book by Andersson & Britton (2000), Section 6.2
+% Reference: Supplementary Methods, Sections 1.3 of
+% Pellis, L et al (2019), Nature Communications
 % 
 % Author: Lorenzo Pellis
-% Last update: 26/05/2019 
+% Last update: 29-12-2019 
  
 ntypes = length(h); % Number of types
 if ~(sum(h)==1)

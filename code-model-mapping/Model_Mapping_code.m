@@ -3,7 +3,7 @@
 % households (H) and random mixing (U). Please refer to publication:
 % Pellis, L. et al (2019), Nature Communications
 %
-% Date: 15-11-2019
+% Date: 29-12-2019
 % 
 % Fixed parameters (uncomment applicable values in the code below):
 %   - country: this selects the household composition structure (how adults
@@ -21,9 +21,10 @@ clearvars;
 
 % Switches
 Activate_checks = 1; % If 0, all cross check mechanisms are de-activated, to make everything a bit faster
-Activate_C_codes = 0; % If 0, C codes call are de-activated
-Activate_workspace_saving = 1; % If 0, the workspace is not saved automatically
+Activate_C_codes = 1; % If 0, C codes call are de-activated
 Activate_continue = 1; % This allows continuing from the last run, if anything makes the code crash or you need to stop it
+% Do not modify the following ones:
+Activate_workspace_saving = 1; % If 0, the workspace is not saved automatically
 Activate_deletefile = 1; recycle('off'); % If 1 the code eletes the output file of the stochastic simulation after use
 warning('off','MATLAB:nearlySingularMatrix');
 
@@ -45,7 +46,7 @@ pop = '2ran'; thetaG = NaN; g_ratio = 1; % Random (which for GB is thetaG = 0.22
 % pop = 'UK'; thetaG = 0.58; g_ratio = 0.75; % UK
 % pop = 'ass'; thetaG = 0.7; g_ratio = 0.75; % More extreme than UK
 
-R0 = 1.5;
+R0 = 2;
 phiG = 1; % relative global infectivity of children versus adults
 
 pAA_min = 0;
@@ -367,7 +368,7 @@ for i2 = 15:l2 % External loop is for psi (so figures in the paper are computed 
         % parameters in a vector:
         shapeHvector = [ h_ratio, thetaH, psiH, phiH ];
 
-        for i1 = 10:l1 % Internal loop is for amount of within-household adult-to-adult transmission probability
+        for i1 = 19:l1 % Internal loop is for amount of within-household adult-to-adult transmission probability
             if flag_entry_loop && Activate_continue && ( i1 <= i1_temp )
             else
                 disp(['Loop ',num2str(i2),'-',num2str(i1),' of ',num2str(l2),'-',num2str(l1)]);
@@ -662,6 +663,7 @@ for i2 = 15:l2 % External loop is for psi (so figures in the paper are computed 
                     zAsim(i1,i2) = mapfail;
                     tAsim(i1,i2) = mapfail;
                     piAsim(i1,i2) = mapfail;
+                    output_file_name_A = [];
                 else
                     % Construct the shape of the NGM matrix for model A
                     NGM_shape_A = create_global_NGM_shape(F_ratio,psiG,phiG,theta_A(i1,i2),g_ratio);
@@ -697,6 +699,7 @@ for i2 = 15:l2 % External loop is for psi (so figures in the paper are computed 
                         zAsim(i1,i2) = mapfail;
                         tAsim(i1,i2) = mapfail;
                         piAsim(i1,i2) = mapfail;
+                        output_file_name_A = [];
                     else
                         % Calculate the real-time growth rate for model A
                         r_A(i1,i2) = r_TVI(R0,2,Tg,alpha_profile,Tmax,dt);
@@ -767,11 +770,6 @@ for i2 = 15:l2 % External loop is for psi (so figures in the paper are computed 
                         warning('Careful! The average household epidemic size in models AH and H is different!')
                         eflag(i1,i2) = eflag(i1,i2) + 1;
                     end
-                    hfs_H_check = afsn_Addy_sizebiased_den(PI_V,1,Rh_H(i1,i2),0,1,1,eta,den_str);
-                    if abs( hfs_H_check - hfs_H(i1,i2) ) > 1e-6
-                        warning( 'Careful! The average household epidemic size of model H computed in two different ways do not coincide!' )
-                        eflag(i1,i2) = eflag(i1,i2) + 1;
-                    end                
                     len = length(PI_V);
                     PI_V_2up = zeros(1,len);
                     PI_V_2up(2:len) = PI_V(2:len) / sum(PI_V(2:len));
@@ -926,7 +924,10 @@ for i2 = 15:l2 % External loop is for psi (so figures in the paper are computed 
                 save([temp_path,workspace_name_temp]); % Save in the workspace all the values that have been computed till now, in case something goes wrong
                 if Activate_C_codes && Activate_deletefile % Clear up the outputs of the individual-based stochastic simulation
                     delete( output_file_name_AH );
-                    delete( output_file_name_A );
+                    if ~isempty( output_file_name_A )
+                        exist( output_file_name_A, 'var' )                    
+                        delete( output_file_name_A );
+                    end
                     delete( output_file_name_H );
                 end
             end

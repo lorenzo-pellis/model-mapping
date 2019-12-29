@@ -23,7 +23,7 @@ function r = rH_TVI_tol(AvCasesGen,Rg,distr_profile,mean_profile,alpha_profile,T
 %   time
 %   - alpha_profile: shape parameter of the gamma-shaped infectivity
 %   profile (only used for distr_profile == 2)
-%   - Tmax: largest tiem considered, after which the profile is trncated
+%   - Tmax: largest time considered, after which the profile is trncated
 %   - dt: time step used
 %   - tol: a tolerance, to check that we have not truncated the infectivity
 %   profile too soon.

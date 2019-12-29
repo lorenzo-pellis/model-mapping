@@ -16,14 +16,14 @@ function R0 = R0H(chain,Rg)
 % Note 1: R0 is computed as the dominant eigenvalue of a matrix, rather
 % than by solving the characteristic equation directly.
 % 
-% Reference: Supplementary Methods, Section 1.2.4 of
+% Reference: Supplementary Methods, Section 1.4 of
 % Pellis, L et al (2019), Nature Communications
 % 
 % Methodological reference: Pellis, Ball Trapman (2012), Mathematical
 % Biosciences, Theorem 1.
 % 
 % Author: Lorenzo Pellis
-% Last update: 05/06/2019 
+% Last update: 29-12-2019 
 
 nmax = length(chain);
 M = zeros(nmax);

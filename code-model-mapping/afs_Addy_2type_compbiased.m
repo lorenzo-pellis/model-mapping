@@ -46,11 +46,11 @@ function afs_compbiased = afs_Addy_2type_compbiased(H,PI,Rh,shapeHvector,pesc,et
 %   - eta: exponent of frequency dependent transmission, set at 1 by
 %   default and never changed
 % 
-% Reference: Supplementary Methods, Sections 1.2.3 and 1.2.7 of
+% Reference: Supplementary Methods, Section 1.2.7 of
 % Pellis, L et al (2019), Nature Communications
 % 
 % Author: Lorenzo Pellis
-% Last update: 31/10/2019 
+% Last update: 29-12-2019 
 
 
 h_ratio = shapeHvector(1);

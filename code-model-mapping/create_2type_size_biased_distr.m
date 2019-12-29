@@ -14,11 +14,11 @@ function PI = create_2type_size_biased_distr(H)
 % of a randomly selected child. Note: row 1 in layer 1 is 0 and column 1 in
 % layer 2 is 0.
 % 
-% Reference: Table S3 (S3A for (:,:,1) and S3B for (:,:,2)) of
+% Reference: Supplementary Tables 3 (3A for (:,:,1) and 3B for (:,:,2)) of
 % Pellis, L. et al (2019), Nature Communications
 % 
 % Author: Lorenzo Pellis
-% Last update: 11/05/2019
+% Last update: 29-12-2019
 
 [ max_inA,max_inC ] = size(H); % inA = index of number of adults (starting from 1 for nA = 0), so inA = nA-1
 PItemp = zeros(max_inA,max_inC,2); % 2 layers: first for the house of a randomly selected adults, second for a randomly selected child
