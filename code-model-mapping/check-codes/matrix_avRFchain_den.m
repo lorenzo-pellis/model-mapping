@@ -1,4 +1,4 @@
-function RFgen = matrix_avRFchain_den(TOT,i0,R0,distribution,iota,alpha,str_den)
+function RFgen = matrix_avRFchain_den(TOT,i0,R0,distribution,iota,alpha,den_str)
 
 % This function computes the average number of cases in each generation of
 % an epidemic in a small group by computing probabilities for each chain
@@ -16,7 +16,7 @@ function RFgen = matrix_avRFchain_den(TOT,i0,R0,distribution,iota,alpha,str_den)
 %   2 = Gamma distributed
 % iota = mean of the distribution: usually irrelevant as it can be absorbed in R0
 % alpha = shape parameter of distribution, if Gamma
-% str_den = a string (either 'n-1' or 'n'), telling if the 1-to-1
+% den_str = a string (either 'n-1' or 'n'), telling if the 1-to-1
 % infectivity is R0/TOT or R0/(TOT-1).
 % 
 % Construct a matrix P of transition probabilities from each state (s,a) to each state (m,i)
@@ -50,14 +50,13 @@ function RFgen = matrix_avRFchain_den(TOT,i0,R0,distribution,iota,alpha,str_den)
 
 if i0==round(i0)
 else
-    'Problem: non-integer initial number of infectives'
-    return;
+    error('Problem: non-integer initial number of infectives');
 end
 
 max = (TOT+2)*(TOT+1)/2-1;
 GMP = zeros(max);
 
-if strcmp(str_den,'n-1')
+if strcmp(den_str,'n-1')
     av_Phi = R0/(TOT-1); % Phi is the (random) total one-to-one infectivity, av_Phi is its average.
 else
     av_Phi = R0/TOT;

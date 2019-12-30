@@ -10,8 +10,8 @@ function av_gen_chain = create_chain_1type_check(PI,Rh,eta,str_den)
 % "create_chain_1type" I use in the main code. (The third version I try is
 % the same as this second one, but passing the matrix of binomial
 % coefficients, rather than declaring it a global variable: it is a tiny
-% bit faster, but I'd have to change all similar codes - maybe I'll do it
-% one day).
+% bit faster, but I'd have to change all similar codes - this is what I use
+% now below).
 
 max_gen = length(PI);
 av_gen_chain_temp = zeros(1,max_gen);
@@ -23,6 +23,27 @@ for n = 1:max_gen
 end
 av_gen_chain = av_gen_chain_temp;
 % toc;
+
+
+% av_gen_chain_temp = zeros(1,max_gen);
+% % tic;
+% for n = 1:max_gen
+%     if PI(n) ~= 0
+%         if strcmp(str_den,'n-1')
+%             lambda = Rh/(n-1)^eta; % 1-to-1 escaping probability
+%         else
+%             lambda = Rh/n^eta;
+%         end
+%         av_gen_chain_temp(1:n) = av_gen_chain_temp(1:n) + PI(n) * create_avRFchain_3dim(n,1,lambda);
+%     end
+% end
+% av_gen_chain2 = av_gen_chain_temp;
+% % toc;
+% % disp( [ av_gen_chain, av_gen_chain2 ] )
+
+
+global bincoeffmat;
+
 av_gen_chain_temp = zeros(1,max_gen);
 % tic;
 for n = 1:max_gen
@@ -32,29 +53,10 @@ for n = 1:max_gen
         else
             lambda = Rh/n^eta;
         end
-        av_gen_chain_temp(1:n) = av_gen_chain_temp(1:n) + PI(n) * create_avRFchain_3dim(n,1,lambda);
+        av_gen_chain_temp(1:n)=av_gen_chain_temp(1:n) + PI(n) * create_avRFchain_3dim_pass(n,1,lambda,bincoeffmat);
     end
 end
-av_gen_chain2 = av_gen_chain_temp;
+av_gen_chain3 = av_gen_chain_temp;
 % toc;
-% disp( [ av_gen_chain, av_gen_chain2 ] )
-
-
-% global bincoeffmat;
-% 
-% av_gen_chain_temp = zeros(1,max_gen);
-% tic;
-% for n = 1:max_gen
-%     if PI(n) ~= 0
-%         if strcmp(str_den,'n-1')
-%             lambda = Rh/(n-1)^eta; % 1-to-1 escaping probability
-%         else
-%             lambda = Rh/n^eta;
-%         end
-%         av_gen_chain_temp(1:n)=av_gen_chain_temp(1:n) + PI(n) * create_avRFchain_3dim_pass(n,1,lambda,bincoeffmat);
-%     end
-% end
-% av_gen_chain3 = av_gen_chain_temp;
-% toc;
-% disp([ av_gen_chain; av_gen_chain2; av_gen_chain3 ])
+% disp([ av_gen_chain; av_gen_chain3 ])
 
