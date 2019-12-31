@@ -22,8 +22,8 @@ usepi = true; % If true, I include the peak incidence (pi) in the overall accept
 uset = true;  % If true, I include the time to the peak (t) in the overall acceptance region plot, otherwise not
 use_match_r = false; % If false, I match R0; if true, I use the r correspondent to the desired R0
 
-country = 'GB'; % Great Britain
-% country = 'SL'; % Sierra-Leone
+% country = 'GB'; % Great Britain
+country = 'SL'; % Sierra-Leone
 % country = 'SA'; % South-Africa
 
 psirange = [ 1 4 ];
@@ -61,7 +61,7 @@ if ispc
         wrksp_path = [base_dir,'\saved-workspaces\',country,'\'];
     end
 else
-    code_path = [base_dir,'/code-figures/'];
+    code_path = [base_dir,'/code-model-mapping/'];
     ROT_path = [base_dir,'/output-rule-of-thumb/'];
     tool_path = [base_dir,'/tools/'];
     if Activate_plot_from_new_workspaces

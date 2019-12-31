@@ -9,7 +9,7 @@
 
 close all; % close all figures
 clearvars; % clear all variables
-Activate_save_fig = 0; % If true, figures are saved
+Activate_save_fig = 1; % If true, figures are saved
 Activate_C_codes = 1;
 
 Activate_plot_from_new_workspaces = 0; 
@@ -18,26 +18,27 @@ Activate_plot_from_new_workspaces = 0;
 
 use_match_r = false; % If false, I match R0; if true, I use the r correspondent to the desired R0
 % Choose here the variable to plot and the figure letter (top left)
-which_output = 'vc'; figletter = 'A';
+% which_output = 'vc'; figletter = 'A';
 % which_output = 'vhc'; figletter = 'B';
 % which_output = 'SAR'; figletter = 'C';
 % which_output = 'Th'; figletter = 'D';
-% which_output = 'ass'; figletter = 'A';
+which_output = 'ass'; figletter = 'A';
+% which_output = 'ass'; figletter = 'B';
 
-country = 'GB'; % Great Britain
+% country = 'GB'; % Great Britain
 % country = 'SL'; % Sierra Leone
-% country = 'SA'; % South Africa
+country = 'SA'; % South Africa
 
 R0vals = [ 1.5 2 4 ]; R0name = 'R0basic';
 % R0vals = [ 1.1 1.3 1.5 ]; R0name = 'R0down';
 % R0vals = [ 1.7 2 2.3 ]; R0name = 'R0middle';
 % R0vals = [ 2.7 3.2 4 ]; R0name = 'R0up';
-% popfig = '2ran'; thetaGval = NaN; gamval = 1; % Random
+popfig = '2ran'; thetaGval = NaN; gamval = 1; % Random
 % popfig = 'm4r'; thetaGval = 0.4; gamval = 1; 
 % popfig = 'm4UK'; thetaGval = 0.4; gamval = 0.75; 
 % popfig = 'm5r'; thetaGval = 0.5; gamval = 1; 
 % popfig = 'm5UK'; thetaGval = 0.5; gamval = 0.75; 
-popfig = 'UK'; thetaGval = 0.58; gamval = 0.75; % UK
+% popfig = 'UK'; thetaGval = 0.58; gamval = 0.75; % UK
 % popfig = 'ass'; thetaGval = 0.7; gamval = 0.75; % More extreme than UK
 phivals = [ 1 1.5 2 ];
 

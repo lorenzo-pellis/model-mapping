@@ -8,15 +8,15 @@
 % file than the one used in the main model mapping code (i.e. with "_dyn" 
 % at the end of the name)
 % 
-% Update: 09/10/2019
+% Update: 31-12-2019
 
 close all; % close all figures
 clearvars;
-Run_simulation_anyway = false; 
+Run_simulation_anyway = 0; % If true, stochastic simulations for the 4 models and 4 parameter combinations are re-run 
 Activate_save_fig = 1; % If true, figures are saved
-Activate_plot_from_new_workspaces = 0; 
-% If 0, I make plots from pre-computed and saved workspaces (folder saved-workspaces)
-% If 1, I make plots from newly computed workspaces (folder output-workspaces)
+Activate_plot_from_new_simulations = 0; 
+% If 0, I make plots from pre-computed and saved simulations (folder code-figures\simulation-dynamics\saved-simulation-dynamics\)
+% If 1, I make plots from newly computed workspaces (folder code-figures\simulation-dynamics\)
 
 country = 'GB';
 R0 = 2;
@@ -35,10 +35,15 @@ if ispc
     tool_path = [base_dir,'\tools\'];
     sim_path = [base_dir,'\code-figures\simulation-dynamics\'];
     runcommand = 'MRCModelMapping_Win_dyn.exe';
-    if Activate_plot_from_new_workspaces
-        wrksp_path = [base_dir,'\output-workspaces\GB\'];
+    wrksp_path = [base_dir,'\saved-workspaces\GB\'];
+    if Activate_plot_from_new_simulations
+        saved_sim_path = sim_path;
+        ncols = 17; % The simulations used to generate the figure in the main paper 
+        % were old and with a slightly different input (18 cols instead of 17)
     else
-        wrksp_path = [base_dir,'\saved-workspaces\GB\'];
+        saved_sim_path = [sim_path,'\saved_simulation_dynamics\'];
+        ncols = 18; % The simulations used to generate the figure in the main paper 
+        % were old and with a slightly different input (18 cols instead of 17)
     end
 else
     code_path = [base_dir,'/code-figures/'];
@@ -46,10 +51,15 @@ else
     tool_path = [base_dir,'/tools/'];
     sim_path = [base_dir,'/code-figures/simulation-dynamics'];
     runcommand = './ModelMapping_Mac_dyn';
-    if Activate_plot_from_new_workspaces
-        wrksp_path = [base_dir,'/output-workspaces/GB/'];
+    wrksp_path = [base_dir,'/saved-workspaces/GB/'];
+    if Activate_plot_from_new_simulations
+        saved_sim_path = sim_path;
+        ncols = 17; % The simulations used to generate the figure in the main paper 
+        % were old and with a slightly different input (18 cols instead of 17)
     else
-        wrksp_path = [base_dir,'/saved-workspaces/GB/'];
+        saved_sim_path = [sim_path,'/saved_simulation_dynamics/'];
+        ncols = 18; % The simulations used to generate the figure in the main paper 
+        % were old and with a slightly different input (18 cols instead of 17)
     end
 end
 addpath(genpath(tool_path));
@@ -69,7 +79,7 @@ for i = 1:2
         ia = find( abs(pAA_vec - test_pAA(j))< 1e-10, 1 );
         ib = find( abs(psiG_vec - test_psi(i))< 1e-10, 1 );
         
-        % AH model
+        % Model AH
         fname = [ country, '_Rg',num2str(Rg(ia,ib),'%.3f'), '_Rw', num2str(Rh_vec(ia),'%.3f'), '_sigma', num2str(psiG_vec(ib),'%.1f'), ...
             '_rho', num2str(phiG,'%.1f'), '_ass', num2str(thetaG,'%.3f'), '_gammaG', num2str(g_ratio,'%.2f'),'_H', num2str(h_ratio,'%.2f'),...
             '__sync_large.dat' ];
@@ -91,19 +101,21 @@ for i = 1:2
                 [status result] = system( cmdlAH ); % cmdlAH is the command line to run the executable with the right arguments
             end
         end
-        [labels,HOW_MANY,data] = readColData( fname, 18, 0, 0 );
+        cd(saved_sim_path);
+        [labels,times,data] = readColData( fname, ncols, 0, 0 );
+        cd(sim_path);
         inc = data(:,4) * 100 / totpop;
         cuminc = data(:,5) * 100 / totpop;
         
         M(:,1) = inc(11:51);
         M(:,5) = cuminc(11:51);
         
-        % A model
+        % Model A
         fname = [ country, '_Rg', num2str(Rg_A(ia,ib),'%.3f'), '_Rw0.000_sigma', num2str(psiG_vec(ib),'%.1f'), ...
             '_rho', num2str(phiG,'%.1f'), '_ass', num2str(theta_A(ia,ib),'%.3f'), '_gammaG', num2str(c_ratio,'%.2f'),'_H', num2str(1,'%.2f'),...
             '__sync_large.dat' ];
         cmdlA = [ runcommand,' param.txt ',country,' ', num2str(Rg_A(ia,ib),'%.3f'), ' ', num2str(0,'%.3f'), ' ', num2str(psiG_vec(ib),'%.1f'), ' ', ...
-             num2str(phiG,'%.1f'), ' ', num2str(theta_A(i1,i2),'%.3f'),' ', num2str(g_ratio,'%.2f'),' ', num2str(h_ratio,'%.2f'),' ',...
+             num2str(phiG,'%.1f'), ' ', num2str(theta_A(ia,ib),'%.3f'),' ', num2str(g_ratio,'%.2f'),' ', num2str(h_ratio,'%.2f'),' ',...
              num2str(n_init_inf_A_A,'%d'),' ', num2str(n_init_inf_C_A,'%d') ];
         if Run_simulation_anyway
             if exist(fname,'file')
@@ -120,14 +132,16 @@ for i = 1:2
                 [status result] = system( cmdlA ); % cmdlA is the command line to run the executable with the right arguments
             end
         end
-        [labels,HOW_MANY,data] = readColData( fname, 18, 0, 0 );
+        cd(saved_sim_path);
+        [labels,times,data] = readColData( fname, ncols, 0, 0 );
+        cd(sim_path);
         inc = data(:,4) * 100 / totpop;
         cuminc = data(:,5) * 100 / totpop;
         
         M(:,2) = inc(11:51);
         M(:,6) = cuminc(11:51);
         
-        % H model
+        % Model H
         fname = [ country, '_Rg', num2str(Rg_H(ia,ib),'%.3f'), '_Rw', num2str(Rh_H(ia,ib),'%.3f'),...
             '_sigma1.0_rho', num2str(phiG,'%.1f'), '_ass', num2str(thetaG,'%.3f'), '_gammaG', num2str(g_ratio,'%.2f'),'_H', num2str(h_ratio,'%.2f'),...
             '__sync_large.dat' ];
@@ -149,14 +163,16 @@ for i = 1:2
                 [status result] = system( cmdlH ); % cmdlH is the command line to run the executable with the right arguments
             end
         end
-        [labels,HOW_MANY,data] = readColData( fname, 18, 0, 0 );
+        cd(saved_sim_path);
+        [labels,times,data] = readColData( fname, ncols, 0, 0 );
+        cd(sim_path);
         inc = data(:,4) * 100 / totpop;
         cuminc = data(:,5) * 100 / totpop;
         
         M(:,3) = inc(11:51);
         M(:,7) = cuminc(11:51);
         
-        % U model
+        % Model U
         fname = [ country, '_Rg', num2str(R0,'%.3f'), '_Rw0.000_sigma1.0',...
             '_rho', num2str(phiG,'%.1f'), '_ass', num2str(thetaG,'%.3f'), '_gammaG', num2str(g_ratio,'%.2f'),'_H', num2str(h_ratio,'%.2f'),...
             '__sync_large.dat' ];
@@ -178,7 +194,9 @@ for i = 1:2
                 [status result] = system( cmdlU ); % cmdlU is the command line to run the executable with the right arguments
             end
         end
-        [labels,HOW_MANY,data] = readColData( fname, 18, 0, 0 );
+        cd(saved_sim_path);
+        [labels,times,data] = readColData( fname, ncols, 0, 0 );
+        cd(sim_path);
         inc = data(:,4) * 100 / totpop;
         cuminc = data(:,5) * 100 / totpop;
         

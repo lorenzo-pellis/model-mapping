@@ -6,7 +6,7 @@
 close all; % close all figures
 clearvars;
 Activate_save_fig = 1; % If true, figures are saved
-Activate_plot_from_new_workspaces = 1; 
+Activate_plot_from_new_workspaces = 0; 
 % If 0, I make plots from pre-computed and saved workspaces (folder saved-workspaces)
 % If 1, I make plots from newly computed workspaces (folder output-workspaces)
 
@@ -33,8 +33,8 @@ else
         wrksp_path = [base_dir,'/saved-workspaces/assortativity/'];
     end
 end
-% wrksp_name = 'GB_R020_pAA50_50_50_psiGcustom_phi10_theta02_gammaG100_H100_plot_v';
-wrksp_name = 'GB_R020_pAA20_30_80_psi06_04_18_phi10_theta02_gammaG100_H100_plot_v';
+wrksp_name = 'GB_R020_pAA50_50_50_psiGcustom_phi10_theta02_gammaG100_H100_plot_v';
+% wrksp_name = 'GB_R020_pAA20_30_80_psi06_04_18_phi10_theta02_gammaG100_H100_plot_v';
 % wrksp_name = 'SL_R020_pAA20_30_80_psi04_02_18_phi10_theta04_gammaG100_H100_plot_v';
 cd(code_path)
 
@@ -114,7 +114,7 @@ for i1 = 1:l1
         vtitle_list(p,:) = ['\psi = ',num2str(psiG_vec(i2),'%1.2f')];
     end
     ass_handles = mysubplot_find_v( width, height, '', ...
-        'Assortativity of children in model A (\theta^A)',...
+        'Assortativity of children in model A   (\theta^A)',...
         'Fractions adults (blue) and children (red)',...
         vtitle_list, ass, v_list, vAH_list );
 end

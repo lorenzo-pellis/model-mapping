@@ -34,24 +34,24 @@ popfig = '2ran'; thetaGval = NaN; gamval = 1; % Random
 % popfig = 'ass'; thetaGval = 0.7; gamval = 0.75; % More extreme than UK
 
 %%% Random - 5% threshold
-% phi_in_title = 1;
-% tolval = 0.05;
-% % R0val = 1.5; phiGfig = 1; first_subletter = 'a';
-% % R0val = 2; phiGfig = 1; first_subletter = 'e';
-% % R0val = 4; phiGfig = 1; first_subletter = 'i';
-% % R0val = 1.5; phiGfig = 2; first_subletter = 'm';
-% % R0val = 2; phiGfig = 2; first_subletter = 'q';
+phi_in_title = 1;
+tolval = 0.05;
+R0val = 1.5; phiGfig = 1; first_subletter = 'a';
+% R0val = 2; phiGfig = 1; first_subletter = 'e';
+% R0val = 4; phiGfig = 1; first_subletter = 'i';
+% R0val = 1.5; phiGfig = 2; first_subletter = 'm';
+% R0val = 2; phiGfig = 2; first_subletter = 'q';
 % R0val = 4; phiGfig = 2; first_subletter = 'u';
 
 %%% Random - other thresholds
-phi_in_title = 0;
-phiGfig = 1;
+% phi_in_title = 0;
+% phiGfig = 1;
 % R0val = 1.5; tolval = 0.01; first_subletter = 'a';
-% R0val = 2; tolval = 0.01; first_subletter = 'e';
-% R0val = 4; tolval = 0.01; first_subletter = 'i';
-% R0val = 1.5; tolval = 0.1; first_subletter = 'm';
-% R0val = 2; tolval = 0.1; first_subletter = 'q';
-R0val = 4; tolval = 0.1; first_subletter = 'u';
+% % R0val = 2; tolval = 0.01; first_subletter = 'e';
+% % R0val = 4; tolval = 0.01; first_subletter = 'i';
+% % R0val = 1.5; tolval = 0.1; first_subletter = 'm';
+% % R0val = 2; tolval = 0.1; first_subletter = 'q';
+% % R0val = 4; tolval = 0.1; first_subletter = 'u';
 
 rval = 0.25282; % [ 0.14552 0.25282 0.52588 ] are the values corresponding to R0 = 1.5, 2 and 4;
 % nsimval = 100;

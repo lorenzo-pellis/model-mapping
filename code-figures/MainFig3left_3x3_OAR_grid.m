@@ -7,7 +7,7 @@
 
 close all; % close all figures
 clearvars;
-Activate_C_codes = true;
+Activate_C_codes = 1;
 Activate_save_fig = 1; % If true, figures are saved
 Activate_plot_from_new_workspaces = 0; 
 % If 0, I make plots from pre-computed and saved workspaces (folder saved-workspaces)

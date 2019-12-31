@@ -11,7 +11,7 @@
 
 close all; % close all figures
 clearvars;
-Activate_save_fig = 0; % If true, figures are saved
+Activate_save_fig = 1; % If true, figures are saved
 Activate_C_codes = 1;
 
 Activate_plot_from_new_workspaces = 0; 
@@ -22,9 +22,10 @@ usez = true; % If true, I include the final size (z) in the overall acceptance r
 usepi = true; % If true, I include the peak incidence (pi) in the overall acceptance region plot, otherwise not
 uset = true;  % If true, I include the time to the peak (t) in the overall acceptance region plot, otherwise not
 useSAR = true; % If true, the SAR contours are overlaid on the plot
-use_match_r = false; % If false, I match R0; if true, I use the r correspondent to the desired R0
+use_match_r = 1; % If false, I match R0; if true, I use the r correspondent to the desired R0
 use_marks = 0; % If true, I add a numbered mark in selected locations
-use_intermediate = false; % Leave this as default choice. If you want intermediate contact patterns, choose them below
+use_intermediate = 0; % Leave this as default choice. If you want intermediate contact patterns, choose them below
+use_log2psi = 0; % If true, I let log2psi run from -2 to 2 with steps of 0.2.
 
 country = 'GB'; % Great Britain
 % country = 'SL'; % Sierra Leone
@@ -41,9 +42,13 @@ popfig = '2ran'; thetaGval = NaN; gamval = 1; % Random
 % popfig = 'm5UK'; thetaGval = 0.5; gamval = 0.75; tolval = 0.05; figletter = 'D'; use_intermediate = true;
 % popfig = 'UK'; thetaGval = 0.58; gamval = 0.75; % UK
 % popfig = 'ass'; thetaGval = 0.7; gamval = 0.75; % UK
-phivals = [ 1 1.5 2 ];
+if ~use_log2psi
+    phivals = [ 1 1.5 2 ];
+else
+    phivals = [ 0.5 1 2 ];
+end
 rvals = [ 0.14552 0.25282 0.52588 ]; % These are the values of r corresponding to the values of R0 = 1.5, 2 and 4
-% nsimval = 100;
+nsimval = 100;
 if strcmp(country,'SL')
     if strcmp(popfig,'2ran')
         tolval = 0.05; figletter = 'A';
@@ -58,9 +63,9 @@ elseif strcmp(country,'SA')
     end
 else % GB        
     if ~use_intermediate
-        tolval = 0.01; figletter = 'A';
-%         tolval = 0.05; figletter = 'B';
-%         tolval = 0.1; figletter = 'C';
+        tolval = 0.01; figletter = 'A'; % A or D
+%         tolval = 0.05; figletter = 'B'; % B or E
+%         tolval = 0.1; figletter = 'C'; % C or F
     end
 end
 
@@ -136,10 +141,21 @@ else % If country is Great Britain
         end
     end
 end
+if use_log2psi
+    if isnan(thetaGval) % If mixing is random
+        preloadedwrksp = 'R020_pAA00_05_95_log2psi-200_025_200_phi10_theta02_gammaG100_H100_100sim_e5_init050';
+    else
+        preloadedwrksp = 'R020_pAA00_05_95_log2psi-200_025_200_phi10_theta06_gammaG075_H075_100sim_e5_init050';
+    end
+end
 load([wrksp_path,preloadedwrksp]);
 cd(code_path); % Work in the directory where the codes for figures are
 x_vec = pAA_vec;
-y_vec = psiG_vec;
+if use_log2psi
+    y_vec = logpsiG_vec;
+else
+    y_vec = psiG_vec;
+end
 [X,Y] = meshgrid(x_vec,y_vec);
 lx = length(x_vec);
 ly = length(y_vec);
@@ -251,7 +267,11 @@ tabstol = ttol;
 treltol = ttol;
 
 % Build figure name
-fname = ['3x3_OAR_ROT_'];
+if ~use_log2psi
+    fname = ['3x3_OAR_ROT_'];
+else
+    fname = ['3x3_OAR_ROT_log2psi_'];
+end
 if use_marks
     fname = [ fname, 'marks_' ];
 end
@@ -283,10 +303,17 @@ for ip = 1:lphi
         else
             wname = [ 'R0', num2str(R0vals(iR0)*10,'%02d') ];
         end
-        wname = [ wname,'_pAA', num2str(ceil(pAA_min*100),'%02d'),'_',num2str(ceil(dpAA*100),'%02d'),'_',num2str(ceil(pAA_max*100),'%02d'),...
-            '_psi', num2str(psiG_min*10,'%02d'), '_', num2str(dpsiG*10,'%02d'),'_', num2str(psiG_max*10,'%02d'),...
-            '_phi', num2str(phivals(ip)*10,'%02d'), '_theta',num2str(round(thetaGval*10),'%02d'),...
-            '_gammaG', num2str(gamval*100,'%03d'), '_H', num2str(gamval*100,'%03d') ];
+        if ~use_log2psi
+            wname = [ wname,'_pAA', num2str(ceil(pAA_min*100),'%02d'),'_',num2str(ceil(dpAA*100),'%02d'),'_',num2str(ceil(pAA_max*100),'%02d'),...
+                '_psi', num2str(psiG_min*10,'%02d'), '_', num2str(dpsiG*10,'%02d'),'_', num2str(psiG_max*10,'%02d'),...
+                '_phi', num2str(phivals(ip)*10,'%02d'), '_theta',num2str(round(thetaGval*10),'%02d'),...
+                '_gammaG', num2str(gamval*100,'%03d'), '_H', num2str(gamval*100,'%03d') ];
+        else
+            wname = [ wname,'_pAA', num2str(round(pAA_min*100),'%02d'),'_',num2str(round(dpAA*100),'%02d'),'_',num2str(round(pAA_max*100),'%02d'),...
+                '_log2psi', num2str(logpsiG_min*100,'%-3d'), '_', num2str(logdpsiG*100,'%03d'),'_', num2str(logpsiG_max*100,'%03d'),...
+                '_phi', num2str(phivals(ip)*10,'%02d'), '_theta',num2str(round(thetaGval*10),'%02d'),...
+                '_gammaG', num2str(gamval*100,'%03d'), '_H', num2str(gamval*100,'%03d') ];
+        end
         if Activate_C_codes
             wname = [ wname, '_100sim_e5_init', num2str(n_init_inf,'%03d') ];
         end
@@ -491,10 +518,17 @@ for ip = 1:lphi
         szplot_rel_end = max([max(max(abs(rel_dsz_AH_A_A))),max(max(abs(rel_dsz_AH_A_C)))]);
         szplot_rel_end_perc = ceil( szplot_rel_end / szreltol ) * szreltol;
 
-        zrelreg(isnan(zA)) = -1 * zrelreg(isnan(zA));
-        pirelreg(isnan(zA)) = -1 * pirelreg(isnan(zA));
-        trelreg(isnan(zA)) = -1 * trelreg(isnan(zA));
-        relreg(isnan(zA)) = -1 * relreg(isnan(zA));
+        if ~use_log2psi
+            zrelreg(isnan(zA)) = -1 * zrelreg(isnan(zA));
+            pirelreg(isnan(zA)) = -1 * pirelreg(isnan(zA));
+            trelreg(isnan(zA)) = -1 * trelreg(isnan(zA));
+            relreg(isnan(zA)) = -1 * relreg(isnan(zA));
+        else
+            zrelreg(isnan(zA)) = -1 * zrelreg(isnan(zA)) - 1;
+            pirelreg(isnan(zA)) = -1 * pirelreg(isnan(zA)) - 1;
+            trelreg(isnan(zA)) = -1 * trelreg(isnan(zA)) - 1;
+            relreg(isnan(zA)) = -1 * relreg(isnan(zA)) - 1;
+        end
         
         %%%%%%%%%%%%%%%%%%%%%%% Figures %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -533,10 +567,17 @@ D.Zover = { overlaid_list, overlaid_list, relregA_list };
 D.Zcont = { [10 40 70 ], [ 20 30 50 60 80 90 ], 0.05 };
 D.Zlinewidth = { 0.3, 0.3, 0.6 };
 D.Zshowtext = { 'on', 'off', 'off' };
-D.Clim = [ -4.5, 4.5 ];
 D.Climleg = [ -0.5, 4.5 ];
 wm = 0.7; % white mix shade
-D.colormap = [ 1 wm wm; 1 1 wm; wm 1 wm; wm 1 1; 0 0 1; 0 1 1; 0 1 0; 1 1 0; 1 0 0 ];
+if ~use_log2psi
+    D.Clim = [ -4.5, 4.5 ];
+    D.colormap = [ 1 wm wm; 1 1 wm; wm 1 wm; wm 1 1; 0 0 1; 0 1 1; 0 1 0; 1 1 0; 1 0 0 ];
+    D.Yticks = 1:0.5:4;
+else
+    D.Clim = [ -5.5, 4.5 ];
+    D.colormap = [ 1 wm wm; 1 1 wm; wm 1 wm; wm 1 1; wm wm 1; 0 0 1; 0 1 1; 0 1 0; 1 1 0; 1 0 0 ];
+    D.Yticks = -2:2;
+end
 
 if strcmp(country,'SL')
     D.Xticks = [ 0 0.1 0.2 0.3 0.4 ];
@@ -545,7 +586,6 @@ elseif strcmp(country,'SA')
 else
     D.Xticks = [ 0 0.2 0.4 0.6 0.8 ];
 end
-D.Yticks = 1:0.5:4;
 
 % %%%%%% Text
 % Annoyingly, spaces in text are weird and system-dependent (differently in
@@ -555,7 +595,11 @@ D.Yticks = 1:0.5:4;
 % T.labelx = 'Adult-to-adult within-household transmission probability (p_{aa})';
 % T.labely = 'Relative susceptibility of children (\psi)';
 T.labelx = 'Adult-to-adult within-household transmission probability{(p_{aa})}';
-T.labely = 'Relative susceptibility of children versus adults { (\psi)}';
+if ~use_log2psi
+    T.labely = 'Relative susceptibility of children versus adults { (\psi)}';
+else
+    T.labely = 'Log_2 relative susceptibility of children versus adults{ (\psi)}   ';
+end
 T.clabels = { 'Unstructured', 'Age', 'Either', 'Households', 'Both' };
 
 % T.subtitles = reltitle_list;
