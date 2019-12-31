@@ -26,22 +26,22 @@ country = 'GB'; % Great Britain
 % country = 'SL'; % Sierra Leone
 % country = 'SA'; % South Africa
 
-% popfig = '2ran'; thetaGval = NaN; gamval = 1; % Random
+popfig = '2ran'; thetaGval = NaN; gamval = 1; % Random
 % popfig = 'm4r'; thetaGval = 0.4; gamval = 1; 
 % popfig = 'm4UK'; thetaGval = 0.4; gamval = 0.75; 
 % popfig = 'm5r'; thetaGval = 0.5; gamval = 1; 
 % popfig = 'm5UK'; thetaGval = 0.5; gamval = 0.75; 
-popfig = 'UK'; thetaGval = 0.58; gamval = 0.75; % UK
+% popfig = 'UK'; thetaGval = 0.58; gamval = 0.75; % UK
 % popfig = 'ass'; thetaGval = 0.7; gamval = 0.75; % More extreme than UK
 
-R0val = 1.5; first_subletter = 'm'; % a or m
-% R0val = 2; first_subletter = 'q'; % e or q
-% R0val = 4; first_subletter = 'u'; % i or u
+R0val = 1.5; first_subletter = 'a'; % a or m
+% R0val = 2; first_subletter = 'e'; % e or q
+% R0val = 4; first_subletter = 'i'; % i or u
 % Choose between z, pi, t, sz
-% output = 'z'; sameclim = [ 40 100 ];
+output = 'z'; sameclim = [ 40 100 ];
 % output = 'pi'; sameclim = [ 1.5 17.5 ];
 % output = 't'; sameclim = [ 4.8 15 ];
-output = 'sz'; sameclim = [ 30 100 ];
+% output = 'sz'; sameclim = [ 30 100 ];
 
 rval = 0.25282; % [ 0.14552 0.25282 0.52588 ] are the values corresponding to R0 = 1.5, 2 and 4;
 % nsimval = 100;

@@ -5,7 +5,7 @@
 % are generated for each row and column.
 % It relies on a hand-made function called "mycomplexfig.m"
 % 
-% Update: 13/10/2019
+% Update: 31-12-2019
 
 close all; % close all figures
 clearvars; % clear all variables
@@ -18,16 +18,16 @@ Activate_plot_from_new_workspaces = 0;
 
 use_match_r = false; % If false, I match R0; if true, I use the r correspondent to the desired R0
 % Choose here the variable to plot and the figure letter (top left)
-% which_output = 'vc'; figletter = 'A';
+which_output = 'vc'; figletter = 'A';
 % which_output = 'vhc'; figletter = 'B';
 % which_output = 'SAR'; figletter = 'C';
 % which_output = 'Th'; figletter = 'D';
-which_output = 'ass'; figletter = 'A';
+% which_output = 'ass'; figletter = 'A';
 % which_output = 'ass'; figletter = 'B';
 
-% country = 'GB'; % Great Britain
+country = 'GB'; % Great Britain
 % country = 'SL'; % Sierra Leone
-country = 'SA'; % South Africa
+% country = 'SA'; % South Africa
 
 R0vals = [ 1.5 2 4 ]; R0name = 'R0basic';
 % R0vals = [ 1.1 1.3 1.5 ]; R0name = 'R0down';

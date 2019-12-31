@@ -17,7 +17,7 @@
 close all; % close all figures
 clearvars;
 Activate_clean_output = 1;
-Activate_save_fig = 0; % If true, figures are saved
+Activate_save_fig = 1; % If true, figures are saved
 Activate_plot_from_new_ROT_analysis = 0; 
 % If 0, I make plots from pre-computed and saved workspaces for the rule-of-thumb analysis (folder saved-rule-of-thumb)
 % If 1, I make plots from newly computed workspaces for the rule-of-thumb analysis (folder output-rule-of-thumb)
@@ -75,6 +75,7 @@ if ispc
         ROT_path = [base_dir,'\output-rule-of-thumb\'];
     else
         ROT_path = [base_dir,'\saved-rule-of-thumb\'];
+        warning('off','MATLAB:dispatcher:UnresolvedFunctionHandle');
     end
 else
     code_path = [base_dir,'/code-figures/'];
@@ -84,6 +85,7 @@ else
         ROT_path = [base_dir,'/output-rule-of-thumb/'];
     else
         ROT_path = [base_dir,'/saved-rule-of-thumb/'];
+        warning('off','MATLAB:dispatcher:UnresolvedFunctionHandle');
     end
 end
 cd(code_path); % Work in the directory where the code for figures are

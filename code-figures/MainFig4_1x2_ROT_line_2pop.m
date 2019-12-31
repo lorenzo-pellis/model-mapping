@@ -13,7 +13,7 @@ close all; % close all figures
 clearvars;
 Activate_clean_output = 1; % Clean output (leave as it is: details explained in Supplementary Discussion, Section 2.4)
 Activate_save_fig = 1; % If true, figures are saved
-Activate_plot_from_new_ROT_analysis = 1; 
+Activate_plot_from_new_ROT_analysis = 0; 
 % If 0, I make plots from pre-computed and saved workspaces for the rule-of-thumb analysis (folder saved-rule-of-thumb)
 % If 1, I make plots from newly computed workspaces for the rule-of-thumb analysis (folder output-rule-of-thumb)
 

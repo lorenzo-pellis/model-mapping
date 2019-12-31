@@ -8,7 +8,7 @@
 % are generated for each row and column.
 % It relies on a hand-made function called "mycomplexfig.m"
 % 
-% Update: 13/10/2019
+% Update: 31-12-2019
 
 close all; % close all figures
 clearvars; % clear all variables
@@ -33,7 +33,7 @@ popfig = '2ran'; thetaGval = NaN; gamval = 1; % Random
 % popfig = 'UK'; thetaGval = 0.58; gamval = 0.75; % UK
 % popfig = 'ass'; thetaGval = 0.7; gamval = 0.75; % More extreme than UK
 
-%%% Random - 5% threshold
+%%% 5% threshold - variable phi
 phi_in_title = 1;
 tolval = 0.05;
 R0val = 1.5; phiGfig = 1; first_subletter = 'a';
@@ -43,7 +43,7 @@ R0val = 1.5; phiGfig = 1; first_subletter = 'a';
 % R0val = 2; phiGfig = 2; first_subletter = 'q';
 % R0val = 4; phiGfig = 2; first_subletter = 'u';
 
-%%% Random - other thresholds
+%%% phi = 1 - variable thresholds
 % phi_in_title = 0;
 % phiGfig = 1;
 % R0val = 1.5; tolval = 0.01; first_subletter = 'a';

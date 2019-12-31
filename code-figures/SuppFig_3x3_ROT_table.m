@@ -39,13 +39,13 @@ R0vals = [ 1.1 1.3 1.5 1.7 2 2.3 2.7 3.2 4 ]; R0name = 'R0all';
 % R0vals = [ 1.1 1.3 1.5 ]; R0name = 'R0down';
 % R0vals = [ 1.7 2 2.3 ]; R0name = 'R0middle';
 % R0vals = [ 2.7 3.2 4 ]; R0name = 'R0up';
-% pop = '2ran'; thetaGval = NaN; gamval = 1; % Random
-% pop = 'm4r'; thetaGval = 0.4; gamval = 1; 
-% pop = 'm4UK'; thetaGval = 0.4; gamval = 0.75; 
-% pop = 'm5r'; thetaGval = 0.5; gamval = 1; 
-% pop = 'm5UK'; thetaGval = 0.5; gamval = 0.75; 
-pop = 'UK'; thetaGval = 0.58; gamval = 0.75; % UK
-% pop = 'ass'; thetaGval = 0.7; gamval = 0.75; % UK
+popfig = '2ran'; thetaGval = NaN; gamval = 1; % Random
+% popfig = 'm4r'; thetaGval = 0.4; gamval = 1; 
+% popfig = 'm4UK'; thetaGval = 0.4; gamval = 0.75; 
+% popfig = 'm5r'; thetaGval = 0.5; gamval = 1; 
+% popfig = 'm5UK'; thetaGval = 0.5; gamval = 0.75; 
+% popfig = 'UK'; thetaGval = 0.58; gamval = 0.75; % UK
+% popfig = 'ass'; thetaGval = 0.7; gamval = 0.75; % UK
 phivals = [ 1 1.5 2 ];
 % endphi = phivals; % I explore phi = 1 to 1, 1.5 or 2
 psirange = [ 1 4 ]; % Don't modify this
@@ -96,7 +96,7 @@ end
 if uset
     wname = [wname,'t'];
 end
-wname = [wname,'_',country,'_',pop,'_',R0name];
+wname = [wname,'_',country,'_',popfig,'_',R0name];
 wname = [wname,'_psirange',num2str(round(psirange(1)*10),'%02d'),'_',num2str(round(psirange(2)*10),'%02d')];
 if Activate_clean_output
     wname = [wname,'_clean'];
@@ -122,7 +122,7 @@ end
 if uset
     fname = [fname,'t'];
 end
-fname = [fname,'_',pop,'_',R0name];
+fname = [fname,'_',popfig,'_',R0name];
 if use_match_r
     fname = [fname,'_match_r'];
 end

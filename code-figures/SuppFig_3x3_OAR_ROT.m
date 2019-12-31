@@ -7,7 +7,7 @@
 % generated for each row and column.
 % It relies on a hand-made function called "mycomplexfig.m"
 % 
-% Update: 13/10/2019
+% Update: 31-12-2019
 
 close all; % close all figures
 clearvars;
@@ -22,7 +22,7 @@ usez = true; % If true, I include the final size (z) in the overall acceptance r
 usepi = true; % If true, I include the peak incidence (pi) in the overall acceptance region plot, otherwise not
 uset = true;  % If true, I include the time to the peak (t) in the overall acceptance region plot, otherwise not
 useSAR = true; % If true, the SAR contours are overlaid on the plot
-use_match_r = 1; % If false, I match R0; if true, I use the r correspondent to the desired R0
+use_match_r = 0; % If false, I match R0; if true, I use the r correspondent to the desired R0
 use_marks = 0; % If true, I add a numbered mark in selected locations
 use_intermediate = 0; % Leave this as default choice. If you want intermediate contact patterns, choose them below
 use_log2psi = 0; % If true, I let log2psi run from -2 to 2 with steps of 0.2.

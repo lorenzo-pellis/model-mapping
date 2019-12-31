@@ -5,7 +5,7 @@
 % depicted in Figure 4 in the Main text of
 % Pellis, L. et al (2019), Nature Communications
 % 
-% Update: 10/10/2019
+% Update: 31-12-2019
 
 close all; % close all figures
 clearvars;
@@ -22,8 +22,8 @@ usepi = true; % If true, I include the peak incidence (pi) in the overall accept
 uset = true;  % If true, I include the time to the peak (t) in the overall acceptance region plot, otherwise not
 use_match_r = false; % If false, I match R0; if true, I use the r correspondent to the desired R0
 
-% country = 'GB'; % Great Britain
-country = 'SL'; % Sierra-Leone
+country = 'GB'; % Great Britain
+% country = 'SL'; % Sierra-Leone
 % country = 'SA'; % South-Africa
 
 psirange = [ 1 4 ];
@@ -37,15 +37,15 @@ R0vals = [ 1.1 1.3 1.5 1.7 2 2.3 2.7 3.2 4 ]; R0name = 'R0all';
 % R0vals = [ 1.3 1.5 1.7 ]; R0name = 'R0best3';
 % R0vals = [ 1.3 1.5 1.7 2 ]; R0name = 'R0best4';
 % R0vals = [ 1.3 1.5 1.7 2 2.3 ]; R0name = 'R0best5';
-pop = '2ran'; thetaGval = NaN; gamval = 1; % Random
-% pop = 'm4r'; thetaGval = 0.4; gamval = 1; 
-% pop = 'm4UK'; thetaGval = 0.4; gamval = 0.75; 
-% pop = 'm5r'; thetaGval = 0.5; gamval = 1; 
-% pop = 'm5UK'; thetaGval = 0.5; gamval = 0.75; 
-% pop = 'UK'; thetaGval = 0.58; gamval = 0.75; % UK
-% pop = 'ass'; thetaGval = 0.7; gamval = 0.75; % highly assortative, only for SL
+popROT = '2ran'; thetaGval = NaN; gamval = 1; % Random
+% popROT = 'm4r'; thetaGval = 0.4; gamval = 1; 
+% popROT = 'm4UK'; thetaGval = 0.4; gamval = 0.75; 
+% popROT = 'm5r'; thetaGval = 0.5; gamval = 1; 
+% popROT = 'm5UK'; thetaGval = 0.5; gamval = 0.75; 
+% popROT = 'UK'; thetaGval = 0.58; gamval = 0.75; % UK
+% popROT = 'ass'; thetaGval = 0.7; gamval = 0.75; % highly assortative, only for SL
 phivals = [ 1 1.5 2 ];
-tolval = 0.05;
+tolval = 0.05; % Possible values: 0.01, 0.05 and 0.1
 
 % Path stuff
 current_dir = cd;
@@ -140,7 +140,7 @@ end
 if uset
     ROT_name = [ROT_name,'t'];
 end
-ROT_name = [ROT_name,'_',country,'_',pop,'_',R0name];
+ROT_name = [ROT_name,'_',country,'_',popROT,'_',R0name];
 ROT_name = [ROT_name,'_psirange',num2str(round(psirange(1)*10),'%02d'),'_',num2str(round(psirange(2)*10),'%02d')];
 if Activate_clean_output
     ROT_name = [ROT_name,'_clean'];
