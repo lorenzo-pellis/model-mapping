@@ -20,16 +20,16 @@
 clearvars;
 
 % Switches
-Activate_checks = 1; % If 0, all cross check mechanisms are de-activated, to make everything a bit faster
-Activate_C_codes = 0; % If 0, C codes call are de-activated
+Activate_checks = 0; % If 0, all cross check mechanisms are de-activated, to make everything a bit faster
+Activate_C_codes = 1; % If 0, C codes call are de-activated
 Activate_workspace_saving = 1; % If 0, the workspace is not saved automatically
 Activate_continue = 1; % This allows continuing from the last run, if anything makes the code crash or you need to stop it
 Activate_deletefile = 1; recycle('off'); % If 1 the code eletes the output file of the stochastic simulation after use
 warning('off','MATLAB:nearlySingularMatrix');
 
-% country = 'GB'; % Great Britain
+country = 'GB'; % Great Britain
 % country = 'SL'; % Sierra Leone
-country = 'SA'; % South Africa
+% country = 'SA'; % South Africa
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Model set-up
@@ -45,7 +45,7 @@ pop = '2ran'; thetaG = NaN; g_ratio = 1; % Random (which for GB is thetaG = 0.22
 % pop = 'UK'; thetaG = 0.58; g_ratio = 0.75; % UK
 % pop = 'ass'; thetaG = 0.7; g_ratio = 0.75; % More extreme than UK
 
-R0 = 1.5;
+R0 = 2;
 phiG = 1; % relative global infectivity of children versus adults
 
 pAA_min = 0;
