@@ -29,9 +29,9 @@
 clearvars;
 
 % Switches
-Activate_checks = 1; % If 0, all cross check mechanisms are de-activated, to make everything a bit faster
+Activate_checks = 0; % If 0, all cross check mechanisms are de-activated, to make everything a bit faster
 Activate_C_codes = 1; % If 0, C codes call are de-activated
-Activate_continue = 0; % This allows continuing from the last run, if anything makes the code crash or you need to stop it
+Activate_continue = 1; % This allows continuing from the last run, if anything makes the code crash or you need to stop it
 % Do not modify the following ones:
 Activate_workspace_saving = 1; % If 0, the workspace is not saved automatically
 Activate_deletefile = 1; recycle('off'); % If 1 the code eletes the output file of the stochastic simulation after use
@@ -71,10 +71,8 @@ elseif strcmp(country,'SA')
     pAA_max = 0.63;
     dpAA = 0.033;
 else
-%     pAA_max = 0.95;
-%     dpAA = 0.05;
-    pAA_max = 0.9;
-    dpAA = 0.3;
+    pAA_max = 0.95;
+    dpAA = 0.05;
 end
 pAA_vec = pAA_min:dpAA:pAA_max;
 l1 = length(pAA_vec);

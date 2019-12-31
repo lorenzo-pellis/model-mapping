@@ -349,7 +349,7 @@ end
 tStart = tic;
 SingleRun = tic;
 
-for i2 = 15:l2 % External loop is for psi (so figures in the paper are computed in rows)
+for i2 = 1:l2 % External loop is for psi (so figures in the paper are computed in rows)
     if Activate_continue && ( i2 < i2_temp )
     else
         psiG = psiG_vec(i2);
@@ -368,7 +368,7 @@ for i2 = 15:l2 % External loop is for psi (so figures in the paper are computed 
         % parameters in a vector:
         shapeHvector = [ h_ratio, thetaH, psiH, phiH ];
 
-        for i1 = 19:l1 % Internal loop is for amount of within-household adult-to-adult transmission probability
+        for i1 = 1:l1 % Internal loop is for amount of within-household adult-to-adult transmission probability
             if flag_entry_loop && Activate_continue && ( i1 <= i1_temp )
             else
                 disp(['Loop ',num2str(i2),'-',num2str(i1),' of ',num2str(l2),'-',num2str(l1)]);
