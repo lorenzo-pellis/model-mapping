@@ -47,24 +47,35 @@ pop = '2ran'; thetaG = NaN; g_ratio = 1; % Random (which for GB is thetaG = 0.22
 % pop = 'ass'; thetaG = 0.7; g_ratio = 0.75; % More extreme than UK
 
 R0 = 2;
-phiG = 1.5; % relative global infectivity of children versus adults
+phiG = 1; % relative global infectivity of children versus adults
 
 pAA_min = 0;
 if strcmp(country,'SL')
     pAA_max = 0.475;
     dpAA = 0.025;
+%     % For a shorter test run, use:
+%     pAA_max = 0.45;
+%     dpAA = 0.15;
 elseif strcmp(country,'SA')
     pAA_max = 0.63;
     dpAA = 0.033;
-else
+%     % For a shorter test run, use:
+%     pAA_max = 0.6;
+%     dpAA = 0.2; % Exact comparison to full SA results needs: 0.0198;
+else % GB
     pAA_max = 0.95;
     dpAA = 0.05;
+%     % For a shorter test run, use:
+%     pAA_max = 0.9;
+%     dpAA = 0.3;
 end
 pAA_vec = pAA_min:dpAA:pAA_max;
 l1 = length(pAA_vec);
 logpsiG_min = -2;
 logpsiG_max = 2;
 logdpsiG = 0.25;
+% % For a shorter test run, use:
+% logdpsiG = 1.25;
 logpsiG_vec = logpsiG_min:logdpsiG:logpsiG_max;
 psiG_vec = 2.^logpsiG_vec;
 l2 = length(psiG_vec);
@@ -922,11 +933,11 @@ for i2 = 1:l2 % External loop is for psi (so figures in the paper are computed i
                 TotTime = TotTime + tElapsed;
                 save([temp_path,workspace_name_temp]); % Save in the workspace all the values that have been computed till now, in case something goes wrong
                 if Activate_C_codes && Activate_deletefile % Clear up the outputs of the individual-based stochastic simulation
-                    delete( output_file_name_AH );
                     if ~isempty( output_file_name_A )
                         assert( logical( exist( output_file_name_A, 'file' ) ) ) % exist returns 2 for files, rather than true                  
                         delete( output_file_name_A );
                     end
+                    delete( output_file_name_AH );
                     delete( output_file_name_H );
                 end
             end

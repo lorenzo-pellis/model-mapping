@@ -31,7 +31,7 @@ clearvars;
 % Switches
 Activate_checks = 0; % If 0, all cross check mechanisms are de-activated, to make everything a bit faster
 Activate_C_codes = 1; % If 0, C codes call are de-activated
-Activate_continue = 1; % This allows continuing from the last run, if anything makes the code crash or you need to stop it
+Activate_continue = 0; % This allows continuing from the last run, if anything makes the code crash or you need to stop it
 % Do not modify the following ones:
 Activate_workspace_saving = 1; % If 0, the workspace is not saved automatically
 Activate_deletefile = 1; recycle('off'); % If 1 the code eletes the output file of the stochastic simulation after use
@@ -61,25 +61,35 @@ desired_r =  0.25282; R0 = 2; % The value of R0 is used only for cross-checking
 phiG = 1; % relative global infectivity of children versus adults
 
 nsimr = 100;
-% rng(17); % Set the seed for the random number generator for the Monte Carlo computation of r
+rng(17); % Set the seed for the random number generator for the Monte Carlo computation of r
 
 pAA_min = 0;
 if strcmp(country,'SL')
     pAA_max = 0.475;
     dpAA = 0.025;
+%     % For a shorter test run, use:
+%     pAA_max = 0.45;
+%     dpAA = 0.15;
 elseif strcmp(country,'SA')
     pAA_max = 0.63;
     dpAA = 0.033;
-else
+%     % For a shorter test run, use:
+%     pAA_max = 0.6;
+%     dpAA = 0.2; % Exact comparison to full SA results needs: 0.0198;
+else % GB
     pAA_max = 0.95;
     dpAA = 0.05;
+%     % For a shorter test run, use:
+%     pAA_max = 0.9;
+%     dpAA = 0.3;
 end
 pAA_vec = pAA_min:dpAA:pAA_max;
 l1 = length(pAA_vec);
 psiG_min = 1;
 psiG_max = 4;
-% dpsiG = 0.2;
-dpsiG = 1;
+dpsiG = 0.2; 
+% % For a shorter test run, use:
+% dpsiG = 1; 
 psiG_vec = psiG_min:dpsiG:psiG_max;
 l2 = length(psiG_vec);
 
