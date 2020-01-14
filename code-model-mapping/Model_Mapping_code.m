@@ -20,9 +20,9 @@
 clearvars;
 
 % Switches
-Activate_checks = 1; % If 0, all cross check mechanisms are de-activated, to make everything a bit faster
+Activate_checks = 0; % If 0, all cross check mechanisms are de-activated, to make everything a bit faster
 Activate_C_codes = 1; % If 0, C codes call are de-activated
-Activate_continue = 1; % This allows continuing from the last run, if anything makes the code crash or you need to stop it
+Activate_continue = 0; % This allows continuing from the last run, if anything makes the code crash or you need to stop it
 % Do not modify the following ones:
 Activate_workspace_saving = 1; % If 0, the workspace is not saved automatically
 Activate_deletefile = 1; recycle('off'); % If 1 the code eletes the output file of the stochastic simulation after use
@@ -46,25 +46,36 @@ pop = '2ran'; thetaG = NaN; g_ratio = 1; % Random (which for GB is thetaG = 0.22
 % pop = 'UK'; thetaG = 0.58; g_ratio = 0.75; % UK
 % pop = 'ass'; thetaG = 0.7; g_ratio = 0.75; % More extreme than UK
 
-R0 = 2;
+R0 = 4;
 phiG = 1; % relative global infectivity of children versus adults
 
 pAA_min = 0;
 if strcmp(country,'SL')
     pAA_max = 0.475;
     dpAA = 0.025;
+%     % For a shorter test run, use:
+%     pAA_max = 0.45;
+%     dpAA = 0.15;
 elseif strcmp(country,'SA')
     pAA_max = 0.63;
     dpAA = 0.033;
-else
+%     % For a shorter test run, use:
+%     pAA_max = 0.6;
+%     dpAA = 0.2; % Exact comparison to full SA results needs: 0.0198;
+else % GB
     pAA_max = 0.95;
     dpAA = 0.05;
+%     % For a shorter test run, use:
+%     pAA_max = 0.9;
+%     dpAA = 0.3;
 end
 pAA_vec = pAA_min:dpAA:pAA_max;
 l1 = length(pAA_vec);
 psiG_min = 1;
 psiG_max = 4;
-dpsiG = 0.2;
+dpsiG = 0.2; 
+% % For a shorter test run, use:
+% dpsiG = 1;
 psiG_vec = psiG_min:dpsiG:psiG_max;
 l2 = length(psiG_vec);
 
@@ -113,9 +124,7 @@ cd(code_path);
 if Activate_checks
     addpath(check_path);
 end
-if Activate_C_codes
-    addpath(genpath(tool_path))
-end
+addpath(genpath(tool_path))
 
 workspace_emergency_name = 'workspace_emergency_save';
 
@@ -349,7 +358,7 @@ end
 tStart = tic;
 SingleRun = tic;
 
-for i2 = 15:l2 % External loop is for psi (so figures in the paper are computed in rows)
+for i2 = 1:l2 % External loop is for psi (so figures in the paper are computed in rows)
     if Activate_continue && ( i2 < i2_temp )
     else
         psiG = psiG_vec(i2);
@@ -368,7 +377,7 @@ for i2 = 15:l2 % External loop is for psi (so figures in the paper are computed 
         % parameters in a vector:
         shapeHvector = [ h_ratio, thetaH, psiH, phiH ];
 
-        for i1 = 19:l1 % Internal loop is for amount of within-household adult-to-adult transmission probability
+        for i1 = 1:l1 % Internal loop is for amount of within-household adult-to-adult transmission probability
             if flag_entry_loop && Activate_continue && ( i1 <= i1_temp )
             else
                 disp(['Loop ',num2str(i2),'-',num2str(i1),' of ',num2str(l2),'-',num2str(l1)]);
@@ -623,7 +632,7 @@ for i2 = 15:l2 % External loop is for psi (so figures in the paper are computed 
                     output_file_name_AH = [ country,'_Rg', num2str(Rg(i1,i2),'%.3f'), '_Rw', num2str(Rh,'%.3f'), '_sigma', num2str(psiG,'%.1f'), ...
                         '_rho', num2str(phiG,'%.1f'), '_ass', num2str(thetaG,'%.3f'), '_gammaG', num2str(g_ratio,'%.2f'),'_H', num2str(h_ratio,'%.2f'),...
                         '__averages.dat' ]; % The simulation creates a data file (.dat, but it's just a text file) with this name
-                    [labels,HOW_MANY,data] = readColData( output_file_name_AH, 16, 0, 1 ); % Read the Excel file with a function written by someone else.
+                    [labels,HOW_MANY,data] = readColData( output_file_name_AH, 11, 0, 1 ); % Read the Excel file with a function written by someone else.
                     zAHsim(i1,i2) = data(3)/100; % Average final size from the simulation (just to cross-check the analytical result). Simulation gives percentage, now turned in a fraction
                     tAHsim(i1,i2) = data(7); % Time to the peak
                     piAHsim(i1,i2) = data(5); % Peak incidence, expressed in percentages
@@ -725,7 +734,7 @@ for i2 = 15:l2 % External loop is for psi (so figures in the paper are computed 
                             output_file_name_A = [ country,'_Rg', num2str(Rg_A(i1,i2),'%.3f'), '_Rw', num2str(0,'%.3f'), '_sigma', num2str(psiG,'%.1f'), ...
                                 '_rho', num2str(phiG,'%.1f'), '_ass', num2str(theta_A(i1,i2),'%.3f'), '_gammaG', num2str(c_ratio,'%.2f'),'_H', num2str(1,'%.2f'),...
                                 '__averages.dat' ]; % The simulation creates a data file (.dat, but it's just a text file) with this name
-                            [labels,HOW_MANY,data] = readColData( output_file_name_A, 16, 0, 1 ); % Read the Excel file with a function written by someone else.
+                            [labels,HOW_MANY,data] = readColData( output_file_name_A, 11, 0, 1 ); % Read the Excel file with a function written by someone else.
                             zAsim(i1,i2) = data(3)/100; % Average final size from the simulation (just to cross-check the analytical result). Simulation gives percentage, now turned in a fraction
                             tAsim(i1,i2) = data(7); % Time to the peak
                             piAsim(i1,i2) = data(5); % Peak incidence, expressed in percentages
@@ -853,7 +862,7 @@ for i2 = 15:l2 % External loop is for psi (so figures in the paper are computed 
                     output_file_name_H = [ country,'_Rg', num2str(Rg_H(i1,i2),'%.3f'), '_Rw', num2str(Rh_H(i1,i2),'%.3f'), '_sigma', num2str(1,'%.1f'), ...
                         '_rho', num2str(1,'%.1f'), '_ass', num2str(thetaG_random_mix,'%.3f'), '_gammaG', num2str(1,'%.2f'),'_H', num2str(1,'%.2f'),...
                         '__averages.dat' ]; % The simulation creates a data file (.dat, but it's just a text file) with this name
-                    [labels,HOW_MANY,data] = readColData( output_file_name_H, 16, 0, 1 ); % Read the Excel file with a function written by someone else.
+                    [labels,HOW_MANY,data] = readColData( output_file_name_H, 11, 0, 1 ); % Read the Excel file with a function written by someone else.
                     zHsim(i1,i2) = data(3)/100; % Average final size from the simulation (just to cross-check the analytical result). Simulation gives percentage, now turned in a fraction
                     tHsim(i1,i2) = data(7); % Time to the peak
                     piHsim(i1,i2) = data(5); % Peak incidence, expressed in percentages
@@ -923,11 +932,11 @@ for i2 = 15:l2 % External loop is for psi (so figures in the paper are computed 
                 TotTime = TotTime + tElapsed;
                 save([temp_path,workspace_name_temp]); % Save in the workspace all the values that have been computed till now, in case something goes wrong
                 if Activate_C_codes && Activate_deletefile % Clear up the outputs of the individual-based stochastic simulation
-                    delete( output_file_name_AH );
                     if ~isempty( output_file_name_A )
-                        exist( output_file_name_A, 'var' )                    
+                        assert( logical( exist( output_file_name_A, 'file' ) ) ) % exist returns 2 for files, rather than true                  
                         delete( output_file_name_A );
                     end
+                    delete( output_file_name_AH );
                     delete( output_file_name_H );
                 end
             end
