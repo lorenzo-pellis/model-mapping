@@ -33,7 +33,9 @@ function [z, inftimes]=multitypeSellke_Gamma_1init(m, n, Lh1to1, Alpha, Gam, tpc
 % Author: Lorenzo Pellis
 % Last update: 31/10/2019 
 
-rng(7); % Sets the seed for the random number generator, to aid reproducibility
+% rng(7); % Sets the seed for the random number generator, to aid reproducibility
+% However, for the paper, the seed is set in the main code
+% "Model_Mapping_code_match_r", so this should stay commented out
 
 global opts1;
 guessintsize = max(max(Alpha./Gam)); % A fixed amount to identify an initial guess for an fzero call
