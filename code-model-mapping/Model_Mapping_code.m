@@ -88,6 +88,7 @@ h_ratio = g_ratio;%0.75; % Ratio of the contact rate hA / hC
 c_ratio = g_ratio; % For the A model, I use the overall ratio of contacts
 n_init_inf = 50;
 mapfail = NaN; % This is the value to use if the mapping procedure fails in finding a suitable assortativity
+ncols = 11; % Number of columns in the output of the stochastic simulation
 
 % Real-time-related parameters
 
@@ -632,7 +633,7 @@ for i2 = 1:l2 % External loop is for psi (so figures in the paper are computed i
                     output_file_name_AH = [ country,'_Rg', num2str(Rg(i1,i2),'%.3f'), '_Rw', num2str(Rh,'%.3f'), '_sigma', num2str(psiG,'%.1f'), ...
                         '_rho', num2str(phiG,'%.1f'), '_ass', num2str(thetaG,'%.3f'), '_gammaG', num2str(g_ratio,'%.2f'),'_H', num2str(h_ratio,'%.2f'),...
                         '__averages.dat' ]; % The simulation creates a data file (.dat, but it's just a text file) with this name
-                    [labels,HOW_MANY,data] = readColData( output_file_name_AH, 11, 0, 1 ); % Read the Excel file with a function written by someone else.
+                    [labels,HOW_MANY,data] = readColData( output_file_name_AH, ncols, 0, 1 ); % Read the Excel file with a function written by someone else.
                     zAHsim(i1,i2) = data(3)/100; % Average final size from the simulation (just to cross-check the analytical result). Simulation gives percentage, now turned in a fraction
                     tAHsim(i1,i2) = data(7); % Time to the peak
                     piAHsim(i1,i2) = data(5); % Peak incidence, expressed in percentages
@@ -734,7 +735,7 @@ for i2 = 1:l2 % External loop is for psi (so figures in the paper are computed i
                             output_file_name_A = [ country,'_Rg', num2str(Rg_A(i1,i2),'%.3f'), '_Rw', num2str(0,'%.3f'), '_sigma', num2str(psiG,'%.1f'), ...
                                 '_rho', num2str(phiG,'%.1f'), '_ass', num2str(theta_A(i1,i2),'%.3f'), '_gammaG', num2str(c_ratio,'%.2f'),'_H', num2str(1,'%.2f'),...
                                 '__averages.dat' ]; % The simulation creates a data file (.dat, but it's just a text file) with this name
-                            [labels,HOW_MANY,data] = readColData( output_file_name_A, 11, 0, 1 ); % Read the Excel file with a function written by someone else.
+                            [labels,HOW_MANY,data] = readColData( output_file_name_A, ncols, 0, 1 ); % Read the Excel file with a function written by someone else.
                             zAsim(i1,i2) = data(3)/100; % Average final size from the simulation (just to cross-check the analytical result). Simulation gives percentage, now turned in a fraction
                             tAsim(i1,i2) = data(7); % Time to the peak
                             piAsim(i1,i2) = data(5); % Peak incidence, expressed in percentages
@@ -862,7 +863,7 @@ for i2 = 1:l2 % External loop is for psi (so figures in the paper are computed i
                     output_file_name_H = [ country,'_Rg', num2str(Rg_H(i1,i2),'%.3f'), '_Rw', num2str(Rh_H(i1,i2),'%.3f'), '_sigma', num2str(1,'%.1f'), ...
                         '_rho', num2str(1,'%.1f'), '_ass', num2str(thetaG_random_mix,'%.3f'), '_gammaG', num2str(1,'%.2f'),'_H', num2str(1,'%.2f'),...
                         '__averages.dat' ]; % The simulation creates a data file (.dat, but it's just a text file) with this name
-                    [labels,HOW_MANY,data] = readColData( output_file_name_H, 11, 0, 1 ); % Read the Excel file with a function written by someone else.
+                    [labels,HOW_MANY,data] = readColData( output_file_name_H, ncols, 0, 1 ); % Read the Excel file with a function written by someone else.
                     zHsim(i1,i2) = data(3)/100; % Average final size from the simulation (just to cross-check the analytical result). Simulation gives percentage, now turned in a fraction
                     tHsim(i1,i2) = data(7); % Time to the peak
                     piHsim(i1,i2) = data(5); % Peak incidence, expressed in percentages
