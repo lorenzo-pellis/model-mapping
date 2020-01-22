@@ -25,7 +25,7 @@ function z = fzeroinfmax(fun,lb,rb,options,factor,maxiter,initguess)
 % When both min and max exist, just use fzero...
 % 
 % Author: Lorenzo Pellis
-% Last update: 06/11/2019 
+% Last update: 06-11-2019 
 
 if nargin < 6 || isempty(maxiter)
     maxiter = 100;

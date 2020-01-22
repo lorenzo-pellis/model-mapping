@@ -15,7 +15,7 @@ function mgf = mgf(t,distribution,iota,alpha)
 %   - alpha: shape of the r.v. (only for distribution 2)
 % 
 % Author: Lorenzo Pellis
-% Last update: 18/05/2019 
+% Last update: 18-05-2019 
 
 if distribution==0
     mgf=exp(-t*iota);

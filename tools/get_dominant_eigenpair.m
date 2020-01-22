@@ -16,7 +16,7 @@ function [ R0, v ] = get_dominant_eigenpair(K)
 % in the dominant eigenvalue of A, just use max(eig(A)).
 % 
 % Author: Lorenzo Pellis
-% Last update: 26/05/2019 
+% Last update: 26-05-2019 
 
 [ V, E ] = eig( K ); % First find all eigenvalues and eigenvectors
 temp = max(E); % E is a matrix with eigenvalues on the diagonal, so max needs to be applied twice

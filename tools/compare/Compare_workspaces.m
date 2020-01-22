@@ -3,7 +3,7 @@
 % relies on the function comp_struct.m (written by Michael Arant and available at
 % https://uk.mathworks.com/matlabcentral/fileexchange/22752-compare-structures?s_tid=mwa_osa_a)
 % 
-% Update: 10/10/2019
+% Update: 10-10-2019
 
 close all; % close all figures
 clearvars;
