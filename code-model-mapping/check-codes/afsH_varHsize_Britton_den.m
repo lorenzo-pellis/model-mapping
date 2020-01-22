@@ -39,12 +39,12 @@ function z = afsH_varHsize_Britton_den(PI,Rg,Rh,distribution,iota,alpha,eta,den_
 % Output: average final size (numbers)
 % 
 % Reference: Supplementary Methods, Section 1.4 of
-% Pellis, L et al (2019), Nature Communications
+% Pellis, L et al (2020), Nature Communications
 %
 % Methodological reference: book by Andersson & Britton (2000), Section 6.3
 % 
 % Author: Lorenzo Pellis
-% Last update: 14/06/2019 
+% Last update: 14-06-2019 
 
 displacement = @(s) ( s - afsn_Britton_sizebiased_den(PI,exp(-Rg*s),Rh,distribution,iota,alpha,eta,den_str) );
 

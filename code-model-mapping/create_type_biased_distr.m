@@ -15,10 +15,10 @@ function PI_type = create_type_biased_distr(PI)
 % children are unlikely to live on their own)
 % 
 % Reference: \pi_n^a and \pi_n^c from Supplementaty Tables 2, 5 and 7 of
-% Pellis, L. et al (2019), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Author: Lorenzo Pellis
-% Last update: 11/05/2019
+% Last update: 11-05-2019
 % This function creates the average size of a household of a randomly
 % selected adult or child: mu = [ mu_a, mu_c ]
 

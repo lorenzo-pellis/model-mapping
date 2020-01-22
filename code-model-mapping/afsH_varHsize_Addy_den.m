@@ -31,14 +31,14 @@ function z = afsH_varHsize_Addy_den(PI,Rg,Rh,distribution,iota,alpha,eta,den_str
 % Output: average final size (numbers)
 % 
 % Reference: Supplementary Methods, Section 1.4 of
-% Pellis, L et al (2019), Nature Communications
+% Pellis, L et al (2020), Nature Communications
 %
 % Methodological references: 
 % Addy, Longini and Haber (1991), Biometrics
 % Ball and Lyne (2001), Advances in Applied Probability
 % 
 % Author: Lorenzo Pellis
-% Last update: 14/06/2019 
+% Last update: 14-06-2019 
 
 displacement = @(s) ( s - afsn_Addy_sizebiased_den(PI,exp(-Rg*s),Rh,distribution,iota,alpha,eta,den_str) );
 

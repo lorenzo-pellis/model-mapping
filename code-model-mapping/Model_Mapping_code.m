@@ -1,9 +1,9 @@
 % This script is the main code to run the model mapping procedure to
 % compare model with age and households (AH) to models with age (A),
 % households (H) and random mixing (U). Please refer to publication:
-% Pellis, L. et al (2019), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 %
-% Date: 29-12-2019
+% Date: 22-01-2020
 % 
 % Fixed parameters (uncomment applicable values in the code below):
 %   - country: this selects the household composition structure (how adults
@@ -247,8 +247,8 @@ PI = create_2type_size_biased_distr(H);
 H_single = create_1type_distr(H);
 PI_single = create_1type_size_biased_distr(H_single);
 PI_type = create_type_biased_distr(PI);
-muH = sum(H_single.*[1:length(H_single)]);
-sb_muH = sum(PI_single.*[1:length(PI_single)]);
+muH = sum(H_single.*(1:length(H_single)));
+sb_muH = sum(PI_single.*(1:length(PI_single)));
 mu_type = sum(PI_type.*[1:length(H_single);1:length(H_single)],2);
 maxHsize = length(H_single);
 
@@ -312,8 +312,8 @@ PIsim = create_2type_size_biased_distr(Hsim);
 H_single_sim = create_1type_distr(Hsim);
 PI_single_sim = create_1type_size_biased_distr(H_single_sim);
 PI_type_sim = create_type_biased_distr(PIsim);
-muH_sim = sum(H_single_sim.*[1:length(H_single_sim)]);
-sb_muH_sim = sum(PI_single_sim.*[1:length(PI_single_sim)]);
+muH_sim = sum(H_single_sim.*(1:length(H_single_sim)));
+sb_muH_sim = sum(PI_single_sim.*(1:length(PI_single_sim)));
 mu_type_sim = sum(PI_type_sim,2); % Just to check
 
 % The output of the mapping procedure (this script) is saved in a workspace
@@ -623,14 +623,14 @@ for i2 = 1:l2 % External loop is for psi (so figures in the paper are computed i
                 if Activate_C_codes % The stochastic simulations are in C
                     disp('Run AH simulations');
                     simtime = tic; % Check how long they take
-                    cmdlAH = [ runcommand,' param.txt ',country,' ', num2str(Rg(i1,i2),'%.3f'), ' ', num2str(Rh,'%.3f'), ' ', num2str(psiG,'%.1f'), ' ', ...
+                    cmdlAH = [ runcommand,' param.txt ',country,' ', num2str(Rg(i1,i2),'%.3f'), ' ', num2str(Rh,'%.3f'), ' ', num2str(psiG,'%.4f'), ' ', ...
                          num2str(phiG,'%.1f'), ' ', num2str(thetaG,'%.3f'),' ', num2str(g_ratio,'%.2f'),' ', num2str(h_ratio,'%.2f'),' ',...
                          num2str(n_init_inf_A_AH,'%d'),' ', num2str(n_init_inf_C_AH,'%d') ];
                     [status result] = system( cmdlAH ); % cmdlAH is the command line to run the executable with the right arguments
                     % status is 0 if the command is executed correctly
                     % result contains what the C code spits out in the standard output (not used here)
 
-                    output_file_name_AH = [ country,'_Rg', num2str(Rg(i1,i2),'%.3f'), '_Rw', num2str(Rh,'%.3f'), '_sigma', num2str(psiG,'%.1f'), ...
+                    output_file_name_AH = [ country,'_Rg', num2str(Rg(i1,i2),'%.3f'), '_Rw', num2str(Rh,'%.3f'), '_sigma', num2str(psiG,'%.4f'), ...
                         '_rho', num2str(phiG,'%.1f'), '_ass', num2str(thetaG,'%.3f'), '_gammaG', num2str(g_ratio,'%.2f'),'_H', num2str(h_ratio,'%.2f'),...
                         '__averages.dat' ]; % The simulation creates a data file (.dat, but it's just a text file) with this name
                     [labels,HOW_MANY,data] = readColData( output_file_name_AH, ncols, 0, 1 ); % Read the Excel file with a function written by someone else.
@@ -725,14 +725,14 @@ for i2 = 1:l2 % External loop is for psi (so figures in the paper are computed i
                         if Activate_C_codes % The stochastic simulations are in C
                             disp('Run A simulations');
                             simtime = tic; % Check how long they take
-                            cmdlA = [ runcommand,' param.txt ',country,' ', num2str(Rg_A(i1,i2),'%.3f'), ' ', num2str(0,'%.3f'), ' ', num2str(psiG,'%.1f'), ' ', ...
+                            cmdlA = [ runcommand,' param.txt ',country,' ', num2str(Rg_A(i1,i2),'%.3f'), ' ', num2str(0,'%.3f'), ' ', num2str(psiG,'%.4f'), ' ', ...
                                  num2str(phiG,'%.1f'), ' ', num2str(theta_A(i1,i2),'%.3f'),' ', num2str(c_ratio,'%.2f'),' ', num2str(1,'%.2f'),' ',...
                                  num2str(n_init_inf_A_A,'%d'),' ', num2str(n_init_inf_C_A,'%d')  ];
                             [status result] = system( cmdlA ); % cmdlA is the command line to run the executable with the right arguments
                             % status is 0 if the command is executed correctly
                             % result contains what the C code spits out in the standard output (not used here)
 
-                            output_file_name_A = [ country,'_Rg', num2str(Rg_A(i1,i2),'%.3f'), '_Rw', num2str(0,'%.3f'), '_sigma', num2str(psiG,'%.1f'), ...
+                            output_file_name_A = [ country,'_Rg', num2str(Rg_A(i1,i2),'%.3f'), '_Rw', num2str(0,'%.3f'), '_sigma', num2str(psiG,'%.4f'), ...
                                 '_rho', num2str(phiG,'%.1f'), '_ass', num2str(theta_A(i1,i2),'%.3f'), '_gammaG', num2str(c_ratio,'%.2f'),'_H', num2str(1,'%.2f'),...
                                 '__averages.dat' ]; % The simulation creates a data file (.dat, but it's just a text file) with this name
                             [labels,HOW_MANY,data] = readColData( output_file_name_A, ncols, 0, 1 ); % Read the Excel file with a function written by someone else.
@@ -853,14 +853,14 @@ for i2 = 1:l2 % External loop is for psi (so figures in the paper are computed i
                 if Activate_C_codes % The stochastic simulations are in C
                     disp('Run H simulations');
                     simtime = tic; % Check how long they take
-                    cmdlH = [ runcommand,' param.txt ',country,' ', num2str(Rg_H(i1,i2),'%.3f'), ' ', num2str(Rh_H(i1,i2),'%.3f'), ' ', num2str(1,'%.1f'), ' ', ...
+                    cmdlH = [ runcommand,' param.txt ',country,' ', num2str(Rg_H(i1,i2),'%.3f'), ' ', num2str(Rh_H(i1,i2),'%.3f'), ' ', num2str(1,'%.4f'), ' ', ...
                          num2str(1,'%.1f'), ' ', num2str(thetaG_random_mix,'%.3f'),' ', num2str(1,'%.2f'),' ', num2str(1,'%.2f'),' ',...
                          num2str(n_init_inf_A_AH,'%d'),' ', num2str(n_init_inf_C_AH,'%d') ];
                     [status result] = system( cmdlH ); % cmdlH is the command line to run the executable with the right arguments
                     % status is 0 if the command is executed correctly
                     % result contains what the C code spits out in the standard output (not used here)
 
-                    output_file_name_H = [ country,'_Rg', num2str(Rg_H(i1,i2),'%.3f'), '_Rw', num2str(Rh_H(i1,i2),'%.3f'), '_sigma', num2str(1,'%.1f'), ...
+                    output_file_name_H = [ country,'_Rg', num2str(Rg_H(i1,i2),'%.3f'), '_Rw', num2str(Rh_H(i1,i2),'%.3f'), '_sigma', num2str(1,'%.4f'), ...
                         '_rho', num2str(1,'%.1f'), '_ass', num2str(thetaG_random_mix,'%.3f'), '_gammaG', num2str(1,'%.2f'),'_H', num2str(1,'%.2f'),...
                         '__averages.dat' ]; % The simulation creates a data file (.dat, but it's just a text file) with this name
                     [labels,HOW_MANY,data] = readColData( output_file_name_H, ncols, 0, 1 ); % Read the Excel file with a function written by someone else.
@@ -933,11 +933,8 @@ for i2 = 1:l2 % External loop is for psi (so figures in the paper are computed i
                 TotTime = TotTime + tElapsed;
                 save([temp_path,workspace_name_temp]); % Save in the workspace all the values that have been computed till now, in case something goes wrong
                 if Activate_C_codes && Activate_deletefile % Clear up the outputs of the individual-based stochastic simulation
-                    if ~isempty( output_file_name_A )
-                        assert( logical( exist( output_file_name_A, 'file' ) ) ) % exist returns 2 for files, rather than true                  
-                        delete( output_file_name_A );
-                    end
                     delete( output_file_name_AH );
+                    delete( output_file_name_A );
                     delete( output_file_name_H );
                 end
             end

@@ -25,7 +25,7 @@ function afsn = afsn_Ball_sizebiased_den(PI,Rh,distribution,iota,alpha,eta,den_s
 %       - 'n-1': transmission has the form beta/(n-1)^eta
 % 
 % Author: Lorenzo Pellis
-% Last update: 26/05/2019 
+% Last update: 26-05-2019 
 
 max = length(PI);
 temp = 0;

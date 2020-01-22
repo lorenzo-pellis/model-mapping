@@ -16,10 +16,10 @@ function S = create_global_NGM_shape(F_ratio,psi,phi,theta,g_ratio)
 %   ratio is the opposite from F_ratio)
 % 
 % Reference: matrix K in Supplementary Methods, Section 1.1.5 of
-% Pellis, L. et al (2019), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Author: Lorenzo Pellis
-% Last update: 12/05/2019 
+% Last update: 12-05-2019 
 
 S = [       g_ratio - ( 1 - theta ) * F_ratio            ( 1 - theta ) * phi            
                 psi * ( 1 - theta ) * F_ratio              psi * theta * phi    ];

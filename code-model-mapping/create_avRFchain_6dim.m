@@ -25,7 +25,7 @@ function av_gen_6dim = create_avRFchain_6dim(n,a,Lh1to1,bincoeffmat)
 %   not to describe what this array is).
 % 
 % Reference: Supplementary Methods, Section 1.2.4 of
-% Pellis, L. et al (2019), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 %
 % Note: this function uses a 6-dimensional array binP_6dim, where element
 % binP_6dim(ia1,ia2,im1,im2,is1,is2) represents the probability that m1 and
@@ -41,7 +41,7 @@ function av_gen_6dim = create_avRFchain_6dim(n,a,Lh1to1,bincoeffmat)
 % 3-dimensional array)
 %
 % Author: Lorenzo Pellis
-% Last update: 31/10/2019 
+% Last update: 31-10-2019 
 
 
 % Although the method in Pellis, Ball & Trapman (2012), Mathematical

@@ -45,7 +45,7 @@ function afs = afsn_Britton_sizebiased_den(PI,pesc,Rh,distribution,iota,alpha,et
 % Methodological reference: book by Andersson & Britton (2000), Section 6.3
 % 
 % Author: Lorenzo Pellis
-% Last update: 14/06/2019 
+% Last update: 14-06-2019 
 
 global bincoeffmat;
 

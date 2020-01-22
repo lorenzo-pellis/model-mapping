@@ -71,7 +71,7 @@ function afs_each_type = afs_2typeH_varHsize_check(H,PI,F,muH,NGM_G,Rh,shapeHvec
 % distribution.
 %
 % Reference: Supplementary Methods, Section 1.2.7 of
-% Pellis, L et al (2019), Nature Communications
+% Pellis, L et al (2020), Nature Communications
 % 
 % Methodological references: 
 % Ball, Britton and Sirl (2011), Journal of Mathematical Biology
@@ -79,7 +79,7 @@ function afs_each_type = afs_2typeH_varHsize_check(H,PI,F,muH,NGM_G,Rh,shapeHvec
 % Ball and Lyne (2001), Advances in Applied Probability
 %
 % Author: Lorenzo Pellis
-% Last update: 31/10/2019 
+% Last update: 31-10-2019 
 
 [ ntypes, ~ ] = size(NGM_G); % It's equal to 2 now
 

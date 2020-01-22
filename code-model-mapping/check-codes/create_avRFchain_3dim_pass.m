@@ -22,7 +22,7 @@ function RFgen = create_avRFchain_3dim_pass(n,a,lambda,bincoeffmat)
 % coefficients rather than declaring it a global variable).
 %
 % Author: Lorenzo Pellis
-% Last update: 07/06/2019 
+% Last update: 07-06-2019 
 
 in = n+1;
 binP_3dim = zeros(in,in,n);

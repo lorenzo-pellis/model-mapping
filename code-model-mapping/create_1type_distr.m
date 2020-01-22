@@ -11,7 +11,7 @@ function H_single = create_1type_distr(H)
 % a randomly selected household has size i.
 % 
 % Reference: h_n in Supplementary Tables 2, 5 and 7 of 
-% Pellis, L. et al (2019), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Author: Lorenzo Pellis
 % Last update: 29-12-2019 

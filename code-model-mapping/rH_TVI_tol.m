@@ -27,9 +27,11 @@ function r = rH_TVI_tol(AvCasesGen,Rg,distr_profile,mean_profile,alpha_profile,T
 %   - dt: time step used
 %   - tol: a tolerance, to check that we have not truncated the infectivity
 %   profile too soon.
-
+% 
 % Reference: Pellis, Ferguson and Fraser (2010), Journal of Mathematical
 % Biology
+% 
+% Last update: 12-05-2019 
 
 t = 0:dt:Tmax; % index tt
 lt = length(t); 

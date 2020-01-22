@@ -9,6 +9,8 @@ function map_gen = map_gen_2to1(n,s,i)
 % 4 <--> (1,0)
 % 5 <--> (1,1)
 % No number is associated with (2,0), because it's a disease-free equilibrium
+% 
+% Last update: 12-05-2019 
 
 h = 0;
 % max = (n+2)*(n+1)/2-1

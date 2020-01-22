@@ -27,10 +27,10 @@ function  [ R0, v_AH ] = R0AH_and_vAH(chains,Rg)
 % dominant eigenvalue and relative eigenvector if the big matrix
 %
 % Reference: Supplementary Methods, Sections 1.2.4 and 1.2.5 of
-% Pellis, L et al (2019), Nature Communications
+% Pellis, L et al (2020), Nature Communications
 %
 % Author: Lorenzo Pellis
-% Last update: 23/05/2019 
+% Last update: 23-05-2019 
 
 [ ntypes, N, ntypes_check ] = size(chains);
 if ( ntypes ~= ntypes_check )

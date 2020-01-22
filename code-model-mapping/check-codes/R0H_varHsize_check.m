@@ -21,6 +21,8 @@ function R0 = R0H_varHsize_check(PI,Rh,Rg)
 % 
 % Note: R0 could be computed directly from the average, which is what I do
 % in the main code (function "R0H")
+%
+% Last update: 29-05-2019 
 
 max_gen = length(PI);
 

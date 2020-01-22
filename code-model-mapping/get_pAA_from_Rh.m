@@ -8,12 +8,12 @@ function TP = get_pAA_from_Rh(distr,Rh)
 % contacts will result in an infection)
 % 
 % Reference: Supplementary Methods, Section 1.2.3, and Supplementary Figure 2 of
-% Pellis, L. et al (2019), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Note: in the paper, Rh is called \beta_h
 %
 % Author: Lorenzo Pellis
-% Last update: 31/10/2019 
+% Last update: 31-10-2019 
 
 max_size = length(distr);
 distr_2up = [ 0, distr(2:max_size) / sum( distr(2:max_size) ) ]; % This is the household size distribution, conditional on at least 2 people in the household

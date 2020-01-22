@@ -42,7 +42,7 @@ function esc_prob = esc_prob_multitype(h,Lambda,z)
 % Mathematical Biology
 % 
 % Author: Lorenzo Pellis
-% Last update: 26/05/2019 
+% Last update: 26-05-2019 
 
 ntypes = length(h); % Number of types
 [check1,check2] = size(Lambda);

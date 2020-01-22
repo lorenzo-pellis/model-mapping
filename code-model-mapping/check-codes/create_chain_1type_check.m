@@ -12,6 +12,8 @@ function av_gen_chain = create_chain_1type_check(PI,Rh,eta,str_den)
 % coefficients, rather than declaring it a global variable: it is a tiny
 % bit faster, but I'd have to change all similar codes - this is what I use
 % now below).
+% 
+% Last update: 12-05-2019 
 
 max_gen = length(PI);
 av_gen_chain_temp = zeros(1,max_gen);

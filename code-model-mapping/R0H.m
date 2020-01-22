@@ -17,7 +17,7 @@ function R0 = R0H(chain,Rg)
 % than by solving the characteristic equation directly.
 % 
 % Reference: Supplementary Methods, Section 1.4 of
-% Pellis, L et al (2019), Nature Communications
+% Pellis, L et al (2020), Nature Communications
 % 
 % Methodological reference: Pellis, Ball Trapman (2012), Mathematical
 % Biosciences, Theorem 1.

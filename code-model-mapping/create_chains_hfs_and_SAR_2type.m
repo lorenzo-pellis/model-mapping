@@ -54,14 +54,14 @@ function [ av_gen_chains, hfs_by_comp_by_ic, SAR_by_comp_by_ic ] = create_chains
 %   susceptibles in the household that end up infected.
 % 
 % Reference: Supplementary Methods, Section 1.2.4 of
-% Pellis, L. et al (2019), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 %
 % Note: this function relies on the function "create_avRFchain_6dim". Old
 % versions relied on a recursive method I had developed, but that turned
 % out to be less efficient.
 %
 % Author: Lorenzo Pellis
-% Last update: 31/10/2019 
+% Last update: 31-10-2019 
 
 h_ratio = shapeHvector(1);
 thetaH = shapeHvector(2);

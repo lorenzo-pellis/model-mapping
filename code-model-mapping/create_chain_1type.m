@@ -27,7 +27,7 @@ function av_gen_chain = create_chain_1type(PI,Rh,eta,str_den)
 % size-biased household size distribution.
 % 
 % Author: Lorenzo Pellis
-% Last update: 05/06/2019 
+% Last update: 05-06-2019 
 
 max_gen = length(PI);
 av_gen_chain_temp = zeros(1,max_gen);

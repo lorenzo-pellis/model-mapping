@@ -47,6 +47,8 @@ function RFgen = matrix_avRFchain_den(TOT,i0,R0,distribution,iota,alpha,den_str)
     % a = 3 -->     0 out of 0      nothing         nothing
     % n = 1         nothing         nothing         nothing
     %               nothing         nothing         nothing
+% 
+% Last update: 12-05-2019 
 
 if i0==round(i0)
 else

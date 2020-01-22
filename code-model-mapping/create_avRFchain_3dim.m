@@ -18,7 +18,7 @@ function RFgen = create_avRFchain_3dim(n,a,lambda)
 % size-biased household size distribution.
 % 
 % Author: Lorenzo Pellis
-% Last update: 05/06/2019 
+% Last update: 05-06-2019 
 
 global bincoeffmat;
 

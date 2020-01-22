@@ -33,7 +33,7 @@ function [ R0, v_AH, NGM ] = R0AH_vAH_and_NGM_check(chains,Rg)
 % Biosciences
 % 
 % Author: Lorenzo Pellis
-% Last update: 23/05/2019 
+% Last update: 23-05-2019 
 
 [ ntypes, N, ntypes_check ] = size(chains);
 if ( ntypes ~= ntypes_check )

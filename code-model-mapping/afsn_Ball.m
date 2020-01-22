@@ -35,7 +35,7 @@ function afs = afsn_Ball(n,a,lambda,distribution,iota,alpha)
 % Reference: book by Andersson & Britton (2000), Theorem 2.2
 % 
 % Author: Lorenzo Pellis
-% Last update: 26/05/2019 
+% Last update: 26-05-2019 
 
 global bincoeffmat;
 

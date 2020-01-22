@@ -15,7 +15,7 @@ function PI = create_2type_size_biased_distr(H)
 % layer 2 is 0.
 % 
 % Reference: Supplementary Tables 3 (3A for (:,:,1) and 3B for (:,:,2)) of
-% Pellis, L. et al (2019), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Author: Lorenzo Pellis
 % Last update: 29-12-2019

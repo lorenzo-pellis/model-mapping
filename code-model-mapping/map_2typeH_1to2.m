@@ -26,7 +26,7 @@ function pair = map_2typeH_1to2(h,w)
 % (h_a,h_c) <--> h_a*(h_c+1) + (h_c+1) = (h_a+1)*(h_c+1)
 %
 % Author: Lorenzo Pellis
-% Last update: 20/05/2019 
+% Last update: 20-05-2019 
 
 max = (h(1)+1)*(h(2)+1); % Maximum value of the single index
 if w > max

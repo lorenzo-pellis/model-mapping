@@ -11,7 +11,7 @@ function F = create_population_composition(H)
 % in the population.
 % 
 % Reference: F_a and F_c in Supplementary Methods, Section 1.6.1 of
-% Pellis, L. et al (2019), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Author: Lorenzo Pellis
 % Last update: 29-12-2019 
