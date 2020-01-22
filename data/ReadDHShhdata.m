@@ -1,24 +1,44 @@
-% Model mapping paper - preparing data for SL and SA from DHS data
-
-% switches:
-% weights?
-% age of separation
-% largest household size
-
-% also, what to do with nan values: exclude the house (E), put case as child (C),
-% put case as adult (A), give a random age (R)
+% This script reads the DHS household data and creates the table describing
+% the household size composition of SL and SA, which look like
+% Supplementary Tables 4 and 6 of:
+% Pellis, L. et al (2020), Nature Communications
+% 
+% Note: the DHS household data is not provided and needs to be obtained
+% directly from www.dhsprogram.com (free registration). The files required
+% are the "Household member recode" files:
+%   - SLPR51FL.SAV for Sierra Leone, available at
+% https://www.dhsprogram.com/data/dataset/Sierra-Leone_Standard-DHS_2008.cfm
+%   - ZAPR31FL.SAV for South Africa, available at
+% https://www.dhsprogram.com/data/dataset/South-Africa_Standard-DHS_1998.cfm
+% Both files need to be converted using the code in file "DHSconvert.R" to
+% .CSV files and then opened in Excel and saved as .xlsx files.
+% 
+% Input data:
+%   - SLPR51FL.xlsx: An Excel file obtained as described above (i.e. not
+%       provided here) for Sierra Leone.
+%   - ZAPR31FL.xlsx: An Excel file obtained as described above (i.e. not
+%       provided here) for South Africa.
+% 
+% Outputs:
+%   - XX_H_structure_ModelMapping.txt: A text file with the table of 
+%       household structure composition of the country considered (XX = SL 
+%       for Sierra Leone, SA for South Africa). The structure of this file 
+%       mimics the form of Supplementary Tables 4 and 6 of the paper. 
+% 
+% Update: 22-01-2020
 
 % Switches:
 useweights = true; % if true, I use weights as I should do according to DHS explanations if false, I discard weights.
 discard_largehh = true; % if true, I just chop the distribution and renormalise; if false, I absorb hh larger than max into max
-handlenan = 'C';
+handlenan = 'C'; % What to do with NaN values? Exclude the house (E), put 
+% case as child (C), put case as adult (A), give a random age (R).
 
 oldestchild = 18; % Largest age of a child (included)
 largesthh = 17; % Largest household size (included)
 
-% country = 'GB';
-% country = 'SL'; % Sierra-Leone
-country = 'SA'; % South-Africa
+% country = 'GB'; % Great Britain
+country = 'SL'; % Sierra Leone
+% country = 'SA'; % South Africa
 
 % Folder and workspace options
 current_dir = cd;
@@ -41,7 +61,7 @@ else
     error('GB not working here...');
 end
 [ ld, nc ] = size(data);
-ih = 0; % hh identity
+ih = 0; % hh index
 ch = data(1,2); % current household id in the data
 cc = data(1,1); % current cluster (just to check there is no case where id remains the same but cluster changes)
 ic = 1; % current line index
@@ -72,7 +92,6 @@ while ~isempty(indhnew)
                 vec(isnan(vec)) = randi(100);
             otherwise
                 error('Invalid option about how to handle NaNs');
-                return;
         end
     end
     ih = ih+1;
@@ -111,7 +130,6 @@ if discard_largehh
                     Hmat(pos(1)+1,pos(2)+1) = Hmat(pos(1)+1,pos(2)+1)+Hcell{ih,2};
                 end
             end
-            Hmat
             Hmat = Hmat / sum(sum(Hmat));
         else
             for ih = 1:nh
@@ -131,7 +149,6 @@ else
             pos = [Hcell{ih,7},Hcell{ih,6}];
             Hmat(pos(1)+1,pos(2)+1) = Hmat(pos(1)+1,pos(2)+1)+Hcell{ih,2};
         end
-        Hmat
         Hmat = Hmat / sum(sum(Hmat));
     else
         for ih = 1:nh
@@ -151,19 +168,22 @@ end
 
 cd(code_path);
 
-F = create_population_composition(Hmat)
-F_ratio = F(2)/F(1) % Ratio N_C / N_A. Careful: numerator and denominator are swapped with respect to g_ratio and h_ratio...
+F = create_population_composition(Hmat);
+F_ratio = F(2)/F(1); % Ratio N_C / N_A. Careful: numerator and denominator are swapped with respect to g_ratio and h_ratio...
 g_ratio = 1; thetaG = NaN;
-thetaG_random_mix = 1 / ( 1 + g_ratio / F_ratio ) % This is the assortativity that should give random mixing: theta = N_C g_C / ( N_A g_A + N_C g_C )
+thetaG_random_mix = 1 / ( 1 + g_ratio / F_ratio ); % This is the assortativity that should give random mixing: theta = N_C g_C / ( N_A g_A + N_C g_C )
 if isnan(thetaG)
     thetaG = thetaG_random_mix;
 end
 PI = create_2type_size_biased_distr(Hmat);
-H_single = create_1type_distr(Hmat)
+H_single = create_1type_distr(Hmat);
 PI_single = create_1type_size_biased_distr(H_single);
 PI_type = create_type_biased_distr(PI);
-muH = sum(H_single.*[1:length(H_single)])
-sb_muH = sum(PI_single.*[1:length(PI_single)])
-mu_type = sum(PI_type.*[1:length(H_single);1:length(H_single)],2)
+muH = sum(H_single.*(1:length(H_single)));
+sb_muH = sum(PI_single.*(1:length(PI_single)));
+mu_type = sum(PI_type.*[1:length(H_single);1:length(H_single)],2);
 muH1 = F*mu_type;
-F
+disp('Matrix for the household composition:')
+disp(Hmat)
+disp(['Fraction of adults and children:     ',num2str(F)])
+disp(' ')

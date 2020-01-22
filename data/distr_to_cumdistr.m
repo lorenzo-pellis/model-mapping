@@ -1,6 +1,11 @@
 function y = distr_to_cumdistr(x)
 
-% Assumes a 1D discrete distribution (like a histogram count)
+% This is a handmade function that takes a 1D empirical probability
+% mass function (like a histogram count) and creates a cumulative mass 
+% function for the same distribution.
+%   
+% Author: Lorenzo Pellis
+% Last update: 21-01-2020 
 
 if ~isvector(x)
     disp('Abort! Invalid distribution:');

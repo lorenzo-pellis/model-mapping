@@ -1,10 +1,46 @@
-% This script creates the household distribution file that I use for the IB
-% stochastic simulation in C. 
+% This script creates the household distribution files that I use for the 
+% individual-based stochastic simulation written in C when running the
+% model mapping procedue of Pellis, L. et al (2020), Nature Communications.
+% 
+% Input data:
+%   - XX_H_structure_ModelMapping.txt: A text file with the table of 
+%       household structure composition of the country considered (XX = GB 
+%       for Great Britain, SL for Sierra Leone, SA for South Africa). The 
+%       structure of this file mimics the form of Supplementary Tables 1, 4
+%       and 6 of the paper. The file for GB is created in Excel directly
+%       from data. Those for SL and SA by running the "ReadDHShhdata.m"
+%       code.
+% 
+% Outputs:
+%   - XX_H_structure_ModelMapping_sim_e5.txt: A text file similar to the
+%       input one, to check how different the population structure used in
+%       the simulation is from the one used in the actual mapping procedure
+%   - H_GB_5.dat: A text file with the structure of schools (which are 
+%       not used at all, but the simulation requires them - due to past
+%       choices, in the simulation "H" stands for workplaces/schools and 
+%       "W" for households). The file contains: the total number of
+%       children, the total number of schools and the largest size (100),
+%       and then a list with an index for each school and the sublist of
+%       each of the children in the school.
+%   - W_GB_5.dat: A text file with the structure of households used in the 
+%       simulation. The file contains: the total number of adults and
+%       children, the total number of households and the largest number of 
+%       adults and children in a household, and finally a list with an 
+%       index for each household, its size, and the sublist of adults 
+%       (smaller indices) and children (largest indices) in each household,
+%       with "-1" used to fill in the remaining gaps to the household size.
+% 
+% Note: No seed for the random number generator was set, so it's impossible
+% to reproduce exactly the population structure used in the paper. However,
+% the files used for the simulation are provided and any newly generated
+% file is very similar.
+% 
+% Update: 21-01-2020
 
 clearvars;
-% country = 'GB';
+country = 'GB'; % Great Britain
 % country = 'SL'; % Sierra-Leone
-country = 'SA'; % South-Africa
+% country = 'SA'; % South-Africa
 
 % Folder and workspace options
 current_dir = cd;
@@ -19,10 +55,11 @@ else
 end
 cd(wrk_path);
 
+% Load the file with the information about the household size composition
 input_distr = [country,'_H_structure_ModelMapping.txt'];
 H = load(input_distr);
 
-tot = 100000;
+tot = 100000; % Total population size: DO NOT change this!
 
 [ max_inA,max_inC ] = size(H);
 max_nA = max_inA - 1;
@@ -44,7 +81,18 @@ for inA = 1:max_inA
 end
 assert(iH==nH+1);
 
-HcompCumDistr = distr_to_cumdistr(normalise_distribution(HcompDistr));
+% First normalise the distribution (in case it doesn't add up to 1) and
+% then construct a cumulative distribution from it:
+HcompCumDistr = distr_to_cumdistr(HcompDistr/sum(HcompDistr));
+% Check whether the cumulative distribution arrives exactly at 1 or not:
+err1 = 1 - sum(HcompDistr);
+err2 = 1 - HcompCumDistr(end);
+if ( err2 > 0 )
+    warning([ 'The cumulative distribution is slightly defective and I had to add ', num2str(err2), ' to reach 1' ]);
+elseif ( err2 < 0 )
+    warning([ 'The cumulative distribution is slightly in excess and I removed ', num2str(-err2), ' to bring the largest value down to 1' ]);
+end
+HcompCumDistr(end) = 1; % If for any reason the distribution does not reach exactly 1, force it to.
 
 N = 0;
 NA = 0;
@@ -88,7 +136,7 @@ assert(N==tot);
 Cindices = randperm(NC) - 1;
 filename = ['W_',country,'_',num2str(round(log10(tot))),'.dat'];
 fileID = fopen(filename,'w');
-fprintf(fileID,'%d\t%d\t%d\t%d\t%d\r\n',NA,NC,NH,max_nA,max_nC); % \r for Windows
+fprintf(fileID,'%d\t%d\t%d\t%d\t%d\r\n',NA,NC,NH,max_nA,max_nC); % Replace "\r\n" with "\r" in Windows
 currA = NC;
 currCind = 1;
 newH = zeros(max_inA,max_inC);
@@ -153,15 +201,18 @@ cd(code_path);
 F1 = create_population_composition(H);
 H_single = create_1type_distr(H);
 PI_single = create_1type_size_biased_distr(H_single);
-muH1 = sum(H_single.*[1:length(H_single)]);
-sb_muH1 = sum(PI_single.*[1:length(PI_single)]);
+muH1 = sum(H_single.*(1:length(H_single)));
+sb_muH1 = sum(PI_single.*(1:length(PI_single)));
 
 F2 = create_population_composition(newH);
 H_single = create_1type_distr(newH);
 PI_single = create_1type_size_biased_distr(H_single);
-muH2 = sum(H_single.*[1:length(H_single)]);
-sb_muH2 = sum(PI_single.*[1:length(PI_single)]);
+muH2 = sum(H_single.*(1:length(H_single)));
+sb_muH2 = sum(PI_single.*(1:length(PI_single)));
 
+% Print out some summary statistics of the population structure now
+% generated ("New"), and compared with the results used for in the model 
+% mapping paper ("Old"):
 disp( ' ' )
 disp( '[ F_a, F_c ]' )
 disp( [ 'Old: ', num2str( F1 ) ] )
