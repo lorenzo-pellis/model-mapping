@@ -1,0 +1,36 @@
+﻿Build started 23/01/2020 00:16:33.
+     1>Project "C:\Users\Lorenzo\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Win\ModelMapping_Win\ModelMapping_Win.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc110.pdb" /Gd /TP /errorReport:prompt "..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\print_output.cpp"
+         print_output.cpp
+     1>..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\print_output.cpp(297): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(357) : see declaration of 'sprintf'
+     1>..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\print_output.cpp(298): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(218) : see declaration of 'fopen'
+     1>..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\print_output.cpp(315): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : see declaration of 'strcpy'
+     1>..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\print_output.cpp(316): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(357) : see declaration of 'sprintf'
+     1>..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\print_output.cpp(317): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(218) : see declaration of 'fopen'
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Lorenzo\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Win\x64\Release\ModelMapping_Win.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Lorenzo\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Win\x64\Release\ModelMapping_Win.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Lorenzo\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Win\x64\Release\ModelMapping_Win.lib" /MACHINE:X64 x64\Release\analyse_epidemic.obj
+         x64\Release\epidemic.obj
+         x64\Release\gammaln.obj
+         x64\Release\load_network.obj
+         x64\Release\Main.obj
+         x64\Release\print_output.obj
+         x64\Release\ran2.obj
+         x64\Release\read.obj
+         x64\Release\rnd_binom.obj
+         x64\Release\rnd_exp.obj
+         x64\Release\rnd_gamma.obj
+         x64\Release\rnd_poiss.obj
+         Generating code
+         Finished generating code
+         ModelMapping_Win.vcxproj -> C:\Users\Lorenzo\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Win\x64\Release\ModelMapping_Win.exe
+     1>Done Building Project "C:\Users\Lorenzo\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Win\ModelMapping_Win\ModelMapping_Win.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.11

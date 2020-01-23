@@ -1,0 +1,35 @@
+﻿Build started 15/01/2020 03:36:56.
+     1>Project "c:\Users\Lorenzo\documents\visual studio 2012\Projects\ModelMapping_Win\ModelMapping_Win\ModelMapping_Win.vcxproj" on node 2 (Rebuild target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Intel\Composer XE 2015\bin\Intel64\icl.exe /c /Qvc11 /Qlocation,link,"C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\amd64" /Zi /nologo /W3 /Od /Qftz- /D __INTEL_COMPILER=1500 /D _MBCS /EHsc /RTC1 /MDd /GS /Qoffload-option,mic,compiler,"" /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc110.pdb" /TP "..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\analyse_epidemic.cpp" "..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\epidemic.cpp" "..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\gammaln.cpp" "..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\load_network.cpp" "..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\Main.cpp" "..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\print_output.cpp" "..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\ran2.cpp" "..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\read.cpp" "..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\rnd_binom.cpp" "..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\rnd_exp.cpp" "..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\rnd_gamma.cpp" "..\..\..\..\..\Desktop\model-mapping-master\stochastic-simulation\ModelMapping_Mac\ModelMapping_Mac\rnd_poiss.cpp"
+         analyse_epidemic.cpp
+         epidemic.cpp
+         gammaln.cpp
+         load_network.cpp
+         Main.cpp
+         print_output.cpp
+         ran2.cpp
+         read.cpp
+         rnd_binom.cpp
+         rnd_exp.cpp
+         rnd_gamma.cpp
+         rnd_poiss.cpp
+       Link:
+         C:\Program Files (x86)\Intel\Composer XE 2015\bin\Intel64\xilink.exe /OUT:"c:\users\lorenzo\documents\visual studio 2012\Projects\ModelMapping_Win\x64\Debug\ModelMapping_Win.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"c:\users\lorenzo\documents\visual studio 2012\Projects\ModelMapping_Win\x64\Debug\ModelMapping_Win.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"c:\users\lorenzo\documents\visual studio 2012\Projects\ModelMapping_Win\x64\Debug\ModelMapping_Win.lib" /MACHINE:X64 x64\Debug\analyse_epidemic.obj
+         x64\Debug\epidemic.obj
+         x64\Debug\gammaln.obj
+         x64\Debug\load_network.obj
+         x64\Debug\Main.obj
+         x64\Debug\print_output.obj
+         x64\Debug\ran2.obj
+         x64\Debug\read.obj
+         x64\Debug\rnd_binom.obj
+         x64\Debug\rnd_exp.obj
+         x64\Debug\rnd_gamma.obj
+         x64\Debug\rnd_poiss.obj
+         xilink: executing 'link'
+     1>Done Building Project "c:\Users\Lorenzo\documents\visual studio 2012\Projects\ModelMapping_Win\ModelMapping_Win\ModelMapping_Win.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:06.28
