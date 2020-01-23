@@ -16,8 +16,8 @@
 void print_output( void ) //const char *base_name )
 {
     prepare_summary();
-    print_final_size();
-    //print_real_time(); // Uncomment this is you want to print the mean epidemic curve (Fig 2 of main paper)
+    print_final_size(); // Use this function to print the output needed in the model mapping procedure
+    //print_real_time(); // Use this function to print the mean epidemic curve (Fig 2 of main paper)
 
     /* Other functions: */
     //print_generations();

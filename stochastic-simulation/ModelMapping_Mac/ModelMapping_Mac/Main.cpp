@@ -120,7 +120,7 @@ int main(int argc, char** argv)
                                                                         name = name + help;
                                                                     }
                                                                     if ( OUT_SIGMA ) {
-                                                                        sprintf( help, "sigma%.1f_", P.REL_SUSC_C_VS_A_IN_COMM );
+                                                                        sprintf( help, "sigma%.4f_", P.REL_SUSC_C_VS_A_IN_COMM );
                                                                         name = name + help;
                                                                     }
                                                                     if ( OUT_RHO ) {

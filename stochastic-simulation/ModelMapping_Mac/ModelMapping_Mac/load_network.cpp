@@ -17,8 +17,8 @@ void prepare_model( void )
     int z, e;
     
     // Set the random number generator
-    // P.seed = time( NULL );
-    P.seed = -7;
+    // P.seed = time( NULL ); // Use this line instead of the next to avoid setting the seed for the random number generator 
+    P.seed = -7; // Use -7 to reproduce exactly the results of the paper
     P.idum = &P.seed;
     
     ind = ( IND* ) calloc( P.TOT, sizeof( IND ) );
