@@ -20,9 +20,9 @@ function subplot_handles = mycomplexfig( plottype, D, L, T )
 %   - T: a structure for Text (title(s), axe labels, legend text, etc.)
 % 
 % In particular, this code has been created when working on the paper:
-% Pellis et al (2019), Nature Communications
+% Pellis et al (2020), Nature Communications
 % 
-% Update: 13/10/2019
+% Update: 13-10-2019
 
 show_layout = false; show_plots = true;
 % show_layout = true; show_plots = false; % This line is here if you want to see the skeleton of the figure (with no plots)

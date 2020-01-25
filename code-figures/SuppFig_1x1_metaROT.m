@@ -1,5 +1,5 @@
 % This is the code to create Figure 25 in the supplementary text of 
-% Pellis, L et al (2019), Nature Communications
+% Pellis, L et al (2020), Nature Communications
 % 
 % It generates a 1x1 graph with a summary of the rule of thumb for each 
 % studied population and each studies threshold.
@@ -10,7 +10,8 @@
 % called "rule-of-thumb". If they are not available, one needs to first run
 % "Analyse_data_for_RuleOfThumb.m"
 % 
-% Update: 14/10/2019
+% Update: 14-10-2019
+
 close all; % close all figures
 clearvars;
 Activate_save_fig = 1; % If true, figures are saved
@@ -25,17 +26,19 @@ elist = [ 0.01, 0.05, 0.1 ];
 
 current_dir = cd;
 eval('cd ..'); % Move to the folder 1 level up, which is assumed to be the "base" folder
-base_dir = cd; % This is assumed to be the self-contained folder with all relevant files and subfolders
+fig_base_dir = cd; % This is assumed to be the self-contained folder with all relevant files and subfolders
+% Names of folders are preceded by "fig_" because there is a risk that
+% loading a workspace might override the names used in this scrip
 if ispc
-    code_path = [base_dir,'\code-figures\'];
-    fig_path = [base_dir,'\output-figures\supp\'];
-    tool_path = [base_dir,'\tools\'];
+    fig_code_path = [fig_base_dir,'\code-figures\'];
+    fig_fig_path = [fig_base_dir,'\output-figures\supp\'];
+    fig_tool_path = [fig_base_dir,'\tools\'];
 else
-    code_path = [base_dir,'/code-figures/'];
-    fig_path = [base_dir,'/output-figures/supp/'];
-    tool_path = [base_dir,'/tools/'];
+    fig_code_path = [fig_base_dir,'/code-figures/'];
+    fig_fig_path = [fig_base_dir,'/output-figures/supp/'];
+    fig_tool_path = [fig_base_dir,'/tools/'];
 end
-cd(code_path); % Work in the directory where the code for figures are
+cd(fig_code_path); % Work in the directory where the code for figures are
 
 % Build figure name
 fname = ['1x1_metaROT_'];
@@ -74,20 +77,14 @@ for e = 1:3
             end
         elseif tolval == 0.05
             if strcmp(country,'GB')
-                myROTcoeff = 0.24;
-                myROTinter = -0.1;
-%                 myROTcoeff = 0.235;%0.236; % Current best for metaROT; % best for fitting (between assortative and random)
-%                 myROTinter = -0.09;%-0.094;
+                myROTcoeff = 0.24;%0.236;
+                myROTinter = -0.1;%-0.094;
             elseif strcmp(country,'SA')
-                myROTcoeff = 0.225;
+                myROTcoeff = 0.225;%0.228;
                 myROTinter = -0.16;%-0.166;
-%                 myROTcoeff = 0.226;%0.228;
-%                 myROTinter = -0.165;
             elseif strcmp(country,'SL')
                 myROTcoeff = 0.22;
                 myROTinter = -0.18;%-0.188;
-%                 myROTcoeff = 0.223;%0.222;
-%                 myROTinter = -0.19;%-0.188;
             else
                 myROTcoeff = 0;
                 myROTinter = 0;
@@ -164,10 +161,10 @@ D = set_mycomplexfig_data( D );
 subplot_handles = mycomplexfig( 'metaROT', D, L, T );
 
 if Activate_save_fig
-    addpath(genpath(tool_path));
-    cd(fig_path);
+    addpath(genpath(fig_tool_path));
+    cd(fig_fig_path);
     expcmd = ['export_fig ',fname,' -pdf -nocrop -transparent'];
     eval(expcmd);
-    cd(code_path);
-    rmpath(genpath(tool_path));
+    cd(fig_code_path);
+    rmpath(genpath(fig_tool_path));
 end

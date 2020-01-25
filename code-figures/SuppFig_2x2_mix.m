@@ -1,5 +1,5 @@
 % This is the code to create many figures in the supplementary text of 
-% Pellis, L et al (2019), Nature Communications
+% Pellis, L et al (2020), Nature Communications
 % 
 % It generates a 2x2 plot with heatmaps for a single output and for 3
 % models in position top-left, top-right, and bottom-left. Then ont he
@@ -7,7 +7,7 @@
 % output is plotted.
 % It relies on a hand-made function called "mycomplexfig_mix.m"
 % 
-% Update: 13/10/2019
+% Update: 13-10-2019
 
 close all; % close all figures
 clearvars;
@@ -52,32 +52,38 @@ tolval = 0.05; % The value of the tolerance used in the simplest-model-acceptanc
 % Path stuff
 current_dir = cd;
 eval('cd ..'); % Move to the folder 1 level up, which is assumed to be the "base" folder
-base_dir = cd; % This is assumed to be the self-contained folder with all relevant files and subfolders
+fig_base_dir = cd; % This is assumed to be the self-contained folder with all relevant files and subfolders
+% Names of folders are preceded by "fig_" because there is a risk that
+% loading a workspace might override the names used in this scrip
 if ispc
-    code_path = [base_dir,'\code-figures\'];
-    fig_path = [base_dir,'\output-figures\supp\',country,'\',popfig,'\'];
-    tool_path = [base_dir,'\tools\'];
+    fig_code_path = [fig_base_dir,'\code-figures\'];
+    fig_fig_path = [fig_base_dir,'\output-figures\supp\',country,'\',popfig,'\'];
+    fig_tool_path = [fig_base_dir,'\tools\'];
     if Activate_plot_from_new_workspaces
-        wrksp_path = [base_dir,'\output-workspaces\',country,'\'];
+        fig_wrksp_path = [fig_base_dir,'\output-workspaces\',country,'\'];
     else
-        wrksp_path = [base_dir,'\saved-workspaces\',country,'\'];
+        fig_wrksp_path = [fig_base_dir,'\saved-workspaces\',country,'\'];
     end
     if use_match_r
-        wrksp_path = [wrksp_path,'match-r\'];
+        fig_wrksp_path = [fig_wrksp_path,'match-r\'];
     end
 else
-    code_path = [base_dir,'/code-figures/'];
-    fig_path = [base_dir,'/output-figures/supp/',country,'/',popfig,'/'];
-    tool_path = [base_dir,'/tools/'];
+    fig_code_path = [fig_base_dir,'/code-figures/'];
+    fig_fig_path = [fig_base_dir,'/output-figures/supp/',country,'/',popfig,'/'];
+    fig_tool_path = [fig_base_dir,'/tools/'];
     if Activate_plot_from_new_workspaces
-        wrksp_path = [base_dir,'/output-workspaces/',country,'/'];
+        fig_wrksp_path = [fig_base_dir,'/output-workspaces/',country,'/'];
     else
-        wrksp_path = [base_dir,'/saved-workspaces/',country,'/'];
+        fig_wrksp_path = [fig_base_dir,'/saved-workspaces/',country,'/'];
     end
     if use_match_r
-        wrksp_path = [wrksp_path,'match-r/'];
+        fig_wrksp_path = [fig_wrksp_path,'match-r/'];
     end
 end
+warning('off','MATLAB:dispatcher:UnresolvedFunctionHandle');
+% Loaded workspaces generated from other computers, with a different folder
+% structure might have saved anonymous functions with paths not recognised 
+% when this script is run, so the line above turns off that warning.
 if strcmp(country,'SL') % If country is Sierra Leone
     if isnan(thetaGval) % If mixing is random
         if ~use_match_r
@@ -121,9 +127,9 @@ else % If country is Great Britain
         end
     end
 end
-load([wrksp_path,preloadedwrksp]);
-addpath(genpath(tool_path));
-cd(code_path); % Work in the directory where the codes for figures are
+load([fig_wrksp_path,preloadedwrksp]);
+addpath(genpath(fig_tool_path));
+cd(fig_code_path); % Work in the directory where the codes for figures are
 x_vec = pAA_vec;
 y_vec = psiG_vec;
 [X,Y] = meshgrid(x_vec,y_vec);
@@ -155,7 +161,7 @@ end
 if use_match_r
     wname = [ wname, '_rfixed_nsimr',num2str(nsimval,'%05d') ];
 end
-load([wrksp_path,wname]);
+load([fig_wrksp_path,wname]);
 
 ztol = tolval;
 sztol = tolval;
@@ -434,10 +440,12 @@ end
 % Windows and Mac), so the first lines show how it should work, while
 % the following lines offer a solution for how the result should look, 
 % (which works for me in Windows)
-% T.labelx = 'Adult-to-adult within-household transmission probability (p_{aa})';
-% T.labely = 'Relative susceptibility of children (\psi)';
-T.labelx = 'Adult-to-adult within-household transmission probability{(p_{aa})}';
-T.labely = 'Relative susceptibility of children versus adults { (\psi)}';
+% Correct spacing (R2019a on Windows):
+T.labelx = 'Adult-to-adult within-household transmission probability (p_{aa})';
+T.labely = 'Relative susceptibility of children (\psi)';
+% % Fudged spacing (R2016a on Mac):
+% T.labelx = 'Adult-to-adult within-household transmission probability{(p_{aa})}';
+% T.labely = 'Relative susceptibility of children versus adults { (\psi)}';
 T.clabels = { 'U', 'A', 'A or H', 'H', 'A and H' };
 
 % if strcmp(output,'sz')
@@ -494,11 +502,9 @@ else
 end
 
 if Activate_save_fig
-    cd(fig_path);
+    cd(fig_fig_path);
     expcmd = ['export_fig ',fname,' -pdf -nocrop -transparent'];
-    % expcmd = ['export_fig ',fname,' -nocrop -zbuffer -transparent'];
-    % expcmd = ['export_fig ',fname,' -nocrop -transparent -m5'];
     eval(expcmd);
-    cd(code_path);
+    cd(fig_code_path);
 end
-rmpath(genpath(tool_path));
+rmpath(genpath(fig_tool_path));

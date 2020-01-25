@@ -1,9 +1,9 @@
 % This is the code to create the left part of Figure 3 of the main text of 
-% Pellis, L et al (2019), Nature Communications
+% Pellis, L et al (2020), Nature Communications
 % 
 % It relies on a hand-made function called "mycomplexfig"
 % 
-% Update: 09/10/2019
+% Update: 09-10-2019
 
 close all; % close all figures
 clearvars;
@@ -33,32 +33,39 @@ figletter = 'A';
 % Path stuff
 current_dir = cd;
 eval('cd ..'); % Move to the folder 1 level up, which is assumed to be the "base" folder
-base_dir = cd; % This is assumed to be the self-contained folder with all relevant files and subfolders
+fig_base_dir = cd; % This is assumed to be the self-contained folder with all relevant files and subfolders
+% Names of folders are preceded by "fig_" because there is a risk that
+% loading a workspace might override the names used in this scrip
 if ispc
-    code_path = [base_dir,'\code-figures\'];
-    fig_path = [base_dir,'\output-figures\main\'];
-    tool_path = [base_dir,'\tools\'];
+    fig_code_path = [fig_base_dir,'\code-figures\'];
+    fig_fig_path = [fig_base_dir,'\output-figures\main\'];
+    fig_tool_path = [fig_base_dir,'\tools\'];
     if Activate_plot_from_new_workspaces
-        wrksp_path = [base_dir,'\output-workspaces\GB\'];
+        fig_wrksp_path = [fig_base_dir,'\output-workspaces\GB\'];
     else
-        wrksp_path = [base_dir,'\saved-workspaces\GB\'];
+        fig_wrksp_path = [fig_base_dir,'\saved-workspaces\GB\'];
     end
     if use_match_r
-        wrksp_path = [wrksp_path,'Match-r\'];
+        fig_wrksp_path = [fig_wrksp_path,'Match-r\'];
     end
 else
-    code_path = [base_dir,'/code-figures/'];
-    fig_path = [base_dir,'/output-figures/main/'];
-    tool_path = [base_dir,'/tools/'];
+    fig_code_path = [fig_base_dir,'/code-figures/'];
+    fig_fig_path = [fig_base_dir,'/output-figures/main/'];
+    fig_tool_path = [fig_base_dir,'/tools/'];
     if Activate_plot_from_new_workspaces
-        wrksp_path = [base_dir,'/output-workspaces/GB/'];
+        fig_wrksp_path = [fig_base_dir,'/output-workspaces/GB/'];
     else
-        wrksp_path = [base_dir,'/saved-workspaces/GB/'];
+        fig_wrksp_path = [fig_base_dir,'/saved-workspaces/GB/'];
     end
     if use_match_r
-        wrksp_path = [wrksp_path,'Match-r/'];
+        fig_wrksp_path = [fig_wrksp_path,'Match-r/'];
     end
 end
+warning('off','MATLAB:dispatcher:UnresolvedFunctionHandle');
+% Loaded workspaces generated from other computers, with a different folder
+% structure might have saved anonymous functions with paths not recognised 
+% when this script is run, so the line above turns off that warning.
+% 
 % Start by loading one workspace, to check paths are correct and to load
 % values of common variables:
 if use_match_r
@@ -66,8 +73,8 @@ if use_match_r
 else
     wrks_name = 'R020_pAA00_05_95_psi10_02_40_phi10_theta02_gammaG100_H100_100sim_e5_init050';
 end
-load([wrksp_path,wrks_name]); 
-cd(code_path); % Work in the directory where the codes for figures are
+load([fig_wrksp_path,wrks_name]); 
+cd(fig_code_path); % Work in the directory where the codes for figures are
 
 x_vec = pAA_vec;
 y_vec = psiG_vec;
@@ -134,7 +141,7 @@ for ip = 1:lphi
         end
         wrks_list{ip,iR0} = wrks_name;
 
-        try_name = strcat(wrksp_path,wrks_list{ip,iR0});
+        try_name = strcat(fig_wrksp_path,wrks_list{ip,iR0});
         load(try_name);
 
         szAH_A = afs_each_typeAH(:,:,1);
@@ -371,10 +378,12 @@ D.colormap = [ 1 wm wm; 1 1 wm; wm 1 wm; wm 1 1; 0 0 1; 0 1 1; 0 1 0; 1 1 0; 1 0
 % Windows and Mac), so the first lines show how it should work, while
 % the following lines offer a solution for how the result should look, 
 % (which works for me in Windows)
-% T.labelx = 'Adult-to-adult within-household transmission probability (p_{aa})';
-% T.labely = 'Relative susceptibility of children (\psi)';
-T.labelx = 'Adult-to-adult within-household transmission probability{(p_{aa})}';
-T.labely = 'Relative susceptibility of children versus adults { (\psi)}';
+% Correct spacing (R2019a on Windows):
+T.labelx = 'Adult-to-adult within-household transmission probability (p_{aa})';
+T.labely = 'Relative susceptibility of children (\psi)';
+% % Fudged spacing (R2016a on Mac):
+% T.labelx = 'Adult-to-adult within-household transmission probability{(p_{aa})}';
+% T.labely = 'Relative susceptibility of children versus adults { (\psi)}';
 T.clabels = { 'Unstructured', 'Age', 'Either', 'Households', 'Both' };
 
 T.subtitles = reltitle_list;
@@ -408,9 +417,9 @@ subplot_handles = mycomplexfig( 'OAR_grid', D, L, T );
 
 if use_marks
     sph = subplot_handles(2,2);
-    orange = [ 1 0.75 0 ];
-    bw = 1.6 * ( x_vec(2) - x_vec(1) ); % width
-    bh = 1.6 * ( y_vec(2) - y_vec(1) ); % height
+    orange = [ 1 0.6 0 ];
+    bw = 1.5 * ( x_vec(2) - x_vec(1) ); % width
+    bh = 1.5 * ( y_vec(2) - y_vec(1) ); % height
     for im = 1:3
         axes( subplot_handles( mark(im).plot ) );
         for jm = 1:mark(im).n
@@ -420,17 +429,17 @@ if use_marks
                 'EdgeColor', orange,...
                 'Linewidth',1.5,'FaceColor','w' );
             ht = text( xm + mark(im).corr(1), ym - bh/3  + mark(im).corr(2), mark(im).symb, 'Color', orange, 'EdgeColor', 'none',...
-                'FontSize',L.screen_scale * 3.4,'Fontweight','bold',...
+                'FontSize',L.screen_scale * 4,'Fontweight','bold',...
                 'HorizontalAlignment','center','VerticalAlignment','baseline' );
         end
     end
 end
 
 if Activate_save_fig
-    addpath(genpath(tool_path));
-    cd(fig_path);
+    addpath(genpath(fig_tool_path));
+    cd(fig_fig_path);
     export_fig Main_Figure3left -pdf -nocrop -transparent;
-    cd(code_path);
-    rmpath(genpath(tool_path));
+    cd(fig_code_path);
+    rmpath(genpath(fig_tool_path));
 end
 

@@ -1,5 +1,5 @@
 % This is the code to create Figure 24 in the supplementary text of 
-% Pellis, L et al (2019), Nature Communications
+% Pellis, L et al (2020), Nature Communications
 % 
 % It generates a 3x3 graph with, in each panel, a table with mulitple
 % values of R0 (each row for a different starting value and each column for
@@ -12,7 +12,7 @@
 % subtitles are generated for each row and column.
 % It relies on a hand-made function called "mycomplexfig.m"
 % 
-% Update: 14/10/2019
+% Update: 14-10-2019
 
 close all; % close all figures
 clearvars;
@@ -62,28 +62,34 @@ rvals = [ 0.14552 0.25282 0.52588 ]; % These are the values of r corresponding t
 % Path stuff
 current_dir = cd;
 eval('cd ..'); % Move to the folder 1 level up, which is assumed to be the "base" folder
-base_dir = cd; % This is assumed to be the self-contained folder with all relevant files and subfolders
+fig_base_dir = cd; % This is assumed to be the self-contained folder with all relevant files and subfolders
+% Names of folders are preceded by "fig_" because there is a risk that
+% loading a workspace might override the names used in this scrip
 if ispc
-    code_path = [base_dir,'\code-figures\'];
-    fig_path = [base_dir,'\output-figures\supp\',country,'\',popfig,'\'];
-    tool_path = [base_dir,'\tools\'];
+    fig_code_path = [fig_base_dir,'\code-figures\'];
+    fig_fig_path = [fig_base_dir,'\output-figures\supp\',country,'\',popfig,'\'];
+    fig_tool_path = [fig_base_dir,'\tools\'];
     if Activate_plot_from_new_ROT_analysis
-        ROT_path = [base_dir,'\output-rule-of-thumb\'];
+        fig_ROT_path = [fig_base_dir,'\output-rule-of-thumb\'];
     else
-        ROT_path = [base_dir,'\saved-rule-of-thumb\'];
+        fig_ROT_path = [fig_base_dir,'\saved-rule-of-thumb\'];
     end
 else
-    code_path = [base_dir,'/code-figures/'];
-    fig_path = [base_dir,'/output-figures/supp/',country,'/',popfig,'/'];
-    tool_path = [base_dir,'/tools/'];
+    fig_code_path = [fig_base_dir,'/code-figures/'];
+    fig_fig_path = [fig_base_dir,'/output-figures/supp/',country,'/',popfig,'/'];
+    fig_tool_path = [fig_base_dir,'/tools/'];
     if Activate_plot_from_new_ROT_analysis
-        ROT_path = [base_dir,'/output-rule-of-thumb/'];
+        fig_ROT_path = [fig_base_dir,'/output-rule-of-thumb/'];
     else
-        ROT_path = [base_dir,'/saved-rule-of-thumb/'];
+        fig_ROT_path = [fig_base_dir,'/saved-rule-of-thumb/'];
     end
 end
-cd(code_path); % Work in the directory where the code for figures are
-addpath(genpath(tool_path));
+cd(fig_code_path); % Work in the directory where the code for figures are
+addpath(genpath(fig_tool_path));
+warning('off','MATLAB:dispatcher:UnresolvedFunctionHandle');
+% Loaded workspaces generated from other computers, with a different folder
+% structure might have saved anonymous functions with paths not recognised 
+% when this script is run, so the line above turns off that warning.
 
 % Workspace name
 wname = [ 'ROT_tol',num2str(round(tolval*100),'%02d'),'_'];
@@ -103,7 +109,7 @@ if Activate_clean_output
 else
     wname = [wname,'_dirty'];
 end
-load([ROT_path,wname]);
+load([fig_ROT_path,wname]);
 
 % Build figure name
 fname = ['3x3_ROT_table_'];
@@ -238,7 +244,7 @@ L.colorbar_bottom_limit_in_box = 1;
 % T.cbar_string_font_size = 6;
 
 % Table
-T.table_incells_font_size = 2.1;%2.5;
+T.table_incells_font_size = 2.1;
 T.table_outcells_font_size = 2.5;
 
 L = set_mycomplexfig_layout( L );
@@ -248,9 +254,9 @@ D = set_mycomplexfig_data( D );
 subplot_handles = mycomplexfig( 'ROT_table', D, L, T );
 
 if Activate_save_fig
-    cd(fig_path);
+    cd(fig_fig_path);
     expcmd = ['export_fig ',fname,' -pdf -nocrop -transparent'];
     eval(expcmd);
-    cd(code_path);
+    cd(fig_code_path);
 end
-rmpath(genpath(tool_path));
+rmpath(genpath(fig_tool_path));

@@ -1,5 +1,5 @@
 % This is the code to create many figures in the supplementary text of 
-% Pellis, L et al (2019), Nature Communications
+% Pellis, L et al (2020), Nature Communications
 % 
 % It generates a 3x3 graph with the overall simplest-model-acceptance-
 % region plots for 3 values of R0 and 3 values of the relative infectivity
@@ -7,7 +7,7 @@
 % generated for each row and column.
 % It relies on a hand-made function called "mycomplexfig.m"
 % 
-% Update: 31-12-2019
+% Update: 22-01-2020
 
 close all; % close all figures
 clearvars;
@@ -22,7 +22,7 @@ usez = true; % If true, I include the final size (z) in the overall acceptance r
 usepi = true; % If true, I include the peak incidence (pi) in the overall acceptance region plot, otherwise not
 uset = true;  % If true, I include the time to the peak (t) in the overall acceptance region plot, otherwise not
 useSAR = true; % If true, the SAR contours are overlaid on the plot
-use_match_r = 0; % If false, I match R0; if true, I use the r correspondent to the desired R0
+use_match_r = 1; % If false, I match R0; if true, I use the r correspondent to the desired R0
 use_marks = 0; % If true, I add a numbered mark in selected locations
 use_intermediate = 0; % Leave this as default choice. If you want intermediate contact patterns, choose them below
 use_log2psi = 0; % If true, I let log2psi run from -2 to 2 with steps of 0.2.
@@ -72,30 +72,32 @@ end
 % Path stuff
 current_dir = cd;
 eval('cd ..'); % Move to the folder 1 level up, which is assumed to be the "base" folder
-base_dir = cd; % This is assumed to be the self-contained folder with all relevant files and subfolders
+fig_base_dir = cd; % This is assumed to be the self-contained folder with all relevant files and subfolders
+% Names of folders are preceded by "fig_" because there is a risk that
+% loading a workspace might override the names used in this scrip
 if ispc
-    code_path = [base_dir,'\code-figures\'];
-    fig_path = [base_dir,'\output-figures\supp\',country,'\',popfig,'\'];
-    tool_path = [base_dir,'\tools\'];
+    fig_code_path = [fig_base_dir,'\code-figures\'];
+    fig_fig_path = [fig_base_dir,'\output-figures\supp\',country,'\',popfig,'\'];
+    fig_tool_path = [fig_base_dir,'\tools\'];
     if Activate_plot_from_new_workspaces
-        wrksp_path = [base_dir,'\output-workspaces\',country,'\'];
+        fig_wrksp_path = [fig_base_dir,'\output-workspaces\',country,'\'];
     else
-        wrksp_path = [base_dir,'\saved-workspaces\',country,'\'];
+        fig_wrksp_path = [fig_base_dir,'\saved-workspaces\',country,'\'];
     end
     if use_match_r
-        wrksp_path = [wrksp_path,'match-r\'];
+        fig_wrksp_path = [fig_wrksp_path,'match-r\'];
     end
 else
-    code_path = [base_dir,'/code-figures/'];
-    fig_path = [base_dir,'/output-figures/supp/',country,'/',popfig,'/'];
-    tool_path = [base_dir,'/tools/'];
+    fig_code_path = [fig_base_dir,'/code-figures/'];
+    fig_fig_path = [fig_base_dir,'/output-figures/supp/',country,'/',popfig,'/'];
+    fig_tool_path = [fig_base_dir,'/tools/'];
     if Activate_plot_from_new_workspaces
-        wrksp_path = [base_dir,'/output-workspaces/',country,'/'];
+        fig_wrksp_path = [fig_base_dir,'/output-workspaces/',country,'/'];
     else
-        wrksp_path = [base_dir,'/saved-workspaces/',country,'/'];
+        fig_wrksp_path = [fig_base_dir,'/saved-workspaces/',country,'/'];
     end
     if use_match_r
-        wrksp_path = [wrksp_path,'match-r/'];
+        fig_wrksp_path = [fig_wrksp_path,'match-r/'];
     end
 end
 if strcmp(country,'SL') % If country is Sierra Leone
@@ -148,8 +150,8 @@ if use_log2psi
         preloadedwrksp = 'R020_pAA00_05_95_log2psi-200_025_200_phi10_theta06_gammaG075_H075_100sim_e5_init050';
     end
 end
-load([wrksp_path,preloadedwrksp]);
-cd(code_path); % Work in the directory where the codes for figures are
+load([fig_wrksp_path,preloadedwrksp]);
+cd(fig_code_path); % Work in the directory where the codes for figures are
 x_vec = pAA_vec;
 if use_log2psi
     y_vec = logpsiG_vec;
@@ -164,69 +166,6 @@ lphi = length(phivals);
 if isnan(thetaGval)
     thetaGval = thetaG; 
 end
-
-
-% if strcmp(country,'SL')
-%     if isnan(thetaGval)
-%         if ~use_match_r
-%             preloadedwrksp = 'R020_pAA00_03_48_psi10_02_40_phi10_theta05_gammaG100_H100_100sim_e5_init050';
-%         else
-%             preloadedwrksp = 'r025282_pAA00_03_48_psi10_02_40_phi10_theta05_gammaG100_H100_100sim_e5_init050_rfixed_nsimr00100';
-%         end
-%     else
-%         if ~use_match_r
-%             preloadedwrksp = 'R020_pAA00_03_48_psi10_02_40_phi10_theta06_gammaG075_H075_100sim_e5_init050';
-%         else
-%             preloadedwrksp = 'r025282_pAA00_03_48_psi10_02_40_phi10_theta06_gammaG075_H075_100sim_e5_init050_rfixed_nsimr00100';
-%         end
-%     end
-% elseif strcmp(country,'SA')
-%     if isnan(thetaGval)
-%         if ~use_match_r
-%             preloadedwrksp = 'R020_pAA00_04_63_psi10_02_40_phi10_theta05_gammaG100_H100_100sim_e5_init050';
-%         else
-%             preloadedwrksp = 'r025282_pAA00_04_63_psi10_02_40_phi10_theta05_gammaG100_H100_100sim_e5_init050_rfixed_nsimr00100';
-%         end
-%     else
-%         if ~use_match_r
-%             preloadedwrksp = 'R020_pAA00_04_63_psi10_02_40_phi10_theta06_gammaG075_H075_100sim_e5_init050';
-%         else
-%             preloadedwrksp = 'r025282_pAA00_04_63_psi10_02_40_phi10_theta06_gammaG075_H075_100sim_e5_init050_rfixed_nsimr00100';
-%         end
-%     end
-% else
-%     if isnan(thetaGval)
-%         if ~use_match_r
-%             preloadedwrksp = 'R020_pAA00_05_95_psi10_02_40_phi10_theta02_gammaG100_H100_100sim_e5_init050';
-%         else
-%             preloadedwrksp = 'r025282_pAA00_05_95_psi10_02_40_phi10_theta02_gammaG100_H100_100sim_e5_init050_rfixed_nsimr00100';
-%         end
-%     else
-%         if ~use_match_r
-%             preloadedwrksp = 'R020_pAA00_05_95_psi10_02_40_phi10_theta06_gammaG075_H075_100sim_e5_init050';
-%         else
-%             preloadedwrksp = 'r025282_pAA00_05_95_psi10_02_40_phi10_theta06_gammaG075_H075_100sim_e5_init050_rfixed_nsimr00100';
-%         end
-%     end
-% end
-% 
-% % Workspace folder
-% if ispc
-%     wrks_path = ['C:\Users\Lorenzo\Desktop\Model Mapping\Workspaces\',country,'\'];
-%     if use_match_r
-%         wrks_path = [wrks_path,'Match r\'];
-%     end
-% else
-%     wrks_path = ['/Volumes/Macintosh data/lpellis/Desktop/3. Current projects/Model Mapping/Workspaces/',country,'/'];
-%     if use_match_r
-%         wrks_path = [wrks_path,'Match r/'];
-%     end
-% end
-% load([wrks_path,preloadedwrksp]);
-% x_vec = pAA_vec;
-% y_vec = psiG_vec;
-
-
 
 if use_marks
     mark(1).plot = 1;
@@ -322,7 +261,7 @@ for ip = 1:lphi
         end
         wrksp_list{ip,iR0} = wname;
 
-        try_name = strcat(wrksp_path,wrksp_list{ip,iR0});
+        try_name = strcat(fig_wrksp_path,wrksp_list{ip,iR0});
         load(try_name);
 
         szAH_A = afs_each_typeAH(:,:,1);
@@ -592,14 +531,20 @@ end
 % Windows and Mac), so the first lines show how it should work, while
 % the following lines offer a solution for how the result should look, 
 % (which works for me in Windows)
-% T.labelx = 'Adult-to-adult within-household transmission probability (p_{aa})';
-% T.labely = 'Relative susceptibility of children (\psi)';
-T.labelx = 'Adult-to-adult within-household transmission probability{(p_{aa})}';
+% Correct spacing (R2019a on Windows):
+T.labelx = 'Adult-to-adult within-household transmission probability (p_{aa})';
 if ~use_log2psi
-    T.labely = 'Relative susceptibility of children versus adults { (\psi)}';
+    T.labely = 'Relative susceptibility of children versus adults (\psi)';
 else
-    T.labely = 'Log_2 relative susceptibility of children versus adults{ (\psi)}   ';
+    T.labely = 'Log_2 relative susceptibility of children versus adults (\psi)   ';
 end
+% % Fudged spacing (R2016a on Mac):
+% T.labelx = 'Adult-to-adult within-household transmission probability{(p_{aa})}';
+% if ~use_log2psi
+%     T.labely = 'Relative susceptibility of children versus adults { (\psi)}';
+% else
+%     T.labely = 'Log_2 relative susceptibility of children versus adults{ (\psi)}   ';
+% end
 T.clabels = { 'Unstructured', 'Age', 'Either', 'Households', 'Both' };
 
 % T.subtitles = reltitle_list;
@@ -660,10 +605,10 @@ if use_marks
 end
 
 if Activate_save_fig
-    addpath(genpath(tool_path));
-    cd(fig_path);
+    addpath(genpath(fig_tool_path));
+    cd(fig_fig_path);
     expcmd = ['export_fig ',fname,' -pdf -nocrop -transparent'];
     eval(expcmd);
-    cd(code_path);
-    rmpath(genpath(tool_path));
+    cd(fig_code_path);
+    rmpath(genpath(fig_tool_path));
 end

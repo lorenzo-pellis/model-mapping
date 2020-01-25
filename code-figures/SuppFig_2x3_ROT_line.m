@@ -1,5 +1,5 @@
 % This is the code to create Figure 25 in the supplementary text of 
-% Pellis, L et al (2019), Nature Communications
+% Pellis, L et al (2020), Nature Communications
 % 
 % It generates a 2x3 graph with, in each panel, the linear regression
 % to work out the rule-of-thumb. Each column for a different country and
@@ -12,7 +12,7 @@
 % called "rule-of-thumb". If they are not available, one needs to first run
 % "Analyse_data_for_RuleOfThumb.m"
 % 
-% Update: 14/10/2019
+% Update: 14-10-2019
 
 close all; % close all figures
 clearvars;
@@ -66,29 +66,33 @@ glist = [ 1, 0.75 ];
 % Path stuff
 current_dir = cd;
 eval('cd ..'); % Move to the folder 1 level up, which is assumed to be the "base" folder
-base_dir = cd; % This is assumed to be the self-contained folder with all relevant files and subfolders
+fig_base_dir = cd; % This is assumed to be the self-contained folder with all relevant files and subfolders
+% Names of folders are preceded by "fig_" because there is a risk that
+% loading a workspace might override the names used in this scrip
 if ispc
-    code_path = [base_dir,'\code-figures\'];
-    fig_path = [base_dir,'\output-figures\supp\'];
-    tool_path = [base_dir,'\tools\'];
+    fig_code_path = [fig_base_dir,'\code-figures\'];
+    fig_fig_path = [fig_base_dir,'\output-figures\supp\'];
+    fig_tool_path = [fig_base_dir,'\tools\'];
     if Activate_plot_from_new_ROT_analysis
-        ROT_path = [base_dir,'\output-rule-of-thumb\'];
+        fig_ROT_path = [fig_base_dir,'\output-rule-of-thumb\'];
     else
-        ROT_path = [base_dir,'\saved-rule-of-thumb\'];
-        warning('off','MATLAB:dispatcher:UnresolvedFunctionHandle');
+        fig_ROT_path = [fig_base_dir,'\saved-rule-of-thumb\'];
     end
 else
-    code_path = [base_dir,'/code-figures/'];
-    fig_path = [base_dir,'/output-figures/supp/'];
-    tool_path = [base_dir,'/tools/'];
+    fig_code_path = [fig_base_dir,'/code-figures/'];
+    fig_fig_path = [fig_base_dir,'/output-figures/supp/'];
+    fig_tool_path = [fig_base_dir,'/tools/'];
     if Activate_plot_from_new_ROT_analysis
-        ROT_path = [base_dir,'/output-rule-of-thumb/'];
+        fig_ROT_path = [fig_base_dir,'/output-rule-of-thumb/'];
     else
-        ROT_path = [base_dir,'/saved-rule-of-thumb/'];
-        warning('off','MATLAB:dispatcher:UnresolvedFunctionHandle');
+        fig_ROT_path = [fig_base_dir,'/saved-rule-of-thumb/'];
     end
 end
-cd(code_path); % Work in the directory where the code for figures are
+cd(fig_code_path); % Work in the directory where the code for figures are
+warning('off','MATLAB:dispatcher:UnresolvedFunctionHandle');
+% Loaded workspaces generated from other computers, with a different folder
+% structure might have saved anonymous functions with paths not recognised 
+% when this script is run, so the line above turns off that warning.
 
 for s = 1:3
     country = clist{s};
@@ -172,7 +176,7 @@ for s = 1:3
         else
             wname = [wname,'_dirty'];
         end
-        load([ROT_path,wname]);
+        load([fig_ROT_path,wname]);
 
         whichnearall = ( dotsROT(2,:) .* dotsROT(4,:) <= maxprod );
         whichfarall = ~whichnearall;
@@ -297,10 +301,10 @@ D = set_mycomplexfig_data( D );
 subplot_handles = mycomplexfig( 'ROT_line', D, L, T );
 
 if Activate_save_fig
-    addpath(genpath(tool_path));
-    cd(fig_path);
+    addpath(genpath(fig_tool_path));
+    cd(fig_fig_path);
     expcmd = ['export_fig ',fname,' -pdf -nocrop -transparent'];
     eval(expcmd);
-    cd(code_path);
-    rmpath(genpath(tool_path));
+    cd(fig_code_path);
+    rmpath(genpath(fig_tool_path));
 end

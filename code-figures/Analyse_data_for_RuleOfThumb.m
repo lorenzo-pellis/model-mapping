@@ -3,7 +3,7 @@
 % space where households should be included or are not necessary for
 % accurate predictions. This is then used to generate the Rule Of Thumb
 % depicted in Figure 4 in the Main text of
-% Pellis, L. et al (2019), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Update: 31-12-2019
 
@@ -50,26 +50,33 @@ tolval = 0.05; % Possible values: 0.01, 0.05 and 0.1
 % Path stuff
 current_dir = cd;
 eval('cd ..'); % Move to the folder 1 level up, which is assumed to be the "base" folder
-base_dir = cd; % This is assumed to be the self-contained folder with all relevant files and subfolders
+fig_base_dir = cd; % This is assumed to be the self-contained folder with all relevant files and subfolders
+% Names of folders are preceded by "fig_" because there is a risk that
+% loading a workspace might override the names used in this scrip
 if ispc
-    code_path = [base_dir,'\code-figures\'];
-    ROT_path = [base_dir,'\output-rule-of-thumb\'];
-    tool_path = [base_dir,'\tools\'];
+    fig_code_path = [fig_base_dir,'\code-figures\'];
+    fig_ROT_path = [fig_base_dir,'\output-rule-of-thumb\'];
+    fig_tool_path = [fig_base_dir,'\tools\'];
     if Activate_plot_from_new_workspaces
-        wrksp_path = [base_dir,'\output-workspaces\',country,'\'];
+        fig_wrksp_path = [fig_base_dir,'\output-workspaces\',country,'\'];
     else
-        wrksp_path = [base_dir,'\saved-workspaces\',country,'\'];
+        fig_wrksp_path = [fig_base_dir,'\saved-workspaces\',country,'\'];
     end
 else
-    code_path = [base_dir,'/code-model-mapping/'];
-    ROT_path = [base_dir,'/output-rule-of-thumb/'];
-    tool_path = [base_dir,'/tools/'];
+    fig_code_path = [fig_base_dir,'/code-model-mapping/'];
+    fig_ROT_path = [fig_base_dir,'/output-rule-of-thumb/'];
+    fig_tool_path = [fig_base_dir,'/tools/'];
     if Activate_plot_from_new_workspaces
-        wrksp_path = [base_dir,'/output-workspaces/',country,'/'];
+        fig_wrksp_path = [fig_base_dir,'/output-workspaces/',country,'/'];
     else
-        wrksp_path = [base_dir,'/saved-workspaces/',country,'/'];
+        fig_wrksp_path = [fig_base_dir,'/saved-workspaces/',country,'/'];
     end
 end
+warning('off','MATLAB:dispatcher:UnresolvedFunctionHandle');
+% Loaded workspaces generated from other computers, with a different folder
+% structure might have saved anonymous functions with paths not recognised 
+% when this script is run, so the line above turns off that warning.
+% 
 % Start by loading the workspace with random mixing (which depends on the 
 % population), to check paths are correct, store the right assortativity 
 % for random mixing and to load values of common variables:
@@ -82,12 +89,12 @@ elseif strcmp(country,'SL')
 else
     error('No valid country specified!');
 end
-load([wrksp_path,wrks_name]); 
+load([fig_wrksp_path,wrks_name]); 
 if isnan(thetaGval)
     thetaGval = thetaG;
 end
-addpath(tool_path)
-cd(code_path); % Work in the directory where the codes for figures are
+addpath(fig_tool_path)
+cd(fig_code_path); % Work in the directory where the codes for figures are
 
 labelx = 'p_{AA}'; x_vec = pAA_vec;
 labely = '\psi'; y_vec = psiG_vec;
@@ -167,7 +174,7 @@ for iR0 = 1:lR0
         if Activate_C_codes
             wrks_name = [ wrks_name, '_100sim_e5_init', num2str(n_init_inf,'%03d') ];
         end
-        load( [wrksp_path, wrks_name] );
+        load( [fig_wrksp_path, wrks_name] );
          
         % Final size differences
         dz_AH_H = zAH - zH; % dz = difference in final size
@@ -479,10 +486,10 @@ for iR0 = 1:lR0
         
     end
 end
-rmpath(tool_path)
+rmpath(fig_tool_path)
 
-cd(ROT_path);
+cd(fig_ROT_path);
 save(ROT_name);
-cd(code_path); % Return to the coding directory
+cd(fig_code_path); % Return to the coding directory
 
 

@@ -5,9 +5,9 @@ function L = set_mycomplexfig_layout( L )
 % of the same output. I mostly use it to create the figures used in the
 % model mapping paper:
 % 
-% Reference: Pellis et al (2019), Nature Communications
+% Reference: Pellis et al (2020), Nature Communications
 % 
-% Update: 22/06/2019
+% Update: 22-06-2019
 
 %%%%%% Layout
 % Dimensions
@@ -221,5 +221,3 @@ L.bsubmargin = L.screen_scale * L.bsubmargin_cm / L.fig_width;
 L.rsubmargin = L.screen_scale * L.rsubmargin_cm / L.fig_height;
 L.tsubmargin = L.screen_scale * L.tsubmargin_cm / L.fig_height;
 
-
-% Options of various sort

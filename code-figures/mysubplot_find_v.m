@@ -18,9 +18,9 @@ set(0, 'Units', 'Centimeters' );
 %   - Y2Data_list: y-values for the other curve (vAH)
 % 
 % In particular, this code has been created when working on the paper:
-% Pellis et al (2019), Nature Communications
+% Pellis et al (2020), Nature Communications
 % 
-% Update: 11/10/2019
+% Update: 11-10-2019
 
 cov = 1; % Coverage = shrinking factor to decide how much of the actual drawing of the main plot covers the area dedicated to it
 subcov = 1; % subCoverage = shrinking factor to decide how much of the actual drawing of each subplot covers the subarea dedicated to it

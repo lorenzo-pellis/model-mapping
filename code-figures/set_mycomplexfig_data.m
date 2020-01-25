@@ -5,9 +5,9 @@ function D = set_mycomplexfig_data( D )
 % of the same output. I mostly use it to create the figures used in the
 % model mapping paper:
 % 
-% Reference: Pellis et al (2019), Nature Communications
+% Reference: Pellis et al (2020), Nature Communications
 % 
-% Update: 22/06/2019
+% Update: 22-06-2019
 
 %%%%%% Data
 if ~isfield(D,'X')

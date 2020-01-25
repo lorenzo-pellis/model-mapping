@@ -8,21 +8,15 @@
 % file than the one used in the main model mapping code (i.e. with "_dyn" 
 % at the end of the name)
 % 
-% Update: 23-01-2020
+% Update: 31-12-2019
 
 close all; % close all figures
 clearvars;
+Run_simulation_anyway = 0; % If true, stochastic simulations for the 4 models and 4 parameter combinations are re-run 
 Activate_save_fig = 1; % If true, figures are saved
 Activate_plot_from_new_simulations = 0; 
 % If 0, I make plots from pre-computed and saved simulations (folder code-figures\simulation-dynamics\saved-simulation-dynamics\)
-% If 1, I make plots from newly computed simulations (folder code-figures\simulation-dynamics\)
-Run_simulation_anyway = 0; % Only active if Activate_plot_from_new_simulations = 1
-% If 0 and plotting from new simulations, the code first check if the 
-%   output of previously run new simulations are already present in
-%   folder code-figures\simulation-dynamics\. If not, new ones are run.
-% If 1 and plotting from new simulations, the code re-runs simulations even
-%   if some have been run before and overwrites any files in folder 
-%   code-figures\simulation-dynamics\.
+% If 1, I make plots from newly computed workspaces (folder code-figures\simulation-dynamics\)
 
 country = 'GB';
 R0 = 2;
@@ -30,7 +24,6 @@ phiG = 1;
 test_pAA = [ 0.15, 0.75 ];
 test_psi = [ 2.4, 1.2 ];
 first_subletter = 'e';
-ncols = 17; % Number of columns in the output of the stochastic simulation
 
 % Path stuff
 current_dir = cd;
@@ -47,8 +40,12 @@ if ispc
     fig_wrksp_path = [fig_base_dir,'\saved-workspaces\GB\'];
     if Activate_plot_from_new_simulations
         fig_saved_sim_path = fig_sim_path;
+        ncols = 17; % The simulations used to generate the figure in the main paper 
+        % were old and with a slightly different input (18 cols instead of 17)
     else
         fig_saved_sim_path = [fig_sim_path,'\saved_simulation_dynamics\'];
+        ncols = 18; % The simulations used to generate the figure in the main paper 
+        % were old and with a slightly different input (18 cols instead of 17)
     end
 else
     fig_code_path = [fig_base_dir,'/code-figures/'];
@@ -59,8 +56,12 @@ else
     fig_wrksp_path = [fig_base_dir,'/saved-workspaces/GB/'];
     if Activate_plot_from_new_simulations
         fig_saved_sim_path = fig_sim_path;
+        ncols = 17; % The simulations used to generate the figure in the main paper 
+        % were old and with a slightly different input (18 cols instead of 17)
     else
         fig_saved_sim_path = [fig_sim_path,'/saved_simulation_dynamics/'];
+        ncols = 18; % The simulations used to generate the figure in the main paper 
+        % were old and with a slightly different input (18 cols instead of 17)
     end
 end
 addpath(genpath(fig_tool_path));
@@ -90,26 +91,22 @@ for i = 1:2
             '_rho', num2str(phiG,'%.1f'), '_ass', num2str(thetaG,'%.3f'), '_gammaG', num2str(g_ratio,'%.2f'),'_H', num2str(h_ratio,'%.2f'),...
             '__sync_large.dat' ];
         cmdlAH = [ runcommand,' param.txt ',country,' ', num2str(Rg(ia,ib),'%.3f'), ' ', num2str(Rh_vec(ia),'%.3f'), ' ', num2str(psiG_vec(ib),'%.4f'), ' ', ...
-            num2str(phiG,'%.1f'), ' ', num2str(thetaG,'%.3f'),' ', num2str(g_ratio,'%.2f'),' ', num2str(h_ratio,'%.2f'),' ',...
-            num2str(n_init_inf_A_AH,'%d'),' ', num2str(n_init_inf_C_AH,'%d') ];
-        if Activate_plot_from_new_simulations
-            if Run_simulation_anyway
-                if exist(fname,'file')
-                    disp('File for dynamics of model AH already exists, but run_code option is active, so I''m running simulations again...');
-                else
-                    disp('File for dynamics of model AH does not exist: running simulations to generate it...');
-                end
-                [status result] = system( cmdlAH ); % cmdlAH is the command line to run the executable with the right arguments
-            else                
-                if exist(fname,'file')
-                    disp('File for dynamics of model AH already exists: no need to run simulations...');
-                else
-                    disp('File for dynamics of model AH does not exist: running simulations to generate it...');
-                    [status result] = system( cmdlAH ); % cmdlAH is the command line to run the executable with the right arguments
-                end
+             num2str(phiG,'%.1f'), ' ', num2str(thetaG,'%.3f'),' ', num2str(g_ratio,'%.2f'),' ', num2str(h_ratio,'%.2f'),' ',...
+             num2str(n_init_inf_A_AH,'%d'),' ', num2str(n_init_inf_C_AH,'%d') ];
+        if Run_simulation_anyway
+            if exist(fname,'file')
+                disp('File for dynamics of model AH already exists, but run_code option is active, so I''m running simulations again...');
+            else
+                disp('File for dynamics of model AH does not exist: running simulations to generate it...');
             end
-        else
-            disp('Using saved file for dynamics of model AH')
+            [status result] = system( cmdlAH ); % cmdlAH is the command line to run the executable with the right arguments
+        else                
+            if exist(fname,'file')
+                disp('File for dynamics of model AH already exists: no need to run simulations...');
+            else
+                disp('File for dynamics of model AH does not exist: running simulations to generate it...');
+                [status result] = system( cmdlAH ); % cmdlAH is the command line to run the executable with the right arguments
+            end
         end
         cd(fig_saved_sim_path);
         [labels,times,data] = readColData( fname, ncols, 0, 0 );
@@ -127,24 +124,20 @@ for i = 1:2
         cmdlA = [ runcommand,' param.txt ',country,' ', num2str(Rg_A(ia,ib),'%.3f'), ' ', num2str(0,'%.3f'), ' ', num2str(psiG_vec(ib),'%.4f'), ' ', ...
              num2str(phiG,'%.1f'), ' ', num2str(theta_A(ia,ib),'%.3f'),' ', num2str(g_ratio,'%.2f'),' ', num2str(h_ratio,'%.2f'),' ',...
              num2str(n_init_inf_A_A,'%d'),' ', num2str(n_init_inf_C_A,'%d') ];
-        if Activate_plot_from_new_simulations
-            if Run_simulation_anyway
-                if exist(fname,'file')
-                    disp('File for dynamics of model A already exists, but run_code option is active, so I''m running simulations again...');
-                else
-                    disp('File for dynamics of model A does not exist: running simulations to generate it...');
-                end
-                [status result] = system( cmdlA ); % cmdlA is the command line to run the executable with the right arguments
-            else                
-                if exist(fname,'file')
-                    disp('File for dynamics of model A already exists: no need to run simulations...');
-                else
-                    disp('File for dynamics of model A does not exist: running simulations to generate it...');
-                    [status result] = system( cmdlA ); % cmdlA is the command line to run the executable with the right arguments
-                end
+        if Run_simulation_anyway
+            if exist(fname,'file')
+                disp('File for dynamics of model A already exists, but run_code option is active, so I''m running simulations again...');
+            else
+                disp('File for dynamics of model A does not exist: running simulations to generate it...');
             end
-        else
-            disp('Using saved file for dynamics of model A')
+            [status result] = system( cmdlA ); % cmdlA is the command line to run the executable with the right arguments
+        else                
+            if exist(fname,'file')
+                disp('File for dynamics of model A already exists: no need to run simulations...');
+            else
+                disp('File for dynamics of model A does not exist: running simulations to generate it...');
+                [status result] = system( cmdlA ); % cmdlA is the command line to run the executable with the right arguments
+            end
         end
         cd(fig_saved_sim_path);
         [labels,times,data] = readColData( fname, ncols, 0, 0 );
@@ -162,24 +155,20 @@ for i = 1:2
         cmdlH = [ runcommand,' param.txt ',country,' ', num2str(Rg_H(ia,ib),'%.3f'), ' ', num2str(Rh_H(ia,ib),'%.3f'), ' ', num2str(1,'%.4f'), ' ', ...
              num2str(1,'%.1f'), ' ', num2str(thetaG_random_mix,'%.3f'),' ', num2str(1,'%.2f'),' ', num2str(1,'%.2f'),' ',...
              num2str(n_init_inf_A_AH,'%d'),' ', num2str(n_init_inf_C_AH,'%d') ];
-        if Activate_plot_from_new_simulations
-            if Run_simulation_anyway
-                if exist(fname,'file')
-                    disp('File for dynamics of model H already exists, but run_code option is active, so I''m running simulations again...');
-                else
-                    disp('File for dynamics of model H does not exist: running simulations to generate it...');
-                end
-                [status result] = system( cmdlH ); % cmdlH is the command line to run the executable with the right arguments
-            else                
-                if exist(fname,'file')
-                    disp('File for dynamics of model H already exists: no need to run simulations...');
-                else
-                    disp('File for dynamics of model H does not exist: running simulations to generate it...');
-                    [status result] = system( cmdlH ); % cmdlH is the command line to run the executable with the right arguments
-                end
+        if Run_simulation_anyway
+            if exist(fname,'file')
+                disp('File for dynamics of model H already exists, but run_code option is active, so I''m running simulations again...');
+            else
+                disp('File for dynamics of model H does not exist: running simulations to generate it...');
             end
-        else
-            disp('Using saved file for dynamics of model H')
+            [status result] = system( cmdlH ); % cmdlH is the command line to run the executable with the right arguments
+        else                
+            if exist(fname,'file')
+                disp('File for dynamics of model H already exists: no need to run simulations...');
+            else
+                disp('File for dynamics of model H does not exist: running simulations to generate it...');
+                [status result] = system( cmdlH ); % cmdlH is the command line to run the executable with the right arguments
+            end
         end
         cd(fig_saved_sim_path);
         [labels,times,data] = readColData( fname, ncols, 0, 0 );
@@ -197,24 +186,20 @@ for i = 1:2
         cmdlU = [ runcommand,' param.txt ',country,' ', num2str(R0,'%.3f'), ' ', num2str(0,'%.3f'), ' ', num2str(1,'%.4f'), ' ', ...
              num2str(1,'%.1f'), ' ', num2str(thetaG_random_mix,'%.3f'),' ', num2str(1,'%.2f'),' ', num2str(1,'%.2f'),' ',...
              num2str(n_init_inf_A_AH,'%d'),' ', num2str(n_init_inf_C_AH,'%d') ];
-        if Activate_plot_from_new_simulations
-            if Run_simulation_anyway
-                if exist(fname,'file')
-                    disp('File for dynamics of model U already exists, but run_code option is active, so I''m running simulations again...');
-                else
-                    disp('File for dynamics of model U does not exist: running simulations to generate it...');
-                end
-                [status result] = system( cmdlU ); % cmdlU is the command line to run the executable with the right arguments
-            else                
-                if exist(fname,'file')
-                    disp('File for dynamics of model U already exists: no need to run simulations...');
-                else
-                    disp('File for dynamics of model U does not exist: running simulations to generate it...');
-                    [status result] = system( cmdlU ); % cmdlU is the command line to run the executable with the right arguments
-                end
+        if Run_simulation_anyway
+            if exist(fname,'file')
+                disp('File for dynamics of model U already exists, but run_code option is active, so I''m running simulations again...');
+            else
+                disp('File for dynamics of model U does not exist: running simulations to generate it...');
             end
-        else
-            disp('Using saved file for dynamics of model U')
+            [status result] = system( cmdlU ); % cmdlU is the command line to run the executable with the right arguments
+        else                
+            if exist(fname,'file')
+                disp('File for dynamics of model U already exists: no need to run simulations...');
+            else
+                disp('File for dynamics of model U does not exist: running simulations to generate it...');
+                [status result] = system( cmdlU ); % cmdlU is the command line to run the executable with the right arguments
+            end
         end
         cd(fig_saved_sim_path);
         [labels,times,data] = readColData( fname, ncols, 0, 0 );

@@ -18,9 +18,9 @@ function subplot_handles = mysubplot_outputs( fig_width, fig_height, title, xaxi
 %   - clabel_list: label for the colour axes
 % 
 % In particular, this code has been created when working on the paper:
-% Pellis et al (2019), Nature Communications
+% Pellis et al (2020), Nature Communications
 % 
-% Update: 11/10/2019
+% Update: 11-10-2019
 
 set(0, 'Units', 'Centimeters' );
 
@@ -186,7 +186,7 @@ for i = 1:nrows
         caxis(CLim_list(n,:));
                 
         if i == 1
-            c = colorbar('location','North','position', [ xsA, ysp + sph, sAw, subtitle_height / fig_height ], 'FontSize',subaxes_values_font_size,'TickLength', [ 0.025 0.025 ],'XAxisLocation','top');
+            c = colorbar('location','North','position', [ xsA, ysp + sph, sAw, subtitle_height / fig_height ], 'FontSize',subaxes_values_font_size,'TickLength', 0.025,'XAxisLocation','top');
             xlabel(c,clabel_list(n,:),'Fontsize',subtitle_font_size );
             % c.Label.String = clabel_list{n,:};
             % set(c.Label.String,'Fontsize',subtitle_font_size );

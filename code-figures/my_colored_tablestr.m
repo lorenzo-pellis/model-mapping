@@ -2,7 +2,7 @@ function my_colored_tablestr( b, a, T, infont, outfont, interp, grid, box, C, li
 % 
 % This function creates a table and colours cells based ont he value in
 % them. This function is used in the paper:
-% Pellis et al (2019), Nature Communications
+% Pellis et al (2020), Nature Communications
 %
 % Inputs:
 % Required:
@@ -22,7 +22,7 @@ function my_colored_tablestr( b, a, T, infont, outfont, interp, grid, box, C, li
 %   - cmap: colormap
 %   - nancolor: colour to be used for cells that contain NaN
 % 
-% Update: 28/06/2019
+% Update: 28-06-2019
 
 if ( nargin < 13 ) || isempty(nancolor)
     nancolor = [ 0 0 0 ];
@@ -96,12 +96,6 @@ for ia = 1:la
 %             assert(strcmp(T{ia,ib},''));
             TC(ia+1,ib+1,:) = nancolor;
         else
-%             if isempty(numformat)
-%                 TM{ia+1,ib+1} = num2str(T(ia,ib));
-%             else
-%                 TM{ia+1,ib+1} = num2str(T(ia,ib),numformat);
-%             end
-%             TC(ia+1,ib+1,:) = reshape(map(ceil(64*Cscaled(ia,ib)),:),[1 1 3]);
             TM{ia+1,ib+1} = T{ia,ib};
             TC(ia+1,ib+1,:) = reshape(map(ceil(64*Cscaled(ia,ib)),:),[1 1 3]);
         end
@@ -117,10 +111,6 @@ hold on;
 if ~isempty(toplefttext)
     text(1,1,toplefttext,'HorizontalAlignment','center','interpreter',interp,'FontSize',outfont);
 end
-% text(1.6,1.5,['  R_0  (to)';'(from)     '],'HorizontalAlignment','right','VerticalAlignment','bottom')
-% text(1.25,1.4,'From R_0','HorizontalAlignment','center')
-% text(1.5,1.2,'To R_0','HorizontalAlignment','right')
-% plot([0.5,1.5],[0.5,1.5],'k')
 if isempty(a)
     limx = [ 1.5, lb + 1.5 ];
     for ia = 1:la
@@ -166,8 +156,6 @@ else
 end
 xlim(limx)
 ylim(limy)
-% caxis(limc)
-% colorbar;
 
 
 
