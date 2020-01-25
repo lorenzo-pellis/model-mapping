@@ -12,7 +12,7 @@
 % called "rule-of-thumb". If they are not available, one needs to first run
 % "Analyse_data_for_RuleOfThumb.m"
 % 
-% Update: 14-10-2019
+% Update: 25-01-2020
 
 close all; % close all figures
 clearvars;
@@ -252,9 +252,9 @@ T.labely = ['SAR (%) at ',num2str(round(tolval*100)),'% relative error threshold
 % T.labelx_xcorr = 0.05;
 % T.labely_ycorr = 0.01;
 
-T.coltitles = {['Great Britain',char(10),'\beta_1 = ',num2str(datam{1,1}(2),'%2.1f'),', \beta_0 = ',num2str(datam{1,1}(1),'%2.1f'),sprintf('\\fontsize{25} ')],...
-    ['South Africa',char(10),'\beta_1 = ',num2str(datam{1,2}(2),'%2.1f'),', \beta_0 = ',num2str(datam{1,2}(1),'%2.1f'),sprintf('\\fontsize{25} ')],...
-    ['Sierra Leone',char(10),'\beta_1 = ',num2str(datam{1,3}(2),'%2.1f'),', \beta_0 = ',num2str(datam{1,3}(1),'%2.1f'),sprintf('\\fontsize{25} ')]};
+T.coltitles = {['Great Britain',char(10),'\eta_1 = ',num2str(datam{1,1}(2),'%2.1f'),', \eta_0 = ',num2str(datam{1,1}(1),'%2.1f'),sprintf('\\fontsize{25} ')],...
+    ['South Africa',char(10),'\eta_1 = ',num2str(datam{1,2}(2),'%2.1f'),', \eta_0 = ',num2str(datam{1,2}(1),'%2.1f'),sprintf('\\fontsize{25} ')],...
+    ['Sierra Leone',char(10),'\eta_1 = ',num2str(datam{1,3}(2),'%2.1f'),', \eta_0 = ',num2str(datam{1,3}(1),'%2.1f'),sprintf('\\fontsize{25} ')]};
 T.rowtitles = {'Random','Assortative'};
 T.figletter = figletter;
 

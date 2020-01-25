@@ -7,7 +7,7 @@
 % called "rule-of-thumb". If they are not available, one needs to first run
 % "Analyse_data_for_RuleOfThumb.m"
 % 
-% Update: 09-10-2019
+% Update: 25-01-2020
 
 close all; % close all figures
 clearvars;
@@ -186,6 +186,8 @@ D.limy = [0,100];
 % %%%%%% Text
 T.title = ['A)  Great Britain: \beta_1 = ',num2str(round(datam{1,1}(2)),'%d'),', \beta_0 = ',num2str(round(datam{1,1}(1)),'%d'),...
     '   B)  Sierra Leone: \beta_1 = ',num2str(round(datam{1,2}(2)),'%d'),', \beta_0 = ',num2str(round(datam{1,2}(1)),'%d'),'      '];
+T.title = ['A)  Great Britain: \eta_1 = ',num2str(round(datam{1,1}(2)),'%d'),', \eta_0 = ',num2str(round(datam{1,1}(1)),'%d'),...
+    '   B)  Sierra Leone: \eta_1 = ',num2str(round(datam{1,2}(2)),'%d'),', \eta_0 = ',num2str(round(datam{1,2}(1)),'%d'),'      '];
 T.labelx = 'R_0';
 T.labely = ['SAR (%) at ',num2str(round(tolval*100)),'% relative error threshold'];
 

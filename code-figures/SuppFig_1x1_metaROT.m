@@ -10,7 +10,7 @@
 % called "rule-of-thumb". If they are not available, one needs to first run
 % "Analyse_data_for_RuleOfThumb.m"
 % 
-% Update: 14-10-2019
+% Update: 25-01-2020
 
 close all; % close all figures
 clearvars;
@@ -126,8 +126,8 @@ D.limx = [-28,-3];
 % %%%%%% Text
 T.figletter = 'D';
 T.title = 'Rule of thumb extensions';
-T.labelx = '\beta_0';
-T.labely = '\beta_1';
+T.labelx = '\eta_0';
+T.labely = '\eta_1';
 
 % %%%%%% Layout
 L.fig_width_cm = 7; % Text width of A4 portrait ~ 15cm
