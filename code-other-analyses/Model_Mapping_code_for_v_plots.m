@@ -4,7 +4,7 @@
 % with age and households (AH) to models with age (A). Therefore it focuses
 % only on these two models. The result of this analysis is plotted in
 % Figure 3 of the supplementary material of: 
-% Pellis, L. et al (2019), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 %
 % Update: 31-12-2019
 % 
@@ -114,7 +114,7 @@ workspace_emergency_name = 'workspace_emergency_save_plot_v';
 
 % H = probability distribution of households with each possible structure:
 % H(i,j) has i-1 adults and j-1 children
-if strcmp(country,'SL');
+if strcmp(country,'SL')
     input_distr = 'SL_H_structure_ModelMapping.txt';
 elseif strcmp(country,'SA')
     input_distr = 'SA_H_structure_ModelMapping.txt';
@@ -234,8 +234,8 @@ PI = create_2type_size_biased_distr(H);
 H_single = create_1type_distr(H);
 PI_single = create_1type_size_biased_distr(H_single);
 PI_type = create_type_biased_distr(PI);
-muH = sum(H_single.*[1:length(H_single)]);
-sb_muH = sum(PI_single.*[1:length(PI_single)]);
+muH = sum(H_single.*(1:length(H_single)));
+sb_muH = sum(PI_single.*(1:length(PI_single)));
 mu_type = sum(PI_type,2); % Just to check
 maxHsize = length(H_single);
 
@@ -299,8 +299,8 @@ PIsim = create_2type_size_biased_distr(Hsim);
 H_single_sim = create_1type_distr(Hsim);
 PI_single_sim = create_1type_size_biased_distr(H_single_sim);
 PI_type_sim = create_type_biased_distr(PIsim);
-muH_sim = sum(H_single_sim.*[1:length(H_single_sim)]);
-sb_muH_sim = sum(PI_single_sim.*[1:length(PI_single_sim)]);
+muH_sim = sum(H_single_sim.*(1:length(H_single_sim)));
+sb_muH_sim = sum(PI_single_sim.*(1:length(PI_single_sim)));
 mu_type_sim = sum(PI_type_sim,2); % Just to check
 
 % The output of the mapping procedure (here, only from model AH to model A)
@@ -345,8 +345,7 @@ for i2 = 1:l2
                 if ( sign(Rh1) == sign(Rh2) )
                     Rh = NaN;
                     eflag(i1,i2) = eflag(i1,i2) + 1;
-                    'Cannot get the required Rh. Abort everything!'
-                    break;
+                    error('Cannot get the required Rh. Abort everything!')
                 else
                     Rh = fzero( funpAA, [0 100] );
                 end

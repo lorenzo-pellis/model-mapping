@@ -151,7 +151,7 @@ workspace_emergency_name = 'workspace_emergency_save';
 
 % H = probability distribution of households with each possible structure:
 % H(i,j) has (i-1) adults and (j-1) children
-if strcmp(country,'SL');
+if strcmp(country,'SL')
     input_distr = 'SL_H_structure_ModelMapping.txt';
 elseif strcmp(country,'SA')
     input_distr = 'SA_H_structure_ModelMapping.txt';
@@ -266,8 +266,8 @@ PI = create_2type_size_biased_distr(H);
 H_single = create_1type_distr(H);
 PI_single = create_1type_size_biased_distr(H_single);
 PI_type = create_type_biased_distr(PI);
-muH = sum(H_single.*[1:length(H_single)]);
-sb_muH = sum(PI_single.*[1:length(PI_single)]);
+muH = sum(H_single.*(1:length(H_single)));
+sb_muH = sum(PI_single.*(1:length(PI_single)));
 mu_type = sum(PI_type.*[1:length(H_single);1:length(H_single)],2);
 maxHsize = length(H_single);
 
@@ -331,8 +331,8 @@ PIsim = create_2type_size_biased_distr(Hsim);
 H_single_sim = create_1type_distr(Hsim);
 PI_single_sim = create_1type_size_biased_distr(H_single_sim);
 PI_type_sim = create_type_biased_distr(PIsim);
-muH_sim = sum(H_single_sim.*[1:length(H_single_sim)]);
-sb_muH_sim = sum(PI_single_sim.*[1:length(PI_single_sim)]);
+muH_sim = sum(H_single_sim.*(1:length(H_single_sim)));
+sb_muH_sim = sum(PI_single_sim.*(1:length(PI_single_sim)));
 mu_type_sim = sum(PI_type_sim,2); % Just to check
 
 % The output of the mapping procedure (this script) is saved in a workspace
@@ -646,7 +646,7 @@ for i2 = 1:l2 % External loop is for psi (so figures in the paper are computed i
                     cmdlAH = [ runcommand,' param.txt ',country,' ', num2str(Rg(i1,i2),'%.3f'), ' ', num2str(Rh,'%.3f'), ' ', num2str(psiG,'%.1f'), ' ', ...
                          num2str(phiG,'%.1f'), ' ', num2str(thetaG,'%.3f'),' ', num2str(g_ratio,'%.2f'),' ', num2str(h_ratio,'%.2f'),' ',...
                          num2str(n_init_inf_A_AH,'%d'),' ', num2str(n_init_inf_C_AH,'%d') ];
-                    [status result] = system( cmdlAH ); % cmdlAH is the command line to run the executable with the right arguments
+                    [status, result] = system( cmdlAH ); % cmdlAH is the command line to run the executable with the right arguments
                     % status is 0 if the command is executed correctly
                     % result contains what the C code spits out in the standard output (not used here)
 
@@ -748,7 +748,7 @@ for i2 = 1:l2 % External loop is for psi (so figures in the paper are computed i
                             cmdlA = [ runcommand,' param.txt ',country,' ', num2str(Rg_A(i1,i2),'%.3f'), ' ', num2str(0,'%.3f'), ' ', num2str(psiG,'%.1f'), ' ', ...
                                  num2str(phiG,'%.1f'), ' ', num2str(theta_A(i1,i2),'%.3f'),' ', num2str(c_ratio,'%.2f'),' ', num2str(1,'%.2f'),' ',...
                                  num2str(n_init_inf_A_A,'%d'),' ', num2str(n_init_inf_C_A,'%d')  ];
-                            [status result] = system( cmdlA ); % cmdlA is the command line to run the executable with the right arguments
+                            [status, result] = system( cmdlA ); % cmdlA is the command line to run the executable with the right arguments
                             % status is 0 if the command is executed correctly
                             % result contains what the C code spits out in the standard output (not used here)
 
@@ -876,7 +876,7 @@ for i2 = 1:l2 % External loop is for psi (so figures in the paper are computed i
                     cmdlH = [ runcommand,' param.txt ',country,' ', num2str(Rg_H(i1,i2),'%.3f'), ' ', num2str(Rh_H(i1,i2),'%.3f'), ' ', num2str(1,'%.1f'), ' ', ...
                          num2str(1,'%.1f'), ' ', num2str(thetaG_random_mix,'%.3f'),' ', num2str(1,'%.2f'),' ', num2str(1,'%.2f'),' ',...
                          num2str(n_init_inf_A_AH,'%d'),' ', num2str(n_init_inf_C_AH,'%d') ];
-                    [status result] = system( cmdlH ); % cmdlH is the command line to run the executable with the right arguments
+                    [status, result] = system( cmdlH ); % cmdlH is the command line to run the executable with the right arguments
                     % status is 0 if the command is executed correctly
                     % result contains what the C code spits out in the standard output (not used here)
 
