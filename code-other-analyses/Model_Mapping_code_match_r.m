@@ -4,13 +4,11 @@
 % precision method for computing R0 in a time-since-infection model like
 % the one used here, a Monte Carlo method based on a multitype version of
 % the Sellke construction (see book by Andersson & Britton, 2000) is
-% invoked to compute r. Because this is really time-consuming, it's 
-% converted into a C code using Matlab's automatic converter, which results
-% in a .mex file being used.
+% invoked to compute r. 
 % 
 % This code is used to compute the necessary workspaces (in subfolders
 % "match-r") to the generate Figure 18 in the Supplementary text of:
-% Pellis, L. et al (2019), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 %
 % Date: 15-01-2020
 % 
@@ -61,8 +59,8 @@ desired_r =  0.25282; R0 = 2; % The value of R0 is used only for cross-checking
 phiG = 1; % relative global infectivity of children versus adults
 
 nsimr = 100;
-rng(7); % Set the seed for the random number generator for the Monte Carlo computation of r
-% Use rng(7) to obtain exactly the results in Supplementary Figure 18
+rng(17); % Set the seed for the random number generator for the Monte Carlo computation of r
+% Use rng(17) to obtain exactly the results in Supplementary Figure 18
 
 pAA_min = 0;
 if strcmp(country,'SL')
