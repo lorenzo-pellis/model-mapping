@@ -1,7 +1,7 @@
 % This is the code to create Figure 1 of the supplementary text of 
 % Pellis, L et al (2020), Nature Communications
 % 
-% Update: 10-10-2019
+% Update: 26-01-2020
 
 close all;
 clearvars;
@@ -47,12 +47,12 @@ ax = annotation('arrow',[ 0.13 0.13+0.775 ], [ 0.11 0.11 ]);
 ax.LineWidth = 1;
 ay = annotation('arrow',[ 0.13 0.13 ], [ 0.11 0.11+0.815 ]);
 ay.LineWidth = 1;
-plot(x,y,'r','Linewidth',1)
-plot(x0,zeros(length(x0)),'r','Linewidth',1)
 plot([ 0 supp_max ], [ c c ],'k','Linewidth',1);
 plot([ supp_max supp_max ], [ c 0 ],'k','Linewidth',1);
 plot([ supp_max xmax ], [ c c ],'k--','Linewidth',1);
 plot([ xmax xmax ], [ c 0 ],'k--','Linewidth',1);
+plot(x,y+0.001,'r','Linewidth',1.5)
+plot(x0,zeros(length(x0))+0.001,'r','Linewidth',1.5)
 text(-0.8,c,'$c$','Fontsize',24','interpreter','latex'); 
 text(supp_max-0.3,-0.05,'$T$','Fontsize',24,'interpreter','latex'); 
 text(xmax-0.3,-0.05,'$T''$','Fontsize',24,'interpreter','latex'); 
