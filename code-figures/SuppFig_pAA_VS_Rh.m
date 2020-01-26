@@ -5,7 +5,7 @@
 
 close all;
 clearvars;
-Activate_save_fig = 0; % If true, figures are saved
+Activate_save_fig = 1; % If true, figures are saved
 
 % Path stuff
 current_dir = cd;
