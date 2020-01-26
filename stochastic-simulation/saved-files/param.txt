@@ -1,0 +1,209 @@
+% This is the file containing all the parameter values
+
+[ MODEL_TYPE ]	% MODEL_TYPE = 0 is the sSIR model (possibly with latent period)
+2		% MODEL_TYPE = 1 is the time-since-infection model with truncated generation time distribution
+		% MODEL_TYPE != 0 and 1 is the time-since-infection model with full generation time distribution
+
+[ LATENCE ]	% Length of latent period: LATENT = 0 is the SIR, LATENT = 1 is the SEIR
+0
+
+[ REC_DELAY ]	% Time at which individuals recover after the last contact
+1				% in the time-since-infection model
+
+[ DUR_SICK ]	% Duration of infectious period for the time-since-infection model truncated
+7		% It excludes REC_DELAY
+
+[ DUR_PRODROMAL ]	% Duration of the period from infection to sickness (and staying home)
+2			% Works only with MODEL_TYPE = 2
+
+[ PROB_ASYMPT ]	% Probability that a randomly selected child is asymptomatic
+0
+
+[ FRACTION_OF_Rh_IN_SCHOOL_IF_SYMPT ] % If children are symptomatic and stay at home when sick, Rh is reduced to Rh*FRACTION
+1	% 0.667	% or 0.855 if DUR_PRODROMAL = 3 or 4
+
+[ FACTOR_COMP_BEHAVIOUR_IN_HOUSEHOLDS_TO_A ]
+1	% 1 % 1 means no change in behaviour due to school closure towards adults in households
+
+[ FACTOR_COMP_BEHAVIOUR_IN_HOUSEHOLDS_TO_C ]
+1	% 1 % 1 means no change in behaviour due to school closure towards children in households
+
+[ FACTOR_COMP_BEHAVIOUR_IN_COMM_TO_A ]
+1	% 1 % 1 means no compensatory behaviour towards adults in the community
+
+[ FACTOR_COMP_BEHAVIOUR_IN_COMM_TO_C ]
+1	% 1 % 1 means no compensatory behaviour towards children in the community
+
+
+
+[ RATIO_CONTACT_RATE_ADULTS_VS_CHILDREN_IN_HOUSEHOLDS ]
+1	% Ratio h_A / h_C, where h_i is the contact rate from type i in the household
+
+[ RATIO_CONTACT_RATE_ADULTS_VS_CHILDREN_IN_COMM ]
+1	% Ratio g_A / g_C, where g_i is the contact rate from type i in the community 
+
+
+[ HOW_MANY ]	% Number of runs for each set of parameters
+100
+
+[ SOCIAL_STRUCTURE_NETWORK_TYPE ]	% The name of the network that stores households and workplaces
+random
+
+[ TOT ]	% Total population of adults
+100000
+
+% [ TOT_A ]	% Total population of adults: irrelevant, I read it from the network structure 
+% 80000
+
+% [ TOT_C ]	% Total population of children:  irrelevant, I read it from the network structure 
+% 20000
+
+%%%%%%%%%%%% Control policy: school closure
+
+[ WITHIN_SCHOOL_PREV_TRIGGER ]	% clinical incidence/prevalence level in the school to trigger school closure (proxy for absenteism)
+100 %1 5 10 15 20 25 30
+
+[ PERC_SCHOOLS_INFECTED_TRIGGER ]	% percentage of schools in which absenteism is too high that is needed to trigger school closure
+100 %1 5 10 15 20 25 30 35 40 45 50
+
+% [ DELAY_INF_ONSET ]	% Delay from infection to onset of symptoms 
+% 0
+
+% [ DELAY_ONSET_DET ]	% Delay from onset of symptoms to detection of a case (at this point the person stays at home)
+% 0
+
+% [ DELAY_DET_CONFIRM ]	% Delay from detection of the case to confirmation it has swine flu
+% 0
+
+	double DELAY; // ( DELAY_INF_ONSET + DELAY_ONSET_DET + DELAY_DET_CONFIRM )
+
+[ DELAY ]
+0 %2 3 4
+
+[ DURATION_CLOSURE ]
+0 %1000 %28 21 14 7 0
+
+[ N_INIT_INF_A ]	% Initial number of adults infected, starting the inf period at time 0
+5
+
+[ N_INIT_INF_C ]	% Initial number of children infected, starting the inf period at time 0
+5
+
+[ N_INIT_IMM_A ]	% Initial number of adults immune
+0
+
+[ N_INIT_IMM_C ]	% Initial number of children immune
+0
+
+	int N_NON_SUSC; // (N_INIT_INF+N_INIT_IMM) 
+
+%%%%%%%%%% Infection process for the sSIR model 
+
+[ Rg ]	% Average number of global contacts from an infective
+0.465 %0.5814               %0.5292 %0.6482 %0.5292
+
+% 5	4.9	4.8	4.7	4.6	4.5	4.4	4.3	4.2	4.1	4	3.9	3.8	3.7	3.6	3.5	3.4	3.3	3.2	3.1	3	2.9	2.8	2.7	2.6	2.5	2.4	2.3	2.2	2.1	2	1.9	1.8	1.7	1.6	1.5	1.4	1.3	1.2	1.1	1
+	% 1.14
+
+[ Rh ]	% Average number of household contacts from an infective
+0 %0.7127     %0.6945	%0.4995 %0.6945	% 0.446
+
+[ Rw ]	% Average number of workplace contacts from an infective
+2.64 %0.68 %0.6841	% 1.87
+
+[ Rs_DISTR ] % Distribution for Rs in various schools. The average is given by Rh
+0
+
+[ Rs_ALPHA ] % Only if Rs_DISTR = 2, so the gamma distribution
+4
+
+[ INF_LENGTH_DISTR ]	% The distribution for the length of the infectious period
+1						% 0 --> Dirac delta-function, concentrated on MEAN */
+						% 1 --> exp, with parameter lambda=1/MEAN */
+						% 2 --> gamma, with alpha=ALPHA and lambda=ALPHA/MEAN */
+
+[ INF_MEAN ]	% Average length of the infectious period
+2
+
+[ INF_ALPHA ]	% Shape parameter of the length of infection, if gamma distributed (integer?)
+9
+
+	double BETA; // (R_NOUGHT/INF_MEAN) /* Average number of contacts per unit of time */
+
+[ REL_SUSC_C_VS_A_IN_HOUSEHOLDS ]
+4 %3.29
+
+[ REL_SUSC_C_VS_A_IN_COMM ]
+4	% 2
+
+[ REL_INF_C_VS_A_IN_HOUSEHOLDS ]
+1
+
+[ REL_INF_C_VS_A_IN_COMM ]
+1
+
+[ ASS_IN_HOUSEHOLDS ]
+0
+
+[ ASS_IN_COMM ]
+0.5 %0.2273
+
+[ STRING_DEN_FREQUENCY_DEPENDENT ]
+n-1
+
+[ FACTOR_REDUCING_GLOBAL_C_TO_C_DUE_TO_SCHOOLS ]
+1
+
+[ EXPONENT_FREQUENCY_DEPENDENT ]
+1
+
+%%%%%%% Latent period 
+
+[ LAT_LENGTH_DISTR ]	% The distribution for the length of the infectious period 
+1						% 0 --> Dirac delta-function, concentrated on MEAN */
+						% 1 --> exp, with parameter lambda=1/MEAN */
+						% 2 --> gamma, with alpha=ALPHA and lambda=ALPHA/MEAN */
+						
+[ LAT_MEAN ]	% Average length of the latent period
+1
+
+[ LAT_ALPHA ]	% Shape parameter for the length of the latent period, when gamma distributed (integer?)
+4
+
+%%%%%%%%%%% Time-since-infection model
+
+[ GEN_TIME_DISTR ]	% The shape of infectivity over time, normalised (R0 specified above)
+2					% 0 --> Dirac delta-function, concentrated on MEAN (don't know if doable)*/
+					% 1 --> exp, with parameter lambda=1/MEAN */
+					% 2 --> gamma, with alpha=ALPHA and lambda=ALPHA/MEAN */
+[ GEN_TIME ]	% Generation time, i.e. average of the generation time distribution omega
+2.85
+	
+[ GEN_ALPHA ] % Shape parameter for the generation time distribution, when gamma distributed (integer?)
+9
+
+%%%%%%%%% Plotting output as a function of t
+[ dt ]	% time step
+1
+
+[ TIME_STOP ]	% top limit for the time (not sharp)
+500
+
+	int TOT_STEPS; // ( int ) ( TIME_STOP / dt )
+
+%%%%%%%%%%%%%%%%%% Generation analysis
+
+[ MAX_GEN ]	% maximum number of generations considered
+100
+
+%%%%%%%%%%% Random access to the event list, via hash table
+
+[ CONST ]	% A constant of proportionality between dh and 1/TOT
+100.0
+
+[ MAX_EV_FACTOR ]	% > 2, as it is worth adding some more, because of people multiply infected, but it's a guess
+3					% If it is not enough, other will be added using malloc
+					% MAX_EV = MAX_EV_FACTOR * TOT
+
+[ CUTOFF ]	% Indicator of the separation between a large and a small epidemic
+0.01
