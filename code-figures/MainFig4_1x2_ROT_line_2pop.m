@@ -62,7 +62,7 @@ warning('off','MATLAB:dispatcher:UnresolvedFunctionHandle');
 
 for s = 1:length(clist)
     country = clist{s};
-    for p = 1:length(plist);
+    for p = 1:length(plist)
         pop = plist{p};
 
         % Values of slope (myROTcoeff) and intercept (myROTinter) are found
@@ -184,8 +184,6 @@ D.limx = [0,4.1];
 D.limy = [0,100];
 
 % %%%%%% Text
-T.title = ['A)  Great Britain: \beta_1 = ',num2str(round(datam{1,1}(2)),'%d'),', \beta_0 = ',num2str(round(datam{1,1}(1)),'%d'),...
-    '   B)  Sierra Leone: \beta_1 = ',num2str(round(datam{1,2}(2)),'%d'),', \beta_0 = ',num2str(round(datam{1,2}(1)),'%d'),'      '];
 T.title = ['A)  Great Britain: \eta_1 = ',num2str(round(datam{1,1}(2)),'%d'),', \eta_0 = ',num2str(round(datam{1,1}(1)),'%d'),...
     '   B)  Sierra Leone: \eta_1 = ',num2str(round(datam{1,2}(2)),'%d'),', \eta_0 = ',num2str(round(datam{1,2}(1)),'%d'),'      '];
 T.labelx = 'R_0';

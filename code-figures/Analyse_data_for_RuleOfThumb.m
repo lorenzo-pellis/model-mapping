@@ -22,8 +22,8 @@ usepi = true; % If true, I include the peak incidence (pi) in the overall accept
 uset = true;  % If true, I include the time to the peak (t) in the overall acceptance region plot, otherwise not
 use_match_r = false; % If false, I match R0; if true, I use the r correspondent to the desired R0
 
-country = 'GB'; % Great Britain
-% country = 'SL'; % Sierra-Leone
+% country = 'GB'; % Great Britain
+country = 'SL'; % Sierra-Leone
 % country = 'SA'; % South-Africa
 
 psirange = [ 1 4 ];
@@ -54,7 +54,8 @@ fig_base_dir = cd; % This is assumed to be the self-contained folder with all re
 % Names of folders are preceded by "fig_" because there is a risk that
 % loading a workspace might override the names used in this scrip
 if ispc
-    fig_code_path = [fig_base_dir,'\code-figures\'];
+    fig_fig_path = [fig_base_dir,'\code-figures\'];
+    fig_code_path = [fig_base_dir,'\code-model-mapping\'];
     fig_ROT_path = [fig_base_dir,'\output-rule-of-thumb\'];
     fig_tool_path = [fig_base_dir,'\tools\'];
     if Activate_plot_from_new_workspaces
@@ -63,6 +64,7 @@ if ispc
         fig_wrksp_path = [fig_base_dir,'\saved-workspaces\',country,'\'];
     end
 else
+    fig_fig_path = [fig_base_dir,'/code-figures/'];
     fig_code_path = [fig_base_dir,'/code-model-mapping/'];
     fig_ROT_path = [fig_base_dir,'/output-rule-of-thumb/'];
     fig_tool_path = [fig_base_dir,'/tools/'];
@@ -94,7 +96,7 @@ if isnan(thetaGval)
     thetaGval = thetaG;
 end
 addpath(fig_tool_path)
-cd(fig_code_path); % Work in the directory where the codes for figures are
+cd(fig_code_path); % Work in the directory where the codes for the model mapping are
 
 labelx = 'p_{AA}'; x_vec = pAA_vec;
 labely = '\psi'; y_vec = psiG_vec;
@@ -490,6 +492,6 @@ rmpath(fig_tool_path)
 
 cd(fig_ROT_path);
 save(ROT_name);
-cd(fig_code_path); % Return to the coding directory
+cd(fig_fig_path); % Return to the folder where codes for the figures are
 
 
