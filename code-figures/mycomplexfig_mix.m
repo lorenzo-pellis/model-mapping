@@ -12,9 +12,9 @@ function subplot_handles = mycomplexfig_mix( D, L, T )
 %   - T: a structure for Text (title(s), axe labels, legend text, etc.)
 % 
 % In particular, this code has been created when working on the paper:
-% Pellis et al (2019), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
-% Update: 13/10/2019
+% Update: 26-01-2020
 
 show_layout = false; show_plots = true;
 % show_layout = true; show_plots = false; % This line is here if you want to see the skeleton of the figure (with no plots)
@@ -213,8 +213,8 @@ for i = 1:L.nrows
 
             %%%%%%%%%%%%%%%%% This is where the real plot occurs %%%%%%%%%%%%%%
             if show_plots               
-                colormap(gca,[ 0 0 1; 0 1 1; 0 1 0; 1 1 0; 1 0 0 ]);
                 imagesc( D.X, D.Y, D.Z{i,j} )
+                colormap(gca,[ 0 0 1; 0 1 1; 0 1 0; 1 1 0; 1 0 0 ]);
                 set(gca,'YDir','normal')
                 hold on;
                 % Make the grid
