@@ -22,8 +22,8 @@ usepi = true; % If true, I include the peak incidence (pi) in the overall accept
 uset = true;  % If true, I include the time to the peak (t) in the overall acceptance region plot, otherwise not
 use_match_r = false; % If false, I match R0; if true, I use the r correspondent to the desired R0
 
-% country = 'GB'; % Great Britain
-country = 'SL'; % Sierra-Leone
+country = 'GB'; % Great Britain
+% country = 'SL'; % Sierra-Leone
 % country = 'SA'; % South-Africa
 
 psirange = [ 1 4 ];
@@ -50,28 +50,28 @@ tolval = 0.05; % Possible values: 0.01, 0.05 and 0.1
 % Path stuff
 current_dir = cd;
 eval('cd ..'); % Move to the folder 1 level up, which is assumed to be the "base" folder
-fig_base_dir = cd; % This is assumed to be the self-contained folder with all relevant files and subfolders
-% Names of folders are preceded by "fig_" because there is a risk that
+ROT_base_dir = cd; % This is assumed to be the self-contained folder with all relevant files and subfolders
+% Names of folders are preceded by "ROT_" because there is a risk that
 % loading a workspace might override the names used in this scrip
 if ispc
-    fig_fig_path = [fig_base_dir,'\code-figures\'];
-    fig_code_path = [fig_base_dir,'\code-model-mapping\'];
-    fig_ROT_path = [fig_base_dir,'\output-rule-of-thumb\'];
-    fig_tool_path = [fig_base_dir,'\tools\'];
+    ROT_fig_path = [ROT_base_dir,'\code-figures\'];
+    ROT_code_path = [ROT_base_dir,'\code-model-mapping\'];
+    ROT_ROT_path = [ROT_base_dir,'\output-rule-of-thumb\'];
+    ROT_tool_path = [ROT_base_dir,'\tools\'];
     if Activate_plot_from_new_workspaces
-        fig_wrksp_path = [fig_base_dir,'\output-workspaces\',country,'\'];
+        ROT_wrksp_path = [ROT_base_dir,'\output-workspaces\',country,'\'];
     else
-        fig_wrksp_path = [fig_base_dir,'\saved-workspaces\',country,'\'];
+        ROT_wrksp_path = [ROT_base_dir,'\saved-workspaces\',country,'\'];
     end
 else
-    fig_fig_path = [fig_base_dir,'/code-figures/'];
-    fig_code_path = [fig_base_dir,'/code-model-mapping/'];
-    fig_ROT_path = [fig_base_dir,'/output-rule-of-thumb/'];
-    fig_tool_path = [fig_base_dir,'/tools/'];
+    ROT_fig_path = [ROT_base_dir,'/code-figures/'];
+    ROT_code_path = [ROT_base_dir,'/code-model-mapping/'];
+    ROT_ROT_path = [ROT_base_dir,'/output-rule-of-thumb/'];
+    ROT_tool_path = [ROT_base_dir,'/tools/'];
     if Activate_plot_from_new_workspaces
-        fig_wrksp_path = [fig_base_dir,'/output-workspaces/',country,'/'];
+        ROT_wrksp_path = [ROT_base_dir,'/output-workspaces/',country,'/'];
     else
-        fig_wrksp_path = [fig_base_dir,'/saved-workspaces/',country,'/'];
+        ROT_wrksp_path = [ROT_base_dir,'/saved-workspaces/',country,'/'];
     end
 end
 warning('off','MATLAB:dispatcher:UnresolvedFunctionHandle');
@@ -91,12 +91,12 @@ elseif strcmp(country,'SL')
 else
     error('No valid country specified!');
 end
-load([fig_wrksp_path,wrks_name]); 
+load([ROT_wrksp_path,wrks_name]); 
 if isnan(thetaGval)
     thetaGval = thetaG;
 end
-addpath(fig_tool_path)
-cd(fig_code_path); % Work in the directory where the codes for the model mapping are
+addpath(ROT_tool_path)
+cd(ROT_code_path); % Work in the directory where the codes for the model mapping are
 
 labelx = 'p_{AA}'; x_vec = pAA_vec;
 labely = '\psi'; y_vec = psiG_vec;
@@ -176,7 +176,7 @@ for iR0 = 1:lR0
         if Activate_C_codes
             wrks_name = [ wrks_name, '_100sim_e5_init', num2str(n_init_inf,'%03d') ];
         end
-        load( [fig_wrksp_path, wrks_name] );
+        load( [ROT_wrksp_path, wrks_name] );
          
         % Final size differences
         dz_AH_H = zAH - zH; % dz = difference in final size
@@ -488,10 +488,10 @@ for iR0 = 1:lR0
         
     end
 end
-rmpath(fig_tool_path)
+rmpath(ROT_tool_path)
 
-cd(fig_ROT_path);
+cd(ROT_ROT_path);
 save(ROT_name);
-cd(fig_fig_path); % Return to the folder where codes for the figures are
+cd(ROT_fig_path); % Return to the folder where codes for the figures are
 
 

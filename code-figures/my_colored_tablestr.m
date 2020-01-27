@@ -2,7 +2,7 @@ function my_colored_tablestr( b, a, T, infont, outfont, interp, grid, box, C, li
 % 
 % This function creates a table and colours cells based ont he value in
 % them. This function is used in the paper:
-% Pellis et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 %
 % Inputs:
 % Required:

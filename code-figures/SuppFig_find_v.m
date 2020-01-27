@@ -1,5 +1,5 @@
 % This is the code to create Figure 3 of the supplementary text of 
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Update: 11-10-2019
 

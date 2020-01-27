@@ -18,7 +18,7 @@ set(0, 'Units', 'Centimeters' );
 %   - Y2Data_list: y-values for the other curve (vAH)
 % 
 % In particular, this code has been created when working on the paper:
-% Pellis et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Update: 11-10-2019
 

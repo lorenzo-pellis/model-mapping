@@ -1,5 +1,5 @@
 % This is the code to create Figure 25 in the supplementary text of 
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % It generates a 2x3 graph with, in each panel, the linear regression
 % to work out the rule-of-thumb. Each column for a different country and
@@ -48,7 +48,7 @@ R0vals = [ 1.1 1.3 1.5 1.7 2 2.3 2.7 3.2 4 ]; R0name = 'R0all';
 % % pop = 'm4UK'; thetaGval = 0.4; gamval = 0.75; 
 % % pop = 'm5r'; thetaGval = 0.5; gamval = 1; 
 % % pop = 'm5UK'; thetaGval = 0.5; gamval = 0.75; 
-% pop = 'UK'; thetaGval = 0.58; gamval = 0.75; % UK
+% % pop = 'UK'; thetaGval = 0.58; gamval = 0.75; % UK
 % % pop = 'ass'; thetaGval = 0.7; gamval = 0.75; % UK
 psirange = [ 1 4 ]; % Don't change this
 maxprod = 3; % I consider more reliable only phi*psi<maxprod

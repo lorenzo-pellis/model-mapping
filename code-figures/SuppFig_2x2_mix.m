@@ -1,5 +1,5 @@
 % This is the code to create many figures in the supplementary text of 
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % It generates a 2x2 plot with heatmaps for a single output and for 3
 % models in position top-left, top-right, and bottom-left. Then ont he

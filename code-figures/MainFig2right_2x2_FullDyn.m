@@ -1,5 +1,5 @@
 % This is the code to create the right part of Figure 2 of the main text of 
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % It relies on a hand-made function called "mycomplexfig"
 % It also relies on files containing the epidemic dynamics, in the

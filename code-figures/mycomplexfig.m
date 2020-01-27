@@ -20,7 +20,7 @@ function subplot_handles = mycomplexfig( plottype, D, L, T )
 %   - T: a structure for Text (title(s), axe labels, legend text, etc.)
 % 
 % In particular, this code has been created when working on the paper:
-% Pellis et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Update: 13-10-2019
 

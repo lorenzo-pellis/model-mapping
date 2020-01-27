@@ -1,5 +1,5 @@
 % This is the code to create many figures in the supplementary text of 
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % It generates a 3x3 plot with heatmaps. There is no title, but subtitles 
 % are generated for each row and column.
@@ -21,7 +21,7 @@ use_match_r = false; % If false, I match R0; if true, I use the r correspondent 
 which_output = 'vc'; figletter = 'A';
 % which_output = 'vhc'; figletter = 'B';
 % which_output = 'SAR'; figletter = 'C';
-% which_output = 'Th'; figletter = 'D';
+% which_output = 'Fh'; figletter = 'D';
 % which_output = 'ass'; figletter = 'A';
 % which_output = 'ass'; figletter = 'B';
 
@@ -184,7 +184,7 @@ for ip = 1:lphi
             out_list{ip,iR0} = 100*vH_AH(:,:,2)';
         elseif strcmp(which_output,'SAR')
             out_list{ip,iR0} = 100*SAR';
-        elseif strcmp(which_output,'Th')
+        elseif strcmp(which_output,'Fh')
             out_list{ip,iR0} = 100*inVSout_prop(:,:,1)';
         elseif strcmp(which_output,'ass')
             out_list{ip,iR0} = theta_A(:,2:end)';
@@ -210,7 +210,7 @@ elseif strcmp(which_output,'vhc')
     title = 'Percentage of children among first household cases';
 elseif strcmp(which_output,'SAR')
     title = 'Household secondary attack rate (%)';
-elseif strcmp(which_output,'Th')
+elseif strcmp(which_output,'Fh')
     title = 'Percentage of transmission in household';
 elseif strcmp(which_output,'ass')
     title = ['Mapped assortativity \theta^A of A model (input: \theta^{AH} = ',num2str(thetaG,'%.2f'),')'];

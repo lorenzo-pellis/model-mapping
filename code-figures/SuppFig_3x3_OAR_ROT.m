@@ -1,5 +1,5 @@
 % This is the code to create many figures in the supplementary text of 
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % It generates a 3x3 graph with the overall simplest-model-acceptance-
 % region plots for 3 values of R0 and 3 values of the relative infectivity
@@ -22,7 +22,7 @@ usez = true; % If true, I include the final size (z) in the overall acceptance r
 usepi = true; % If true, I include the peak incidence (pi) in the overall acceptance region plot, otherwise not
 uset = true;  % If true, I include the time to the peak (t) in the overall acceptance region plot, otherwise not
 useSAR = true; % If true, the SAR contours are overlaid on the plot
-use_match_r = 1; % If false, I match R0; if true, I use the r correspondent to the desired R0
+use_match_r = 0; % If false, I match R0; if true, I use the r correspondent to the desired R0
 use_marks = 0; % If true, I add a numbered mark in selected locations
 use_intermediate = 0; % Leave this as default choice. If you want intermediate contact patterns, choose them below
 use_log2psi = 0; % If true, I let log2psi run from -2 to 2 with steps of 0.2.
@@ -63,9 +63,9 @@ elseif strcmp(country,'SA')
     end
 else % GB        
     if ~use_intermediate
-        tolval = 0.01; figletter = 'A'; % A or D
-%         tolval = 0.05; figletter = 'B'; % B or E
-%         tolval = 0.1; figletter = 'C'; % C or F
+        tolval = 0.01; figletter = 'D'; % A or D
+%         tolval = 0.05; figletter = 'E'; % B or E
+%         tolval = 0.1; figletter = 'F'; % C or F
     end
 end
 

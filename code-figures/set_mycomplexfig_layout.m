@@ -5,7 +5,7 @@ function L = set_mycomplexfig_layout( L )
 % of the same output. I mostly use it to create the figures used in the
 % model mapping paper:
 % 
-% Reference: Pellis et al (2020), Nature Communications
+% Reference: Pellis, L. et al (2020), Nature Communications
 % 
 % Update: 22-06-2019
 

@@ -18,7 +18,7 @@ function subplot_handles = mysubplot_outputs( fig_width, fig_height, title, xaxi
 %   - clabel_list: label for the colour axes
 % 
 % In particular, this code has been created when working on the paper:
-% Pellis et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Update: 11-10-2019
 

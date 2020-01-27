@@ -1,5 +1,5 @@
 % This is the code to create many figures in the supplementary text of 
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % It generates a 2x2 graph with the simplest-model-acceptance-region plot 
 % for each of the 3 outputs and then the overall simplest-model-acceptance-
@@ -15,7 +15,7 @@ clearvars; % clear all variables
 Activate_save_fig = 1; % If true, figures are saved
 Activate_C_codes = 1;
 
-Activate_plot_from_new_workspaces = 1; 
+Activate_plot_from_new_workspaces = 0; 
 % If 0, I make plots from pre-computed and saved workspaces (folder saved-workspaces)
 % If 1, I make plots from newly computed workspaces (folder output-workspaces)
 
@@ -36,8 +36,8 @@ popfig = '2ran'; thetaGval = NaN; gamval = 1; % Random
 %%% 5% threshold - variable phi
 phi_in_title = 1;
 tolval = 0.05;
-% R0val = 1.5; phiGfig = 1; first_subletter = 'a';
-R0val = 2; phiGfig = 1; first_subletter = 'e';
+R0val = 1.5; phiGfig = 1; first_subletter = 'a';
+% R0val = 2; phiGfig = 1; first_subletter = 'e';
 % R0val = 4; phiGfig = 1; first_subletter = 'i';
 % R0val = 1.5; phiGfig = 2; first_subletter = 'm';
 % R0val = 2; phiGfig = 2; first_subletter = 'q';

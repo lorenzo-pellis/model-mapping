@@ -1,5 +1,5 @@
 % This is the code to create Figure 25 in the supplementary text of 
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % It generates a 1x1 graph with a summary of the rule of thumb for each 
 % studied population and each studies threshold.

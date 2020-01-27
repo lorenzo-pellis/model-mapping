@@ -1,5 +1,5 @@
 % This is the code to create Figure 24 in the supplementary text of 
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % It generates a 3x3 graph with, in each panel, a table with mulitple
 % values of R0 (each row for a different starting value and each column for
@@ -12,7 +12,7 @@
 % subtitles are generated for each row and column.
 % It relies on a hand-made function called "mycomplexfig.m"
 % 
-% Update: 14-10-2019
+% Update: 26-01-2020
 
 close all; % close all figures
 clearvars;
@@ -51,7 +51,7 @@ phivals = [ 1 1.5 2 ];
 psirange = [ 1 4 ]; % Don't modify this
 endpsi = [ 2 3 4 ]; % I explore psi = 1-2, 1-3 or 1-4
 tolval = 0.05;
-figletter = 'B';
+figletter = 'A';
 
 toprow = R0vals(3:end);
 leftcol = R0vals(1:(end-2));
