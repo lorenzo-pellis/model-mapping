@@ -1,5 +1,5 @@
 % This script is the main code to run the model mapping procedure to
-% compare model with age and households (AH) to models with age (A),
+% compare models with age and households (AH) to models with age (A),
 % households (H) and random mixing (U). Please refer to publication:
 % Pellis, L. et al (2020), Nature Communications
 %
