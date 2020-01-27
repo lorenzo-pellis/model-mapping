@@ -37,13 +37,13 @@ current_dir = cd;
 eval('cd ..'); % Move to the folder 1 level up, which is assumed to be the "base" folder
 fig_base_dir = cd; % This is assumed to be the self-contained folder with all relevant files and subfolders
 % Names of folders are preceded by "fig_" because there is a risk that
-% loading a workspace might override the names used in this scrip
+% loading a workspace might override the names used in this script
 if ispc
     fig_code_path = [fig_base_dir,'\code-figures\'];
     fig_fig_path = [fig_base_dir,'\output-figures\main\'];
     fig_tool_path = [fig_base_dir,'\tools\'];
     fig_sim_path = [fig_base_dir,'\code-figures\simulation-dynamics\'];
-    runcommand = 'MRCModelMapping_Win_dyn.exe';
+    runcommand = 'ModelMapping_Win_dyn.exe';
     fig_wrksp_path = [fig_base_dir,'\saved-workspaces\GB\'];
     if Activate_plot_from_new_simulations
         fig_saved_sim_path = fig_sim_path;
@@ -99,13 +99,13 @@ for i = 1:2
                 else
                     disp('File for dynamics of model AH does not exist: running simulations to generate it...');
                 end
-                [status result] = system( cmdlAH ); % cmdlAH is the command line to run the executable with the right arguments
+                [status, result] = system( cmdlAH ); % cmdlAH is the command line to run the executable with the right arguments
             else                
                 if exist(fname,'file')
                     disp('File for dynamics of model AH already exists: no need to run simulations...');
                 else
                     disp('File for dynamics of model AH does not exist: running simulations to generate it...');
-                    [status result] = system( cmdlAH ); % cmdlAH is the command line to run the executable with the right arguments
+                    [status, result] = system( cmdlAH ); % cmdlAH is the command line to run the executable with the right arguments
                 end
             end
         else
@@ -134,13 +134,13 @@ for i = 1:2
                 else
                     disp('File for dynamics of model A does not exist: running simulations to generate it...');
                 end
-                [status result] = system( cmdlA ); % cmdlA is the command line to run the executable with the right arguments
+                [status, result] = system( cmdlA ); % cmdlA is the command line to run the executable with the right arguments
             else                
                 if exist(fname,'file')
                     disp('File for dynamics of model A already exists: no need to run simulations...');
                 else
                     disp('File for dynamics of model A does not exist: running simulations to generate it...');
-                    [status result] = system( cmdlA ); % cmdlA is the command line to run the executable with the right arguments
+                    [status, result] = system( cmdlA ); % cmdlA is the command line to run the executable with the right arguments
                 end
             end
         else
@@ -169,13 +169,13 @@ for i = 1:2
                 else
                     disp('File for dynamics of model H does not exist: running simulations to generate it...');
                 end
-                [status result] = system( cmdlH ); % cmdlH is the command line to run the executable with the right arguments
+                [status, result] = system( cmdlH ); % cmdlH is the command line to run the executable with the right arguments
             else                
                 if exist(fname,'file')
                     disp('File for dynamics of model H already exists: no need to run simulations...');
                 else
                     disp('File for dynamics of model H does not exist: running simulations to generate it...');
-                    [status result] = system( cmdlH ); % cmdlH is the command line to run the executable with the right arguments
+                    [status, result] = system( cmdlH ); % cmdlH is the command line to run the executable with the right arguments
                 end
             end
         else
@@ -204,13 +204,13 @@ for i = 1:2
                 else
                     disp('File for dynamics of model U does not exist: running simulations to generate it...');
                 end
-                [status result] = system( cmdlU ); % cmdlU is the command line to run the executable with the right arguments
+                [status, result] = system( cmdlU ); % cmdlU is the command line to run the executable with the right arguments
             else                
                 if exist(fname,'file')
                     disp('File for dynamics of model U already exists: no need to run simulations...');
                 else
                     disp('File for dynamics of model U does not exist: running simulations to generate it...');
-                    [status result] = system( cmdlU ); % cmdlU is the command line to run the executable with the right arguments
+                    [status, result] = system( cmdlU ); % cmdlU is the command line to run the executable with the right arguments
                 end
             end
         else
@@ -233,7 +233,7 @@ end
         
 %% Figure
 cd(fig_code_path)
-% To constuct the figure, I pass 3 structures:
+% To construct the figure, I pass 3 structures:
 %   - D = Data
 %   - T = Text (title(s), axe labels, legend text, etc.)
 %   - L = Layout information for the figure spatial structure

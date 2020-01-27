@@ -359,7 +359,7 @@ for ip = 1:lphi
 end
 
 %% Figure
-% To constuct the figure, I pass 3 structures:
+% To construct the figure, I pass 3 structures:
 %   - D = Data
 %   - T = Text (title(s), axe labels, legend text, etc.)
 %   - L = Layout information for the figure spatial structure
