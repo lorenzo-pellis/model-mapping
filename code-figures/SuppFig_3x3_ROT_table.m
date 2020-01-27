@@ -1,7 +1,7 @@
 % This is the code to create Figure 24 in the supplementary text of 
 % Pellis, L. et al (2020), Nature Communications
 % 
-% It generates a 3x3 graph with, in each panel, a table with mulitple
+% It generates a 3x3 graph with, in each panel, a table with multiple
 % values of R0 (each row for a different starting value and each column for
 % a different ending value), to identify the intervals in R0 values over
 % which to do a linear regression. The numbers in each cell show the
