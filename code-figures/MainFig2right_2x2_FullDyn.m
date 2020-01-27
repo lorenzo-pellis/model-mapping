@@ -95,7 +95,7 @@ for i = 1:2
         if Activate_plot_from_new_simulations
             if Run_simulation_anyway
                 if exist(fname,'file')
-                    disp('File for dynamics of model AH already exists, but run_code option is active, so I''m running simulations again...');
+                    disp('File for dynamics of model AH already exists, but Run_simulation_anyway option is active, so I''m running simulations again...');
                 else
                     disp('File for dynamics of model AH does not exist: running simulations to generate it...');
                 end
@@ -130,7 +130,7 @@ for i = 1:2
         if Activate_plot_from_new_simulations
             if Run_simulation_anyway
                 if exist(fname,'file')
-                    disp('File for dynamics of model A already exists, but run_code option is active, so I''m running simulations again...');
+                    disp('File for dynamics of model A already exists, but Run_simulation_anyway option is active, so I''m running simulations again...');
                 else
                     disp('File for dynamics of model A does not exist: running simulations to generate it...');
                 end
@@ -165,7 +165,7 @@ for i = 1:2
         if Activate_plot_from_new_simulations
             if Run_simulation_anyway
                 if exist(fname,'file')
-                    disp('File for dynamics of model H already exists, but run_code option is active, so I''m running simulations again...');
+                    disp('File for dynamics of model H already exists, but Run_simulation_anyway option is active, so I''m running simulations again...');
                 else
                     disp('File for dynamics of model H does not exist: running simulations to generate it...');
                 end
@@ -200,7 +200,7 @@ for i = 1:2
         if Activate_plot_from_new_simulations
             if Run_simulation_anyway
                 if exist(fname,'file')
-                    disp('File for dynamics of model U already exists, but run_code option is active, so I''m running simulations again...');
+                    disp('File for dynamics of model U already exists, but Run_simulation_anyway option is active, so I''m running simulations again...');
                 else
                     disp('File for dynamics of model U does not exist: running simulations to generate it...');
                 end
