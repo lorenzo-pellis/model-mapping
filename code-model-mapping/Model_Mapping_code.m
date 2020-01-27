@@ -25,7 +25,7 @@ Activate_C_codes = 1; % If 0, C codes call are de-activated
 Activate_continue = 0; % This allows continuing from the last run, if anything makes the code crash or you need to stop it
 % Do not modify the following ones:
 Activate_workspace_saving = 1; % If 0, the workspace is not saved automatically
-Activate_deletefile = 1; recycle('off'); % If 1 the code eletes the output file of the stochastic simulation after use
+Activate_deletefile = 1; recycle('off'); % If 1 the code deletes the output file of the stochastic simulation after use
 warning('off','MATLAB:nearlySingularMatrix');
 
 country = 'GB'; % Great Britain
@@ -108,7 +108,7 @@ if ispc
     code_path = [base_dir,'\code-model-mapping\'];
     temp_path = [base_dir,'\code-model-mapping\temp\'];
     wrksp_path = [base_dir,'\output-workspaces\',country,'\'];
-    runcommand = 'MRCModelMapping_Win.exe';
+    runcommand = 'ModelMapping_Win.exe';
     tool_path = [base_dir,'\tools\'];
     check_path = [code_path,'\check-codes\'];
 else
