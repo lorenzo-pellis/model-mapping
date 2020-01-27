@@ -54,7 +54,7 @@ function afsn = afsn_Addy_2type_distr_initinf_check(H,Rh,shapeHvector,i,pi,eta)
 %   default and never changed
 % 
 % Reference: Supplementary Methods, Section 1.2.7 of
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Author: Lorenzo Pellis
 % Last update: 29-12-2019 

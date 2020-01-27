@@ -47,7 +47,7 @@ function afs_compbiased = afs_Addy_2type_compbiased(H,PI,Rh,shapeHvector,pesc,et
 %   default and never changed
 % 
 % Reference: Supplementary Methods, Section 1.2.7 of
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Author: Lorenzo Pellis
 % Last update: 29-12-2019 

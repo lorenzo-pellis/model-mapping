@@ -133,7 +133,7 @@ workspace_emergency_name = 'workspace_emergency_save';
 
 % H = probability distribution of households with each possible structure:
 % H(i,j) has (i-1) adults and (j-1) children
-if strcmp(country,'SL');
+if strcmp(country,'SL')
     input_distr = 'SL_H_structure_ModelMapping.txt';
 elseif strcmp(country,'SA')
     input_distr = 'SA_H_structure_ModelMapping.txt';

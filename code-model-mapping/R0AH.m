@@ -23,7 +23,7 @@ function  R0 = R0AH(chains,Rg)
 % dominant eigenvalue and relative eigenvector if the big matrix
 %
 % Reference: Supplementary Methods, Section 1.2.4 of
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 %
 % Author: Lorenzo Pellis
 % Last update: 14-05-2019 

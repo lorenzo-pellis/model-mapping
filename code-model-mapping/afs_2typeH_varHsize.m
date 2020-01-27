@@ -62,7 +62,7 @@ function afs_each_type = afs_2typeH_varHsize(H,PI,F,NGM_G,Rh,shapeHvector,eta)
 % distribution.
 %
 % Reference: Supplementary Methods, Section 1.2.7 of
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Methodological references: 
 % Ball, Britton and Sirl (2011), Journal of Mathematical Biology

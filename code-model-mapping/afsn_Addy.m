@@ -30,7 +30,7 @@ function afsn = afsn_Addy(n,pesc,lambda,distribution,iota,alpha)
 % random duration is relegated to an external function "mgf"
 % 
 % Reference: Supplementary Methods, Section 1.4 of
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 %
 % Methodological references: 
 % Addy, Longini and Haber (1991), Biometrics

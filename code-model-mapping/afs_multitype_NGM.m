@@ -17,7 +17,7 @@ function afs_each_type = afs_multitype_NGM(h,NGM)
 % population, but of each group, i.e. 0 <= z_i <= 1
 % 
 % Reference: Supplementary Methods, Sections 1.3 of
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Author: Lorenzo Pellis
 % Last update: 29-12-2019 

@@ -31,7 +31,7 @@ function z = afsH_varHsize_Addy_den(PI,Rg,Rh,distribution,iota,alpha,eta,den_str
 % Output: average final size (numbers)
 % 
 % Reference: Supplementary Methods, Section 1.4 of
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 %
 % Methodological references: 
 % Addy, Longini and Haber (1991), Biometrics

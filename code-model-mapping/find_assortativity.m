@@ -29,7 +29,7 @@ function theta = find_assortativity(v,F_ratio,psi,phi,g_ratio,pAA,failsymb,testp
 % of them (so they are highlighted in a different colour)
 % 
 % Reference: Supplementary Methods, Sections 1.3 of
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 %
 % Author: Lorenzo Pellis
 % Last update: 26-05-2019 

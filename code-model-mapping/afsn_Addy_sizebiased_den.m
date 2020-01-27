@@ -35,7 +35,7 @@ function afs = afsn_Addy_sizebiased_den(PI,pesc,Rh,distribution,iota,alpha,eta,d
 % (to allow for 0 values for i and j).
 % 
 % Reference: Supplementary Methods, Section 1.4 of
-% Pellis, L et al (2020), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 %
 % Methodological references: 
 % Addy, Longini and Haber (1991), Biometrics
