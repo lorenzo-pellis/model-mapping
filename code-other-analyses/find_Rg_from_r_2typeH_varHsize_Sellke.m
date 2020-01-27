@@ -77,15 +77,15 @@ function Rg = find_Rg_from_r_2typeH_varHsize_Sellke(PI,desired_r,NGM_G_shape,Alp
 % current simulation is the last dimension in the big array "inftimesall"
 % 
 % Reference: Supplementary Methods of
-% Pellis, L. et al (2019), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Author: Lorenzo Pellis
-% Last update: 06/11/2019 
+% Last update: 06-11-2019 
 
-% For debugging purposes:
 optsRg = optimset('TolX',1e-5);
-% optsRg = optimset('TolX',1e-5,'Display','iter');
 optsr = []; % optimset('display','iter');
+% % For debugging purposes:
+% optsRg = optimset('TolX',1e-5,'Display','iter');
 % optsr = optimset('TolX',1e-10);
 
 

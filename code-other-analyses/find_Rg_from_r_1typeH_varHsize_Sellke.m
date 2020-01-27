@@ -58,15 +58,15 @@ function Rg = find_Rg_from_r_1typeH_varHsize_Sellke(PI_single,desired_r,Alphag,G
 % current simulation is the last dimension in the big array "inftimesall"
 % 
 % Reference: Supplementary Methods of
-% Pellis, L. et al (2019), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Author: Lorenzo Pellis
-% Last update: 09/11/2019 
+% Last update: 09-11-2019 
 
-% For debugging purposes:
 optsRg = optimset('TolX',1e-5);
-% optsRg = optimset('TolX',1e-5,'Display','iter');
 optsr = []; % optimset('display','iter');
+% % For debugging purposes:
+% optsRg = optimset('TolX',1e-5,'Display','iter');
 % optsr = optimset('TolX',1e-10);
 
 nmax = length(PI_single); % Largest household size

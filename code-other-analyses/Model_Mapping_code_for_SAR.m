@@ -189,8 +189,8 @@ for iR0 = 1:3
     H_single = create_1type_distr(H);
     PI_single = create_1type_size_biased_distr(H_single);
     PI_type = create_type_biased_distr(PI);
-    muH = sum(H_single.*[1:length(H_single)]);
-    sb_muH = sum(PI_single.*[1:length(PI_single)]);
+    muH = sum(H_single.*(1:length(H_single)));
+    sb_muH = sum(PI_single.*(1:length(PI_single)));
     mu_type = sum(PI_type.*[1:length(H_single);1:length(H_single)],2);
     maxHsize = length(H_single);
 
@@ -254,8 +254,8 @@ for iR0 = 1:3
     H_single_sim = create_1type_distr(Hsim);
     PI_single_sim = create_1type_size_biased_distr(H_single_sim);
     PI_type_sim = create_type_biased_distr(PIsim);
-    muH_sim = sum(H_single_sim.*[1:length(H_single_sim)]);
-    sb_muH_sim = sum(PI_single_sim.*[1:length(PI_single_sim)]);
+    muH_sim = sum(H_single_sim.*(1:length(H_single_sim)));
+    sb_muH_sim = sum(PI_single_sim.*(1:length(PI_single_sim)));
     mu_type_sim = sum(PI_type_sim,2); % Just to check
 
     % The output of the mapping procedure (this script) is saved in a workspace

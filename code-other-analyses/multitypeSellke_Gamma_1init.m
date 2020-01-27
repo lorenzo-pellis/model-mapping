@@ -23,7 +23,7 @@ function [z, inftimes]=multitypeSellke_Gamma_1init(m, n, Lh1to1, Alpha, Gam, tpc
 %   individuals in row a
 % 
 % Reference: Supplementary Methods, Section 2.3.2 of
-% Pellis, L et al (2019), Nature Communications
+% Pellis, L. et al (2020), Nature Communications
 % 
 % Methodological references: 
 % Sellke (1983), Journal of Applied Probability
@@ -31,9 +31,9 @@ function [z, inftimes]=multitypeSellke_Gamma_1init(m, n, Lh1to1, Alpha, Gam, tpc
 % book by Andersson & Britton (2000)
 %
 % Author: Lorenzo Pellis
-% Last update: 31/10/2019 
+% Last update: 31-10-2019 
 
-% rng(7); % Sets the seed for the random number generator, to aid reproducibility
+% rng(17); % Sets the seed for the random number generator, to aid reproducibility
 % However, for the paper, the seed is set in the main code
 % "Model_Mapping_code_match_r", so this should stay commented out
 
