@@ -63,9 +63,9 @@ elseif strcmp(country,'SA')
     end
 else % GB        
     if ~use_intermediate
-        tolval = 0.01; figletter = 'D'; % A or D
-%         tolval = 0.05; figletter = 'E'; % B or E
-%         tolval = 0.1; figletter = 'F'; % C or F
+        tolval = 0.01; figletter = 'A'; % A or D
+%         tolval = 0.05; figletter = 'B'; % B or E
+%         tolval = 0.1; figletter = 'C'; % C or F
     end
 end
 
